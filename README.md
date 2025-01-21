@@ -1,2 +1,2 @@
 # TITO
-Proyecto grupal
+Proyecto grupal para DAW
