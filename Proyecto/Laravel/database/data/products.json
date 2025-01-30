@@ -1,0 +1,83 @@
+[
+    {
+      "ID_Producto": 1,
+      "Nombre": "Tomate",
+      "Descripcion": "El tomate es el fruto de la planta conocida como tomatera, una especie herbácea que pertenece a la familia de las solanáceas y es nativa del continente americano.",
+      "Precio": 3,
+      "Stock": 100,
+      "Imagen_Url": "public/images/tomate.jpeg"
+    },
+    {
+      "ID_Producto": 2,
+      "Nombre": "Naranja",
+      "Descripcion": "La naranja es un fruto hesperidio (pulpa carnosa entre el endocarpio y las semillas en forma de gajos llenos de zumo), de corteza lisa y más o menos endurecida con vesículas oleosas.",
+      "Precio": 2,
+      "Stock": 100,
+      "Imagen_Url": "public/images/naranja.jpeg"
+    },
+    {
+      "ID_Producto": 3,
+      "Nombre": "Mandarina",
+      "Descripcion": "La sandía, es un fruto de gran tamaño, que se caracteriza por tener una de color verde (oscuro o claro) y amarillo, con o sin listas/rayas. La pulpa es dulce, muy jugosa y refrescante, de color rojo o amarillo, y con semillas negras, marrones o blancas.",
+      "Precio": 2,
+      "Stock": 100,
+      "Imagen_Url": "public/images/mandarina.jpeg"
+    },
+    {
+      "ID_Producto": 4,
+      "Nombre": "Sandía",
+      "Descripcion": "El tomate es el fruto de la planta conocida como tomatera, una especie herbácea que pertenece a la familia de las solanáceas y es nativa del continente americano.",
+      "Precio": 2.19,
+      "Stock": 100,
+      "Imagen_Url": "public/images/sandia.jpeg"
+    },
+    {
+      "ID_Producto": 5,
+      "Nombre": "Panceta",
+      "Descripcion": "Se denomina panceta, o de forma más generalizada «beicon», a la falda del cerdo, es decir, a la carne de la res que cuelga de las agujas (costillas del cuarto delantero del animal), sin asirse a ningún hueso ni costilla.",
+      "Precio": 3,
+      "Stock": "50kl",
+      "Imagen_Url": "public/images/panceta.jpeg"
+    },
+    {
+      "ID_Producto": 6,
+      "Nombre": "Cereales Nesquik",
+      "Descripcion": "Un delicioso cereal hecho con cereales integrales con vitaminas y minerales, y con un rico sabor a chocolate Nesquik® que a los niños les encanta.",
+      "Precio": 3,
+      "Stock": 100,
+      "Imagen_Url": "public/images/cereales.jpeg"
+    },
+    {
+      "ID_Producto": 7,
+      "Nombre": "Tomate frito",
+      "Descripcion": "El tomate frito es una salsa que se elabora a partir de tomate (bien con tomate natural, zumo de tomate, puré, pasta o concentrado de tomate), sometido a un proceso de cocción con aceite vegetal, con la adición opcional de determinados ingredientes.",
+      "Precio": 3,
+      "Stock": 20,
+      "Imagen_Url": "public/images/tomate-frito.jpeg"
+    },
+    {
+      "ID_Producto": 8,
+      "Nombre": "Café",
+      "Descripcion": "El tomate es el fruto de la planta conocida como tomatera, una especie herbácea que pertenece a la familia de las solanáceas y es nativa del continente americano.",
+      "Precio": 3,
+      "Stock": 21,
+      "Imagen_Url": "public/images/cafe.jpeg"
+    },
+    {
+      "ID_Producto": 9,
+      "Nombre": "Jabón",
+      "Descripcion": "Producto soluble en agua resultado de la combinación de un álcali con los ácidos del aceite u otro cuerpo graso, que se usa generalmente para lavar.",
+      "Precio": 1.79,
+      "Stock": 30,
+      "Imagen_Url": "public/images/jabon.jpeg"
+    },
+    {
+      "ID_Producto": 10,
+      "Nombre": "Manzana",
+      "Descripcion": "Es el fruto del manzano, árbol de la familia de las rosáceas. La piel puede ser de color verde, amarilla o rojiza, y la pulpa, harinosa o crujiente, presenta un sabor que varía entre el agrio y el dulce. Contiene en su interior varias semillas de color marrón oscuro.",
+      "Precio": 2,
+      "Stock": 100,
+      "Imagen_Url": "public/images/manzana.jpeg"
+    }
+  ]
+  

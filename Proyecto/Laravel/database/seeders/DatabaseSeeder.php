@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        // Llamar al seeder de productos
+        $this->call([
+            ProductSeeder::class, // Añade esta línea para registrar el ProductSeeder
+        ]);
     }
 }
