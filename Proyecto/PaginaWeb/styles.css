@@ -1,0 +1,145 @@
+/* Importación de fuente */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+main{
+    margin: 0%;
+}
+
+/* HEADER */
+header {
+    background-color: white;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 15px;
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+.header_icons{
+    width: 20%;
+}
+
+.logo {
+    width: 12%;
+    height: auto;
+}
+
+.search-bar {
+    flex: 1;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: larger;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+}
+
+/* NAVBAR */
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #600000;
+    padding: 10px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* BANNER */
+.banner {
+    background: rgb(255, 255, 255);
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* NOVEDADES */
+.novedades {
+    padding: 20px;
+    background-color: white;
+}
+
+.novedades h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.producto {
+    background: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* FOOTER */
+footer {
+    background-color: #8B0000;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu.active {
+        display: flex;
+    }
+}
