@@ -23,8 +23,16 @@ class DatabaseSeeder extends Seeder
      }   
         
         // Llamar al seeder de productos
+        // $this->call([
+        //     ProductSeeder::class,
+        // ]);
+
         $this->call([
-            ProductSeeder::class,
+            RecipesSeeder::class,
         ]);
+        
     }
 }
+
+
+
