@@ -12,17 +12,17 @@
     <header class="container-fluid bg-white border-bottom py-4 sticky-top">
         <div class="row align-items-center">
             <!-- Columna del logo (izquierda) -->
-            <div class="col-4 d-flex justify-content-start">
+            <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
                 <img src="img_Header/logo.png" style="width: 80px;">
             </div>
 
             <!-- Columna del buscador (centrado) -->
             <div class="col-4 d-flex justify-content-center">
-                <input type="text" class="form-control w-75" placeholder="Buscar">
+                <input type="text" class="form-control w-100" placeholder="Buscar">
             </div>
 
             <!-- Columna del login y carrito (derecha) -->
-            <div class="col-4 d-flex justify-content-end align-items-center gap-3">
+            <div class="col-4 d-flex justify-content-end align-items-center gap-3" style="padding-right:3%">
                 <img class="img-fluid" src="./img_Header/login.jpg" alt="Login" style="width: 40px; height: 40px;">
                 <img class="img-fluid" src="./img_Header/carrito.png" alt="Carrito" style="width: 40px; height: 40px;">
             </div>
@@ -31,7 +31,7 @@
 
     <nav class="container-fluid bg-light py-4">
         <div class="row justify-content-center">
-            <div class="col-auto"><a href="./PagProd/app.component.html" class="nav-link active">PRODUCTOS</a></div>
+            <div class="col-auto"><a href="{{ route('productos') }}" class="nav-link active">PRODUCTOS</a></div>
             <div class="col-auto"><a href="#" class="nav-link">RECETAS</a></div>
             <div class="col-auto"><a href="#" class="nav-link">EVENTOS</a></div>
         </div>
@@ -39,11 +39,11 @@
     
     <div class="container my-4">
       
-        <section class=" width bg-light text-center py-5" ">
-        <img src=" ./img_eventos/eventoHindi.jpg" alt="">
+        <section class=" bg-light text-center py-5">
+        <img src=" ./img_eventos/eventoHindi.jpg" alt="" style="width: 100%">
         </section>
 
-
+        <h2>Recetas Ganadoras</h2>
         <section class="text-center py-5">
             <div class="row">
                 <div class="col-md-4 col-sm-6 mb-4">
