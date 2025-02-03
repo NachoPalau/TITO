@@ -27,3 +27,11 @@ Route::get('/productos', function () {
     return view('prod');
 })->name('productos');
 //->middleware(['auth', 'verified'])
+
+Route::get('/eventos', function () {
+    return view('eventos');
+})->name('eventos');
+
+Route::get('/recetas', function () {
+    return view('recetas');
+})->name('recetas');
