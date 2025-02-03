@@ -18,7 +18,7 @@
 
             <!-- Columna del buscador (centrado) -->
             <div class="col-4 d-flex justify-content-center">
-                <input type="text" class="form-control w-100" placeholder="Buscar">
+                <input type="text" class="form-control w-100 border border-danger border-1 rounded-0" placeholder="Buscar">
             </div>
 
             <!-- Columna del login y carrito (derecha) -->
