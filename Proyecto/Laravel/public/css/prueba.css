@@ -10,6 +10,7 @@
     padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
 }
 
 .producto img {
@@ -26,6 +27,7 @@
 .producto p {
     font-size: 1em;
     color: #555;
+    flex-grow: 1;
 }
 
 button {
@@ -33,15 +35,15 @@ button {
     justify-content: center;
     align-items: center;
     padding: 8px 16px;
-    color:white;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    margin-top: 10px;
     width: auto;
     text-align: center;
-    background-color:red;
+    background-color: red;
+
 }
 
 button:hover {

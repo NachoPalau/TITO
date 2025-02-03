@@ -450,7 +450,6 @@ class ProductSeeder extends Seeder
             'stock' => 100,
             'imagen_url' => 'cafe.jpg',
         ]);
-            //Por aqui
         Producto::create([
             'nombre' => 'Té (Verde, Negro, De Hierbas)',
             'descripcion' => 'Variedad de tés: verde, negro y de hierbas, perfectos para relajarse.',
@@ -476,11 +475,11 @@ class ProductSeeder extends Seeder
         ]);
 
         Producto::create([
-            'nombre' => 'Bebidas Deportivas',
+            'nombre' => 'Bebidas Energeticas',
             'descripcion' => 'Bebidas energéticas y deportivas para mantenerte hidratado durante el ejercicio.',
             'precio' => 2.20,
             'stock' => 150,
-            'imagen_url' => 'bebidas_deportivas.jpg',
+            'imagen_url' => 'bebidas_energeticas.jpg',
         ]);
 
         Producto::create([
@@ -569,6 +568,396 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 300,
             'imagen_url' => 'harina.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Galletas Saladas',
+            'descripcion' => 'Galletas saladas, perfectas para acompañar tus sopas o ensaladas.',
+            'precio' => 2.00,
+            'stock' => 150,
+            'imagen_url' => 'galletas_salada.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pan Rallado',
+            'descripcion' => 'Pan rallado, ideal para empanizar o agregar textura a tus platos.',
+            'precio' => 1.50,
+            'stock' => 200,
+            'imagen_url' => 'pan_rallado.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Avena',
+            'descripcion' => 'Avena saludable, perfecta para el desayuno o preparar galletas.',
+            'precio' => 1.20,
+            'stock' => 300,
+            'imagen_url' => 'avena.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Quinoa',
+            'descripcion' => 'Quinoa, una opción saludable y rica en proteínas para tus platos.',
+            'precio' => 3.50,
+            'stock' => 120,
+            'imagen_url' => 'quinoa.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Cuscús',
+            'descripcion' => 'Cuscús, fácil de preparar y un excelente acompañante para tus comidas.',
+            'precio' => 2.00,
+            'stock' => 150,
+            'imagen_url' => 'cuscus.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Polenta',
+            'descripcion' => 'Polenta, una base excelente para diversos platos italianos.',
+            'precio' => 2.50,
+            'stock' => 100,
+            'imagen_url' => 'polenta.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Aceite de Oliva',
+            'descripcion' => 'Aceite de oliva extra virgen, ideal para aderezos o cocinar.',
+            'precio' => 5.00,
+            'stock' => 200,
+            'imagen_url' => 'aceite_oliva.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Aceite de Girasol',
+            'descripcion' => 'Aceite de girasol, ligero y perfecto para freír o hornear.',
+            'precio' => 3.00,
+            'stock' => 180,
+            'imagen_url' => 'aceite_girasol.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Vinagre (Balsámico, De Manzana, Blanco)',
+            'descripcion' => 'Vinagre en diferentes variedades: balsámico, de manzana y blanco.',
+            'precio' => 1.80,
+            'stock' => 150,
+            'imagen_url' => 'vinagre.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Sal (Sal Común, Sal Marina, Sal de Himalaya)',
+            'descripcion' => 'Sal en varias variedades: común, marina y sal de Himalaya.',
+            'precio' => 1.00,
+            'stock' => 250,
+            'imagen_url' => 'sal.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pimienta (Negra, Blanca)',
+            'descripcion' => 'Pimienta de alta calidad, disponible en negra y blanca.',
+            'precio' => 1.50,
+            'stock' => 200,
+            'imagen_url' => 'pimienta.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Salsa de Soja',
+            'descripcion' => 'Salsa de soja, perfecta para acompañar tus platos asiáticos.',
+            'precio' => 2.00,
+            'stock' => 180,
+            'imagen_url' => 'salsa_soja.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Salsa de Tomate',
+            'descripcion' => 'Salsa de tomate natural, ideal para pastas, pizzas o guisos.',
+            'precio' => 1.80,
+            'stock' => 250,
+            'imagen_url' => 'salsa_tomate.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Mostaza',
+            'descripcion' => 'Mostaza, condimentar tus platos con un toque de sabor único.',
+            'precio' => 1.50,
+            'stock' => 200,
+            'imagen_url' => 'mostaza.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Ketchup',
+            'descripcion' => 'Ketchup, perfecto para acompañar papas fritas y hamburguesas.',
+            'precio' => 2.00,
+            'stock' => 180,
+            'imagen_url' => 'ketchup.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Mayonesa',
+            'descripcion' => 'Mayonesa suave y cremosa, ideal para ensaladas y sándwiches.',
+            'precio' => 1.80,
+            'stock' => 150,
+            'imagen_url' => 'mayonesa.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pesto',
+            'descripcion' => 'Pesto, una salsa de albahaca ideal para pastas o panecillos.',
+            'precio' => 2.50,
+            'stock' => 100,
+            'imagen_url' => 'pesto.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Miel',
+            'descripcion' => 'Miel natural, ideal para endulzar o como ingrediente en recetas.',
+            'precio' => 3.00,
+            'stock' => 120,
+            'imagen_url' => 'miel.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Azúcar (Blanca, Morena, Azúcar Glass)',
+            'descripcion' => 'Azúcar en diversas formas: blanca, morena y azúcar glass.',
+            'precio' => 1.00,
+            'stock' => 300,
+            'imagen_url' => 'azucar.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Salsas y Especias (Comino, Curry, Ajo en Polvo, Orégano, Albahaca)',
+            'descripcion' => 'Variedad de salsas y especias, ideales para sazonar tus platillos.',
+            'precio' => 1.50,
+            'stock' => 150,
+            'imagen_url' => 'salsas_especias.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Verduras Congeladas',
+            'descripcion' => 'Verduras congeladas, disponibles en diferentes combinaciones.',
+            'precio' => 2.00,
+            'stock' => 180,
+            'imagen_url' => 'verduras_congeladas.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Frutas Congeladas',
+            'descripcion' => 'Frutas congeladas, perfectas para smoothies o postres.',
+            'precio' => 2.50,
+            'stock' => 150,
+            'imagen_url' => 'frutas_congeladas.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Comidas Preparadas Congeladas (Pizza, Empanadas, Lasaña)',
+            'descripcion' => 'Comidas preparadas congeladas para disfrutar rápidamente.',
+            'precio' => 3.00,
+            'stock' => 100,
+            'imagen_url' => 'comidas_congeladas.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pescado Congelado',
+            'descripcion' => 'Pescado congelado, ideal para preparar en cualquier momento.',
+            'precio' => 5.00,
+            'stock' => 80,
+            'imagen_url' => 'pescado_congelado.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Carne Congelada',
+            'descripcion' => 'Carne congelada de alta calidad, lista para cocinar.',
+            'precio' => 7.00,
+            'stock' => 100,
+            'imagen_url' => 'carne_congelada.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Nuggets de Pollo',
+            'descripcion' => 'Nuggets de pollo empanizados, listos para freír o hornear.',
+            'precio' => 4.00,
+            'stock' => 180,
+            'imagen_url' => 'nuggets_pollo.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Detergente para la Ropa',
+            'descripcion' => 'Detergente líquido para lavar ropa, efectivo y suave.',
+            'precio' => 2.00,
+            'stock' => 250,
+            'imagen_url' => 'detergente.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Suavizante',
+            'descripcion' => 'Suavizante para la ropa, deja un aroma fresco y suave.',
+            'precio' => 1.80,
+            'stock' => 200,
+            'imagen_url' => 'suavizante.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Limpiador Multiusos',
+            'descripcion' => 'Limpiador multiusos, efectivo para diferentes superficies.',
+            'precio' => 2.50,
+            'stock' => 150,
+            'imagen_url' => 'limpiador_multiusos.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Desinfectantes',
+            'descripcion' => 'Desinfectante para mantener tus espacios limpios y saludables.',
+            'precio' => 3.00,
+            'stock' => 100,
+            'imagen_url' => 'desinfectantes.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Jabón para Platos',
+            'descripcion' => 'Jabón líquido para lavar platos, eficaz contra la grasa.',
+            'precio' => 1.50,
+            'stock' => 200,
+            'imagen_url' => 'jabon_platos.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Bolsas de Basura',
+            'descripcion' => 'Bolsas de basura resistentes, ideales para uso doméstico.',
+            'precio' => 1.00,
+            'stock' => 300,
+            'imagen_url' => 'bolsas_basura.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Papel Higiénico',
+            'descripcion' => 'Papel higiénico suave y resistente, disponible en varias presentaciones.',
+            'precio' => 2.00,
+            'stock' => 250,
+            'imagen_url' => 'papel_higienico.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Toallas de Papel',
+            'descripcion' => 'Toallas de papel absorbentes y resistentes.',
+            'precio' => 1.50,
+            'stock' => 300,
+            'imagen_url' => 'toallas_papel.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Esponjas y Trapos',
+            'descripcion' => 'Esponjas y trapos para la limpieza diaria.',
+            'precio' => 1.00,
+            'stock' => 200,
+            'imagen_url' => 'esponjas_trapos.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Productos para el Cuidado del Baño (Lavamanos, Limpiadores de Inodoro)',
+            'descripcion' => 'Productos especializados para mantener el baño limpio.',
+            'precio' => 3.00,
+            'stock' => 150,
+            'imagen_url' => 'productos_bano.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Filtros de Agua',
+            'descripcion' => 'Filtros de agua, perfectos para purificar el agua potable.',
+            'precio' => 4.00,
+            'stock' => 120,
+            'imagen_url' => 'filtros_agua.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Velas y Ambientadores',
+            'descripcion' => 'Velas aromáticas y ambientadores para tu hogar.',
+            'precio' => 2.50,
+            'stock' => 180,
+            'imagen_url' => 'velas_ambientadores.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pilas',
+            'descripcion' => 'Pilas de varias presentaciones, esenciales para dispositivos electrónicos.',
+            'precio' => 1.00,
+            'stock' => 300,
+            'imagen_url' => 'pilas.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Shampoo y Acondicionador',
+            'descripcion' => 'Shampoo y acondicionador para todo tipo de cabello, suave y eficaz.',
+            'precio' => 4.50,
+            'stock' => 200,
+            'imagen_url' => 'shampoo_acondicionador.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Jabón de Baño',
+            'descripcion' => 'Jabón de baño suave y humectante, ideal para pieles sensibles.',
+            'precio' => 1.80,
+            'stock' => 250,
+            'imagen_url' => 'jabón_baño.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pasta de Dientes',
+            'descripcion' => 'Pasta de dientes, con fórmula de protección para dientes y encías.',
+            'precio' => 2.00,
+            'stock' => 300,
+            'imagen_url' => 'pasta_dientes.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Desodorantes',
+            'descripcion' => 'Desodorantes, con fragancias frescas y duraderas.',
+            'precio' => 2.50,
+            'stock' => 200,
+            'imagen_url' => 'desodorante.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Crema Hidratante',
+            'descripcion' => 'Crema hidratante para rostro y cuerpo, ideal para todo tipo de piel.',
+            'precio' => 3.00,
+            'stock' => 180,
+            'imagen_url' => 'crema_hidratante.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Afeitadoras y Máquinas de Afeitar',
+            'descripcion' => 'Afeitadoras y máquinas de afeitar, precisión y comodidad al afeitar.',
+            'precio' => 10.00,
+            'stock' => 100,
+            'imagen_url' => 'afeitadora.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Productos para el Cabello (Gel, Laca, Espuma)',
+            'descripcion' => 'Productos para estilizar el cabello: gel, laca y espuma.',
+            'precio' => 4.00,
+            'stock' => 150,
+            'imagen_url' => 'productos_cabello.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Protector Solar',
+            'descripcion' => 'Protector solar de alta protección contra los rayos UV.',
+            'precio' => 6.00,
+            'stock' => 120,
+            'imagen_url' => 'protector_solar.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Toallitas Húmedas',
+            'descripcion' => 'Toallitas húmedas, suaves y perfectas para limpiar en cualquier lugar.',
+            'precio' => 2.50,
+            'stock' => 250,
+            'imagen_url' => 'toallitas_humedas.jpg',
+        ]);
+
+        Producto::create([
+            'nombre' => 'Productos de Higiene Femenina (Compresas, Tampones)',
+            'descripcion' => 'Productos de higiene femenina: compresas y tampones, comodidad y discreción.',
+            'precio' => 3.50,
+            'stock' => 200,
+            'imagen_url' => 'higiene_femenina.jpg',
         ]);
     }
 }
