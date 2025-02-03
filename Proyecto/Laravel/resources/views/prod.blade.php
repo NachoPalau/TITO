@@ -10,35 +10,9 @@
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="container-fluid bg-white border-bottom py-4 sticky-top">
-        <div class="row align-items-center">
-            <!-- Columna del logo (izquierda) -->
-            <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
-                <img src="img_Header/logo.png" style="width: 80px;">
-            </div>
+@include('layouts.navigation')
 
-            <!-- Columna del buscador (centrado) -->
-            <div class="col-4 d-flex justify-content-center">
-                <input type="text" class="form-control w-100" placeholder="Buscar">
-            </div>
-
-            <!-- Columna del login y carrito (derecha) -->
-            <div class="col-4 d-flex justify-content-end align-items-center gap-3" style="padding-right:3%">
-                <img class="img-fluid" src="./img_Header/login.jpg" alt="Login" style="width: 40px; height: 40px;">
-                <img class="img-fluid" src="./img_Header/carrito.png" alt="Carrito" style="width: 40px; height: 40px;">
-            </div>
-        </div>
-    </header>
-
-    <!-- NAVBAR -->
-    <nav class="container text-center my-3">
-        <div class="d-flex justify-content-center gap-4">
-            <a href="#" class="fw-bold text-decoration-underline">PRODUCTOS</a>
-            <a href="#" class="fw-bold text-dark text-decoration-none">RECETAS</a>
-            <a href="#" class="fw-bold text-dark text-decoration-none">EVENTOS</a>
-        </div>
-    </nav>
+@include('layouts.subnavbar')
 
     <!-- MAIN CONTAINER -->
     <div class="container">

@@ -1,6 +1,10 @@
-<x-guest-layout>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
+                <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 150px;"></a>
+            </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -44,4 +48,3 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
