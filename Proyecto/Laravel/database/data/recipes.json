@@ -1,0 +1,83 @@
+[
+    {
+      "id": 1,
+      "titulo": "Tacos de pollo al pastor",
+      "descripcion": "Tacos de pollo sazonados con achiote y piña, acompañados de cebolla y cilantro frescos. ¡Una explosión de sabores!",
+      "id_usuario": 1,
+      "ingredientes": ["Pechuga de pollo", "achiote", "piña fresca", "tortillas de maíz", "cebolla", "cilantro", "limón", "sal", "pimienta"],
+      "guardados": 4
+    },
+    {
+      "id": 2,
+      "titulo": "Ensalada Mediterránea",
+      "descripcion": "Fresca ensalada con pepino, tomate, aceitunas, queso feta y aliño de aceite de oliva y limón. Ideal como acompañante o plato ligero.",
+      "id_usuario": 5,
+      "ingredientes": ["Pepino", "tomate", "aceitunas negras", "queso feta", "aceite de oliva", "limón", "orégano", "sal", "pimienta"],
+      "guardados": 6
+    },
+    {
+      "id": 3,
+      "titulo": "Sopa de Lentejas",
+      "descripcion": "Reconfortante sopa de lentejas con zanahorias, cebolla, ajo y un toque de comino. Perfecta para días fríos.",
+      "id_usuario": 1,
+      "ingredientes": ["Lentejas", "zanahorias", "cebolla", "ajo", "caldo de verdura", "comino", "aceite de oliva", "sal", "pimienta"],
+      "guardados": 4
+    },
+    {
+      "id": 4,
+      "titulo": "Spaghetti Carbonara",
+      "descripcion": "Pasta con una salsa cremosa a base de huevo, panceta y queso parmesano. Un clásico italiano que nunca falla.",
+      "id_usuario": 5,
+      "ingredientes": ["Tallarines", "panceta", "huevos", "queso parmesano", "ajo", "sal", "pimienta"],
+      "guardados": 9
+    },
+    {
+      "id": 5,
+      "titulo": "Guacamole",
+      "descripcion": "Guacamole cremoso con aguacate, cebolla, cilantro y un toque de chile. Perfecto para acompañar nachos o tacos.",
+      "id_usuario": 1,
+      "ingredientes": ["Aguacates", "cebolla morada", "cilantro", "chile jalapeño", "limón", "sal"],
+      "guardados": 1
+    },
+    {
+      "id": 6,
+      "titulo": "Pizza Margherita",
+      "descripcion": "Pizza clásica con tomate, mozzarella fresca y albahaca. Simple pero deliciosa.",
+      "id_usuario": 5,
+      "ingredientes": ["Masa para pizza", "salsa de tomate", "mozzarella fresca", "albahaca", "aceite de oliva", "sal"],
+      "guardados": 7
+    },
+    {
+      "id": 7,
+      "titulo": "Pollo al Curry",
+      "descripcion": "Pollo tierno cocinado en una salsa de curry con leche de coco. Un platillo lleno de sabor exótico.",
+      "id_usuario": 1,
+      "ingredientes": ["Pechugas de pollo", "curry en polvo", "cebolla", "ajo", "aceite de oliva", "sal", "pimienta"],
+      "guardados": 12
+    },
+    {
+      "id": 8,
+      "titulo": "Tortillas de Patatas",
+      "descripcion": "Una clásica tortilla española con patatas, cebolla y huevo. Ideal para el desayuno o como tapa.",
+      "id_usuario": 5,
+      "ingredientes": ["Patatas", "cebolla", "huevos", "aceite de oliva", "sal", "pimienta"],
+      "guardados": 4
+    },
+    {
+      "id": 9,
+      "titulo": "Batido de Fresas y Plátano",
+      "descripcion": "Un batido saludable y refrescante de fresas y plátano con leche. Ideal para un desayuno o merienda rápida.",
+      "id_usuario": 1,
+      "ingredientes": ["Fresas", "plátano", "leche", "miel (opcional)", "hielo"],
+      "guardados": 2
+    },
+    {
+      "id": 10,
+      "titulo": "Ceviche de Pescado",
+      "descripcion": "Pescado fresco marinado en limón con cebolla, cilantro y un toque de chile. Refrescante y ligero.",
+      "id_usuario": 5,
+      "ingredientes": ["Pescado blanco", "jugo de limón", "cebolla morada", "cilantro", "chile serrano", "sal", "pimienta"],
+      "guardados": 6
+    }
+  ]
+  

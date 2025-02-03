@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recetas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('titulo');
-            $table->string('descripcion');
-            $table->unsignedBigInteger('id_usuario');
-            $table->json('ingredientes');
-            $table->integer('guardados');
+        Schema::table('recetas', function (Blueprint $table) {
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recetas');
-
         Schema::table('recetas', function (Blueprint $table) {
-            $table->dropForeign(['id_usuario']);
+            //
         });
     }
 };

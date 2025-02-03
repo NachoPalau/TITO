@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedidos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('id_usuario');
-            $table->string('estado');
-            $table->string('direccion');
+        Schema::table('pedidos', function (Blueprint $table) {
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pedidos');
+        Schema::table('pedidos', function (Blueprint $table) {
+            //
+        });
     }
 };
