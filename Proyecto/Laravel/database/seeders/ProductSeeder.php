@@ -450,7 +450,7 @@ class ProductSeeder extends Seeder
             'stock' => 100,
             'imagen_url' => 'cafe.jpg',
         ]);
-
+            //Por aqui
         Producto::create([
             'nombre' => 'Té (Verde, Negro, De Hierbas)',
             'descripcion' => 'Variedad de tés: verde, negro y de hierbas, perfectos para relajarse.',
