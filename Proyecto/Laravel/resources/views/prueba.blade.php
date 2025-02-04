@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Productos</title>
     <link rel="stylesheet" href="{{ asset('css/prueba.css') }}">
+
 </head>
 <style>
     #productos,
@@ -24,28 +25,29 @@
 </style>
 <script>
     function filtrarTotal() {
-    let input = document.getElementById("busquedaTotal").value.toLowerCase();
-    let productos = document.querySelectorAll(".producto");
-    let recetas = document.querySelectorAll(".receta");
+        let input = document.getElementById("busquedaTotal").value.toLowerCase();
+        let productos = document.querySelectorAll(".producto");
+        let recetas = document.querySelectorAll(".receta");
 
-    productos.forEach(producto => {
-        let nombre = producto.querySelector("strong").textContent.toLowerCase();
-        if (nombre.includes(input)) {
-            producto.style.display = "block";
-        } else {
-            producto.style.display = "none";
-        }
-    });
+        productos.forEach(producto => {
+            let nombre = producto.querySelector("strong").textContent.toLowerCase();
+            if (nombre.includes(input)) {
+                producto.style.display = "block";
+            } else {
+                producto.style.display = "none";
+            }
+        });
 
-    recetas.forEach(receta => {
-        let nombre = receta.querySelector("strong").textContent.toLowerCase();
-        if (nombre.includes(input)) {
-            receta.style.display = "block";
-        } else {
-            receta.style.display = "none";
-        }
-    });
-}
+        recetas.forEach(receta => {
+            let nombre = receta.querySelector("strong").textContent.toLowerCase();
+            if (nombre.includes(input)) {
+                receta.style.display = "block";
+            } else {
+                receta.style.display = "none";
+            }
+        });
+    }
+
     function filtrarProductos() {
         let input = document.getElementById('busqueda').value.toLowerCase();
         let productos = document.getElementsByClassName('producto');
@@ -157,27 +159,53 @@
     }
 
     function ordenarRecetasPorGuardados() {
-    let recetasContainer = document.getElementById("recetas");
-    let recetas = Array.from(document.querySelectorAll(".receta"));
-    
-    recetas.sort((a, b) => {
-        let guardadosA = parseInt(a.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
-        let guardadosB = parseInt(b.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
-        
-        if (guardadosA === guardadosB) {
-            let tituloA = a.querySelector("strong").textContent.toLowerCase();
-            let tituloB = b.querySelector("strong").textContent.toLowerCase();
-            return tituloA.localeCompare(tituloB);
-        }
-        return guardadosB - guardadosA;
+        let recetasContainer = document.getElementById("recetas");
+        let recetas = Array.from(document.querySelectorAll(".receta"));
+
+        recetas.sort((a, b) => {
+            let guardadosA = parseInt(a.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
+            let guardadosB = parseInt(b.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
+
+            if (guardadosA === guardadosB) {
+                let tituloA = a.querySelector("strong").textContent.toLowerCase();
+                let tituloB = b.querySelector("strong").textContent.toLowerCase();
+                return tituloA.localeCompare(tituloB);
+            }
+            return guardadosB - guardadosA;
+        });
+
+        recetas.forEach(receta => recetasContainer.appendChild(receta));
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        let carritoIcon = document.getElementById("carrito");
+        let slideCarrito = document.getElementById("slideCarrito");
+        let cerrarCarrito = document.getElementById("cerrarCarrito");
+        let body = document.body;
+
+
+        carritoIcon.addEventListener("click", function() {
+            slideCarrito.classList.add("slide-abierto");
+            body.classList.add("no-scroll");
+        });
+
+
+        cerrarCarrito.addEventListener("click", function() {
+            slideCarrito.classList.remove("slide-abierto");
+            body.classList.remove("no-scroll");
+        });
     });
-    
-    recetas.forEach(receta => recetasContainer.appendChild(receta));
-}
 </script>
 
 <body>
     <img id="carrito" src="{{ asset('img/carritos.svg') }}">
+    <div id="slideCarrito" class="slide-carrito">
+        <button id="cerrarCarrito">✖</button>
+        <h2>Carrito de Compras</h2>
+        <div id="contenidoCarrito">
+            <p>Tu carrito está vacío</p>
+        </div>
+    </div>
+
     <input type="text" id="busquedaTotal" placeholder="Buscar..." onkeyup="filtrarTotal()">
     <h1>Listado de productos</h1>
     <input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
@@ -210,7 +238,6 @@
             <p style="font-weight: bold; color:black">Ingredientes: </p>
             <p>{{ $receta->ingredientes }}</p>
             <p style="font-weight: bold; color:black">Creador: {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <p style="font-weight: bold; color:black">Guardados: {{ $receta->guardados}}</p>
             <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito.svg') }}"></button>
         </div>
         @endforeach
