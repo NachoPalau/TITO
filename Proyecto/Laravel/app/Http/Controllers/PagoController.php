@@ -21,7 +21,7 @@ class PagoController extends Controller
         ]);
 
         try {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey(config('services.stripe.secret_key'));
 
             //se crea el cargo
             $cargo = Charge::create([
