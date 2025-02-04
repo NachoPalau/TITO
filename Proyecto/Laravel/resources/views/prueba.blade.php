@@ -159,23 +159,30 @@
     }
 
     function ordenarRecetasPorGuardados() {
-        let recetasContainer = document.getElementById("recetas");
-        let recetas = Array.from(document.querySelectorAll(".receta"));
+    let recetasContainer = document.getElementById("recetas");
+    let recetas = Array.from(document.querySelectorAll(".receta"));
 
-        recetas.sort((a, b) => {
-            let guardadosA = parseInt(a.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
-            let guardadosB = parseInt(b.querySelector("p:nth-of-type(6)").textContent.replace("Guardados: ", "")) || 0;
-
-            if (guardadosA === guardadosB) {
-                let tituloA = a.querySelector("strong").textContent.toLowerCase();
-                let tituloB = b.querySelector("strong").textContent.toLowerCase();
-                return tituloA.localeCompare(tituloB);
-            }
-            return guardadosB - guardadosA;
-        });
-
-        recetas.forEach(receta => recetasContainer.appendChild(receta));
+    if (recetas.length === 0) {
+        console.warn("No se encontraron recetas para ordenar.");
+        return;
     }
+
+    recetas.forEach(receta => {
+        console.log("Receta detectada:", receta.querySelector("strong").textContent, "Guardados:", receta.dataset.guardados);
+    });
+
+    recetas.sort((a, b) => {
+        let guardadosA = parseInt(a.dataset.guardados) || 0;
+        let guardadosB = parseInt(b.dataset.guardados) || 0;
+
+        return guardadosB - guardadosA;
+    });
+
+    recetas.forEach(receta => recetasContainer.appendChild(receta));
+
+    console.log("Ordenación completada.");
+}
+
     document.addEventListener("DOMContentLoaded", function() {
         let carritoIcon = document.getElementById("carrito");
         let slideCarrito = document.getElementById("slideCarrito");
@@ -231,7 +238,7 @@
     <button onclick="ordenarRecetasPorGuardados()">Mas guardados</button>
     <div id="recetas">
         @foreach($recetas as $receta)
-        <div class="receta">
+        <div class="receta" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
