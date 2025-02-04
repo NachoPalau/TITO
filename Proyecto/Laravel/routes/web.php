@@ -3,10 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -25,5 +27,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/prueba',[ProductoController::class, 'index'])->name('prueba');
 
-require __DIR__.'/auth.php';
+Route::get('/api/productos', function () {
+    return response()->json(Producto::all());
+});
+
+Route::get('/productos', function () {
+    return view('prod');
+})->name('productos');
+//->middleware(['auth', 'verified'])
+
+Route::get('/eventos', function () {
+    return view('eventos');
+})->name('eventos');
+
+Route::get('/recetas', function () {
+    return view('recetas');
+})->name('recetas');

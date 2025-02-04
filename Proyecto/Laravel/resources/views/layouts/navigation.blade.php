@@ -1,4 +1,20 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<style>
+    .form-control:focus {
+        box-shadow: none;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+</style>
+<header class="container-fluid bg-white border-bottom py-1 sticky-top">
+        <div class="row align-items-center">
+            <!-- Columna del logo (izquierda) -->
+            <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
+                <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 100px;"></a>
+            </div>
+
+            <!-- Columna del buscador (centrado) -->
+            <div class="col-4 d-flex justify-content-center" >
+                <input type="text" class="form-control w-100 rounded-0 custom-border" style="border: none; border:1px solid #6B0200" placeholder="Buscar">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -14,6 +30,10 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('prueba')" :active="request()->routeIs('prueba')">
+                        {{ __('Página de Prueba') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -43,7 +63,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -52,16 +72,14 @@
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+            <!-- Columna del login y carrito (derecha) -->
+            <div class="col-4 d-flex justify-content-end align-items-center gap-3" style="padding-right:3%">
+                <a href="{{ route('login') }}"><img class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px;"></a>
+                <img class="img-fluid" src="{{ asset('img/img_Header/carrito.png') }}" alt="Carrito" style="width: 40px; height: 40px;">
             </div>
         </div>
+    </header>
+</nav>
     </div>
 
     <!-- Responsive Navigation Menu -->
@@ -89,7 +107,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
