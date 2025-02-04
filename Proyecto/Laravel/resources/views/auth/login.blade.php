@@ -2,28 +2,34 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
-                <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 150px;"></a>
-            </div>
+    <div class="col-4 d-flex justify-content-start" style=" text-align: center; width: 100%; justify-content: center;">
+    <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 150px;"></a>
+    </div>
+
+    <div style="border:1px solid #6B0200; width: 350px; margin: 50px auto; padding: 20px; text-align: center; border-radius: 0px;">
+    <h2 style="font-weight: bold; margin-bottom: 20px;">INICIA SESIÓN</h2>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        <div style="text-align: left;">
+            <x-input-label for="email" :value="__('Email')" style="display: block; margin-bottom: 5px; font-weight: bold;"/>
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" 
+                          style="border:none; border-bottom: 2px solid #6B0200; border-radius: 0; outline: none; width: 70%; padding: 10px; margin-bottom: 15px;" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div style="text-align: left;">
+            <x-input-label for="password" :value="__('Password')" style="display: block; margin-bottom: 5px; font-weight: bold;"/>
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="current-password" />
+                            required autocomplete="current-password" 
+                            style="border:none; border-bottom: 2px solid #6B0200; border-radius: 0; outline: none; width: 70%; padding: 10px; margin-bottom: 15px;" />
+                            
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -48,3 +54,4 @@
             </x-primary-button>
         </div>
     </form>
+    </div>
