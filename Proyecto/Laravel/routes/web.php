@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
 
 Route::get('/', function () {
     return view('index');
@@ -21,6 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::get('/prueba',[ProductoController::class, 'index'])->name('prueba');
+
+Route::get('/api/productos', function () {
+    return response()->json(Producto::all());
 });
 
 Route::get('/productos', function () {
