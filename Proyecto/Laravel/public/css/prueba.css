@@ -61,19 +61,44 @@ button:hover {
 
 
 @media (max-width: 1024px) { 
-    #productos {
+    #productos,#recetas {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) { 
-    #productos {
+    #productos,#recetas {
         grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media (max-width: 480px) { 
-    #productos {
+    #productos,#recetas {
         grid-template-columns: 1fr; 
     }
+    
+}
+
+#recetas{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+.receta {
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+}
+.receta strong {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.receta p {
+    font-size: 1em;
+    color: #555;
+    flex-grow: 1;
 }
