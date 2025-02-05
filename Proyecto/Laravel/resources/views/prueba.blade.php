@@ -24,6 +24,24 @@
     }
 </style>
 <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    let carritoIcon = document.getElementById("carrito");
+    let slideCarrito = document.getElementById("slideCarrito");
+    let cerrarCarrito = document.getElementById("cerrarCarrito");
+    let body = document.body;
+
+
+    carritoIcon.addEventListener("click", function() {
+        slideCarrito.classList.add("slide-abierto");
+        body.classList.add("no-scroll");
+    });
+
+
+    cerrarCarrito.addEventListener("click", function() {
+        slideCarrito.classList.remove("slide-abierto");
+        body.classList.remove("no-scroll");
+    });
+});
     function filtrarTotal() {
         let input = document.getElementById("busquedaTotal").value.toLowerCase();
         let productos = document.querySelectorAll(".producto");

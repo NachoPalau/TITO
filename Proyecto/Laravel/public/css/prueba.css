@@ -103,7 +103,7 @@ button:hover {
     flex-grow: 1;
 }
 
-/* .slide-carrito {
+.slide-carrito {
     position: fixed;
     top: 0;
     right: -400px; 
@@ -135,4 +135,4 @@ button:hover {
 
 .no-scroll {
     overflow: hidden;
-} */
+}
