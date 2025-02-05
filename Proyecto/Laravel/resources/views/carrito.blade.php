@@ -63,6 +63,12 @@
         overlay.style.display = "none";
         body.classList.remove("no-scroll");
     });
+
+    overlay.addEventListener("click", function() {
+        slideCarrito.classList.remove("slide-abierto");
+        overlay.style.display = "none";
+        body.classList.remove("no-scroll");
+    });
 });
 </script>
 
@@ -73,7 +79,7 @@
         <h4 style="margin-left:15px; margin-top:10px;"><b>CARRITO</b></h4>
         <div id="sinContenidoCarrito">
             <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px; ">
-            <strong>Tu cesta está vacía</strong>
+            <strong>Tu carrito está vacío</strong>
         </div>
         <div id="contenidoCarrito">
             <p>Tu carrito tiene articulos</p>
