@@ -21,7 +21,9 @@ class ProductSeeder extends Seeder
             'telefono' => '1234567890',
             'puntos'=> 0,
             'favoritas' => '[]',
-            'carrito' => '[]']);
+            'carrito' => '[]'
+        ]);
+        
         Producto::create([
             'nombre' => 'Manzanas',
             'descripcion' => 'Fruta fresca, rica en fibra y vitaminas.',
