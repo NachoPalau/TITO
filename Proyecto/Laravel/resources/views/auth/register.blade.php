@@ -5,7 +5,7 @@
     border: 1px solid #6B0200;
     width: 350px;
     margin: 50px auto;
-    margin-top: 0px;
+    margin-top: 4%;
     padding: 20px;
     text-align: center;
     border-radius: 0px;
