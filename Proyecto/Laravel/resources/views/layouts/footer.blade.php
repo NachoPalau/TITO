@@ -2,7 +2,7 @@
         <p>Añadir correo para recibir notificaciones</p>
         <div class="row justify-content-center">
             <div class="col-auto">
-                <p class="m-0">TITO o LOGO</p>
+                <h4 class="m-0">TITO</h4>
             </div>
             <div class="col-auto"><a href="#" class="text-white">Contactanos</a></div>
             <div class="col-auto"><a href="#" class="text-white">Términos y condiciones</a></div>
