@@ -42,7 +42,7 @@
         <div class="row align-items-center">
             <!-- Columna del logo (izquierda) -->
             <div class="col-4 d-flex justify-content-start" style="padding-left:3%">
-                <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 100px;"></a>
+                <a href="{{ route('index') }}"><img src="{{ asset('img/img_Header/logo.png') }}" style="width: 100px; padding: 10px;"></a>
             </div>
 
             <!-- Columna del buscador (centrado) -->
