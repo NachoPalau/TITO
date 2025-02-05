@@ -3,8 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-
 
 Route::get('/', function () {
     return view('index');
@@ -16,7 +14,10 @@ Route::get('register', [RegisteredUserController::class, 'create'])
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+use App\Http\Controllers\PagoController;
 
+Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
+Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::get('/prueba',[ProductoController::class, 'index'])->name('prueba');
+
+Route::get('/api/productos', function () {
+    return response()->json(Producto::all());
 });
 
 Route::get('/productos', function () {
@@ -40,4 +46,3 @@ Route::get('/eventos', function () {
 Route::get('/recetas', function () {
     return view('recetas');
 })->name('recetas');
-
