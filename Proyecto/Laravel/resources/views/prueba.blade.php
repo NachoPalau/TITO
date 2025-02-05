@@ -25,40 +25,36 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Verificar si el usuario está autenticado
+
         const usuarioAutenticado = document.body.dataset.usuario === 'true';
-        
+
         const estrellas = document.querySelectorAll("#estrella");
         const popupLogin = document.getElementById("popupLogin");
         const cerrarPopup = document.getElementById("cerrarPopup");
 
-        // Event listener para cerrar el popup cuando se hace clic en la "X"
+
         cerrarPopup.addEventListener("click", function() {
-            popupLogin.style.display = "none"; // Ocultar el popup cuando se cierre
+            popupLogin.style.display = "none";
         });
 
-        // Event listener para cerrar el popup cuando se hace clic fuera del contenido del popup
+
         popupLogin.addEventListener("click", function(event) {
-            // Verificar si el clic es en el fondo (no en el contenido)
+
             if (event.target === popupLogin) {
-                popupLogin.style.display = "none"; // Cerrar el popup
+                popupLogin.style.display = "none";
             }
         });
 
         estrellas.forEach(estrella => {
             estrella.addEventListener("click", function() {
-           
                 if (estrella.src.includes("estrellaVacia.svg")) {
                     if (!usuarioAutenticado) {
-                       
                         popupLogin.style.display = "flex";
                         return;
                     } else {
-               
                         estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
                     }
                 } else {
-           
                     estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
                 }
             });
