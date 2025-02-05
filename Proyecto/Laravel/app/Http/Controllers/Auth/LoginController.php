@@ -21,7 +21,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->intended('/home');
+            return redirect()->intended('');
         }
 
         return back()->withErrors(['email' => 'Las credenciales son incorrectas.']);

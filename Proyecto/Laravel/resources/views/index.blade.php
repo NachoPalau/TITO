@@ -30,6 +30,9 @@
                 </div>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <img src="./img_eventos/eventoHindi.jpg" class="img-fluid" alt="Receta 3">
+    
+    @include('layouts.filtrar')
+
                 </div>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <img src="./img_eventos/eventoHindi.jpg" class="img-fluid" alt="Receta 4">

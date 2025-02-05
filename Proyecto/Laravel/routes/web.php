@@ -3,12 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('register', [RegisteredUserController::class, 'create'])
+->name('register');
+
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -35,3 +40,4 @@ Route::get('/eventos', function () {
 Route::get('/recetas', function () {
     return view('recetas');
 })->name('recetas');
+

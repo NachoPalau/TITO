@@ -9,8 +9,9 @@
             <li><a class="dropdown-item" href="#">Más vendidos</a></li>
         </ul>
     </div>
-    <div>
+    <div class="d-flex ">
         <button class="btn btn-none">A-Z ⬆⬇</button>
         <button class="btn btn-none">Precio ⬆⬇</button>
     </div>
+    
 </section>
