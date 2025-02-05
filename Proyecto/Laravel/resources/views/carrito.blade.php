@@ -73,7 +73,7 @@
         <h4 style="margin-left:15px; margin-top:10px;"><b>CARRITO</b></h4>
         <div id="sinContenidoCarrito">
             <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px; ">
-            <strong>Aún no has añadido productos a tu carro</strong>
+            <strong>Tu cesta está vacía</strong>
         </div>
         <div id="contenidoCarrito">
             <p>Tu carrito tiene articulos</p>
