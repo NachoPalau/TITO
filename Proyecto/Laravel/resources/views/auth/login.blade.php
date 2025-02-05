@@ -1,6 +1,7 @@
 <style>
 /* Contenedor principal del formulario */
 .form-container {
+    font-family: sans-serif;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
     border: 1px solid #6B0200;
     width: 350px;
@@ -11,6 +12,7 @@
 
 /* Logo centrado */
 .logo-container {
+    margin-top:20px;
     text-align: center;
     display: flex;
     justify-content: center;

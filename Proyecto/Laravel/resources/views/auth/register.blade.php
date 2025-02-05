@@ -1,6 +1,7 @@
 <style>
 /* Estilo general del contenedor */
 .form-container {
+    font-family: sans-serif;
     border: 1px solid #6B0200;
     width: 350px;
     margin: 50px auto;
