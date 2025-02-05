@@ -1,110 +1,4 @@
-<style>
-/* Contenedor principal del formulario */
-.form-container {
-    font-family: sans-serif;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    border: 1px solid #6B0200;
-    width: 350px;
-    margin: 50px auto;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Logo centrado */
-.logo-container {
-    margin-top:20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
-
-/* Título */
-.form-title {
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Contenedor de inputs */
-.input-group {
-    position: relative;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-/* Etiqueta flotante */
-.input-label {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease-in-out;
-    font-weight: bold;
-    color:rgb(15, 1, 1);
-    pointer-events: none;
-}
-
-/* Levanta la etiqueta cuando el input está enfocado o tiene texto */
-.text-input:focus + .input-label,
-.text-input:not(:placeholder-shown) + .input-label {
-    top: 0;
-    font-size: 12px;
-    color:rgb(2, 0, 0);
-}
-
-/* Estiliza los inputs */
-.text-input {
-    width: 85%;
-    padding: 10px 15px;
-    border: none;
-    border-bottom: 2px solid #6B0200;
-    outline: none;
-    font-size: 16px;
-}
-
-/* Botón de inicio de sesión */
-.button-primary {
-    background-color: #6B0200;
-    color: white;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Botón de registro */
-.button-secondary {
-    display: block;
-    text-align: center;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    padding: 10px;
-    width: 94%;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    text-decoration: none;
-}
-
-/* Footer */
-.footer {
-    background-color: #6B0200;
-    color: white;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-
-.footer a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 <!-- Session Status -->
 <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -145,10 +39,11 @@
         </div>
     </form>
 
-    <!-- Botón de registro -->
-    <a href="{{ route('register') }}" class="button-secondary">
-        REGÍSTRATE
-    </a>
+    <div class="flex items-center justify-end mt-4">
+            <x-secondary-button class="button-secondary">
+                <a href="{{route('register')}}">REGÍSTRATE</a>
+            </x-secondary-button>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

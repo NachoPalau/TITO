@@ -6,18 +6,19 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+use App\Http\Controllers\PagoController;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::get('register', [RegisteredUserController::class, 'create'])
-->name('register');
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-use App\Http\Controllers\PagoController;
+
 
 Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
