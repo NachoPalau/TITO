@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
-
+use App\Http\Controllers\RecetaController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -45,3 +45,4 @@ Route::get('/eventos', function () {
 Route::get('/recetas', function () {
     return view('recetas');
 })->name('recetas');
+Route::post('/receta/{id}/actualizarGuardados', [RecetaController::class, 'actualizarGuardados'])->name('receta.actualizarGuardados');
