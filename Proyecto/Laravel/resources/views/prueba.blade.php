@@ -24,24 +24,66 @@
     }
 </style>
 <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    let carritoIcon = document.getElementById("carrito");
-    let slideCarrito = document.getElementById("slideCarrito");
-    let cerrarCarrito = document.getElementById("cerrarCarrito");
-    let body = document.body;
+    document.addEventListener("DOMContentLoaded", function() {
+        // Verificar si el usuario está autenticado
+        const usuarioAutenticado = document.body.dataset.usuario === 'true';
+        
+        const estrellas = document.querySelectorAll("#estrella");
+        const popupLogin = document.getElementById("popupLogin");
+        const cerrarPopup = document.getElementById("cerrarPopup");
 
+        // Event listener para cerrar el popup cuando se hace clic en la "X"
+        cerrarPopup.addEventListener("click", function() {
+            popupLogin.style.display = "none"; // Ocultar el popup cuando se cierre
+        });
 
-    carritoIcon.addEventListener("click", function() {
-        slideCarrito.classList.add("slide-abierto");
-        body.classList.add("no-scroll");
+        // Event listener para cerrar el popup cuando se hace clic fuera del contenido del popup
+        popupLogin.addEventListener("click", function(event) {
+            // Verificar si el clic es en el fondo (no en el contenido)
+            if (event.target === popupLogin) {
+                popupLogin.style.display = "none"; // Cerrar el popup
+            }
+        });
+
+        estrellas.forEach(estrella => {
+            estrella.addEventListener("click", function() {
+           
+                if (estrella.src.includes("estrellaVacia.svg")) {
+                    if (!usuarioAutenticado) {
+                       
+                        popupLogin.style.display = "flex";
+                        return;
+                    } else {
+               
+                        estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
+                    }
+                } else {
+           
+                    estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
+                }
+            });
+        });
     });
 
+    document.addEventListener("DOMContentLoaded", function() {
+        let carritoIcon = document.getElementById("carrito");
+        let slideCarrito = document.getElementById("slideCarrito");
+        let cerrarCarrito = document.getElementById("cerrarCarrito");
+        let body = document.body;
 
-    cerrarCarrito.addEventListener("click", function() {
-        slideCarrito.classList.remove("slide-abierto");
-        body.classList.remove("no-scroll");
+
+        carritoIcon.addEventListener("click", function() {
+            slideCarrito.classList.add("slide-abierto");
+            body.classList.add("no-scroll");
+        });
+
+
+        cerrarCarrito.addEventListener("click", function() {
+            slideCarrito.classList.remove("slide-abierto");
+            body.classList.remove("no-scroll");
+        });
     });
-});
+
     function filtrarTotal() {
         let input = document.getElementById("busquedaTotal").value.toLowerCase();
         let productos = document.querySelectorAll(".producto");
@@ -177,29 +219,29 @@
     }
 
     function ordenarRecetasPorGuardados() {
-    let recetasContainer = document.getElementById("recetas");
-    let recetas = Array.from(document.querySelectorAll(".receta"));
+        let recetasContainer = document.getElementById("recetas");
+        let recetas = Array.from(document.querySelectorAll(".receta"));
 
-    if (recetas.length === 0) {
-        console.warn("No se encontraron recetas para ordenar.");
-        return;
+        if (recetas.length === 0) {
+            console.warn("No se encontraron recetas para ordenar.");
+            return;
+        }
+
+        recetas.forEach(receta => {
+            console.log("Receta detectada:", receta.querySelector("strong").textContent, "Guardados:", receta.dataset.guardados);
+        });
+
+        recetas.sort((a, b) => {
+            let guardadosA = parseInt(a.dataset.guardados) || 0;
+            let guardadosB = parseInt(b.dataset.guardados) || 0;
+
+            return guardadosB - guardadosA;
+        });
+
+        recetas.forEach(receta => recetasContainer.appendChild(receta));
+
+        console.log("Ordenación completada.");
     }
-
-    recetas.forEach(receta => {
-        console.log("Receta detectada:", receta.querySelector("strong").textContent, "Guardados:", receta.dataset.guardados);
-    });
-
-    recetas.sort((a, b) => {
-        let guardadosA = parseInt(a.dataset.guardados) || 0;
-        let guardadosB = parseInt(b.dataset.guardados) || 0;
-
-        return guardadosB - guardadosA;
-    });
-
-    recetas.forEach(receta => recetasContainer.appendChild(receta));
-
-    console.log("Ordenación completada.");
-}
 
     document.addEventListener("DOMContentLoaded", function() {
         let carritoIcon = document.getElementById("carrito");
@@ -221,13 +263,21 @@
     });
 </script>
 
-<body>
-    <img id="carrito" src="{{ asset('img/carritos.svg') }}">
+<body data-usuario="{{ auth()->check() ? 'true' : 'false' }}">
+    <img id="carrito" src="{{ asset('img/carrito/carritos.svg') }}">
     <div id="slideCarrito" class="slide-carrito">
         <button id="cerrarCarrito">✖</button>
         <h2>Carrito de Compras</h2>
         <div id="contenidoCarrito">
             <p>Tu carrito está vacío</p>
+        </div>
+    </div>
+    <div id="popupLogin" class="popup">
+        <div class="popup-contenido">
+            <span id="cerrarPopup" class="popup-cerrar">✖</span>
+            <h2>¡Debes iniciar sesión para guardar esta receta!</h2>
+            <p>Para poder guardar esta receta, primero necesitas iniciar sesión en tu cuenta.</p>
+            <button onclick="window.location.href='/login'">Iniciar sesión</button>
         </div>
     </div>
 
@@ -244,7 +294,7 @@
             <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
             <strong>{{ $producto->nombre }}</strong> {{ $producto->precio }} €
             <p>{{ $producto->descripcion }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito.svg') }}"></button>
+            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
     </div>
@@ -258,12 +308,13 @@
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
+            <img src="{{asset('img/carrito/estrellaVacia.svg')}}" id="estrella">
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>
-            <p>{{ $receta->ingredientes }}</p>
+            <p>{{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p style="font-weight: bold; color:black">Creador: {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito.svg') }}"></button>
+            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
     </div>

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 class ProductSeeder extends Seeder
 {
     /**
@@ -12,6 +14,14 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('users')->insert([
+            'name' => 'TITO',
+            'email' => 'TITO@gmail.com',
+            'password' => bcrypt('TITO1234'),
+            'telefono' => '1234567890',
+            'puntos'=> 0,
+            'favoritas' => '[]',
+            'carrito' => '[]']);
         Producto::create([
             'nombre' => 'Manzanas',
             'descripcion' => 'Fruta fresca, rica en fibra y vitaminas.',
@@ -959,5 +969,190 @@ class ProductSeeder extends Seeder
             'stock' => 200,
             'imagen_url' => 'higiene_femenina.jpg',
         ]);
+        
+        Producto::create([
+            'nombre' => 'Conejo',
+            'descripcion' => 'Carne de conejo tierna y fresca para paellas y guisos.',
+            'precio' => 7.50,
+            'stock' => 100,
+            'imagen_url' => 'conejo.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Judía Verde',
+            'descripcion' => 'Judía verde fresca, ideal para paellas y ensaladas.',
+            'precio' => 3.00,
+            'stock' => 200,
+            'imagen_url' => 'judia_verde.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Garrofón',
+            'descripcion' => 'Legumbre típica de la paella valenciana.',
+            'precio' => 4.00,
+            'stock' => 120,
+            'imagen_url' => 'garrofon.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Azafrán',
+            'descripcion' => 'Azafrán puro en hebras, el mejor condimento para paellas.',
+            'precio' => 8.50,
+            'stock' => 80,
+            'imagen_url' => 'azafran.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Huevos',
+            'descripcion' => 'Huevos frescos de gallina, calidad garantizada.',
+            'precio' => 2.00,
+            'stock' => 300,
+            'imagen_url' => 'huevos.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Pan',
+            'descripcion' => 'Pan fresco ideal para acompañar comidas y sopas.',
+            'precio' => 1.50,
+            'stock' => 500,
+            'imagen_url' => 'pan.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Habichuelas ',
+            'descripcion' => 'Judías blancas para la tradicional fabada asturiana.',
+            'precio' => 4.50,
+            'stock' => 100,
+            'imagen_url' => 'habichuelas.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Chorizo',
+            'descripcion' => 'Chorizo español, ideal para fabada y guisos.',
+            'precio' => 3.00,
+            'stock' => 180,
+            'imagen_url' => 'chorizo.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Morcilla',
+            'descripcion' => 'Morcilla asturiana para fabada y otros platos tradicionales.',
+            'precio' => 3.20,
+            'stock' => 120,
+            'imagen_url' => 'morcilla.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Pimentón',
+            'descripcion' => 'Pimentón ahumado para dar sabor a guisos y embutidos.',
+            'precio' => 2.80,
+            'stock' => 150,
+            'imagen_url' => 'pimenton.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Pulpo',
+            'descripcion' => 'Pulpo fresco para la tradicional receta gallega.',
+            'precio' => 15.00,
+            'stock' => 60,
+            'imagen_url' => 'pulpo.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Sal Gorda',
+            'descripcion' => 'Sal gruesa para potenciar el sabor de los platos.',
+            'precio' => 1.50,
+            'stock' => 300,
+            'imagen_url' => 'sal_gorda.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Cochinillo',
+            'descripcion' => 'Cochinillo fresco para asar al estilo segoviano.',
+            'precio' => 25.00,
+            'stock' => 50,
+            'imagen_url' => 'cochinillo.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Manteca de Cerdo',
+            'descripcion' => 'Manteca de cerdo natural, usada en recetas tradicionales.',
+            'precio' => 3.50,
+            'stock' => 100,
+            'imagen_url' => 'manteca_cerdo.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Caldo de Pollo',
+            'descripcion' => 'Caldo casero de pollo, ideal para sopas y arroces.',
+            'precio' => 2.50,
+            'stock' => 200,
+            'imagen_url' => 'caldo_pollo.jpg',
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Tocino',
+            'descripcion' => 'Tocino ahumado para guisos y platos tradicionales.',
+            'precio' => 4.00,
+            'stock' => 150,
+            'imagen_url' => 'tocino.jpg',
+        ]);
+        DB::table('recetas')->insert([
+            [
+                'titulo' => 'Paella Valenciana',
+                'descripcion' => 'Arroz con pollo, conejo, judía verde y garrofón.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['arroz', 'pollo', 'conejo', 'judía verde', 'garrofón', 'azafrán', 'caldo de pollo']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Tortilla de Patatas',
+                'descripcion' => 'Tortilla española hecha con huevos, patatas y cebolla.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['huevos', 'patatas', 'cebolla', 'aceite de oliva', 'sal']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Gazpacho Andaluz',
+                'descripcion' => 'Sopa fría de tomate, pimiento y pepino, ideal para el verano.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['tomate', 'pimiento verde', 'pepino', 'ajo', 'aceite de oliva', 'vinagre', 'pan']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Fabada Asturiana',
+                'descripcion' => 'Plato tradicional de Asturias con fabes, chorizo y morcilla.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['habichuelas', 'chorizo', 'morcilla', 'tocino', 'pimentón', 'agua', 'sal']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Pulpo a la Gallega',
+                'descripcion' => 'Pulpo cocido con pimentón, aceite de oliva y sal gorda.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['pulpo', 'patatas', 'pimentón', 'aceite de oliva', 'sal gorda']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Cochinillo Asado',
+                'descripcion' => 'Cochinillo tierno asado al horno al estilo segoviano.',
+                'id_usuario' => 1,
+                'ingredientes' => json_encode(['cochinillo', 'agua', 'sal', 'manteca de cerdo']),
+                'guardados' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
+        
     }
+    
 }
