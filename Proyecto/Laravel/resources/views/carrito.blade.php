@@ -1,31 +1,4 @@
-<style>
-    #sinContenidoCarrito {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 80%;
-        text-align: center;
-        margin: 30px;
-    }
-
-    #sinContenidoCarrito img {
-        margin-bottom: 10px;
-    }
-
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        display: none;
-        z-index: 1;
-    }
-
-</style>
-
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
