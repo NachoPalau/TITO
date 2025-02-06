@@ -1154,6 +1154,54 @@ class ProductSeeder extends Seeder
                 'updated_at' => now()
             ]
         ]);
+
+        DB::table('pedidos')->insert([
+            [
+                'id' => 1,
+                'id_usuario' => 1,
+                'estado' => 'En camino',
+                'direccion' => 'Calle tal/nº13 Valencia',
+                'codigo_seguimiento' => 'gsdasdffg',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 2,
+                'id_usuario' => 1,
+                'estado' => 'En camino',
+                'direccion' => 'Calle tal/nº13 Valencia',
+                'codigo_seguimiento' => '123456789',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 3,
+                'id_usuario' => 1,
+                'estado' => 'En preparación',
+                'direccion' => 'Calle tal/nº13 Valencia',
+                'codigo_seguimiento' => '123abc',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 4,
+                'id_usuario' => 1,
+                'estado' => 'En preparación',
+                'direccion' => 'Calle tal/nº13 Valencia',
+                'codigo_seguimiento' => '123def',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 5,
+                'id_usuario' => 1,
+                'estado' => 'Repartido',
+                'direccion' => 'Calle tal/nº13 Valencia',
+                'codigo_seguimiento' => '4567Abc',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
         
     }
     
