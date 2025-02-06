@@ -13,9 +13,6 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('trackeo', function () {
-    return view('pedido.trackeo');
-})->name('trackeo');
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -34,7 +31,7 @@ Route::get('/track_pedido', function () {
 })->name('track.pedido.view');
 
 Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
-Route::get('/mis_pedidos', [PedidoController::class, 'misPedidos'])->name('mis.pedidos')->middleware('auth');
+Route::get('/pedidos', [PedidoController::class, 'misPedidos'])->name('mis.pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {
