@@ -16,5 +16,7 @@ class ProductoController extends Controller
             'recetas' => $recetas
         ]);  
     }
+    
+
 
 }
