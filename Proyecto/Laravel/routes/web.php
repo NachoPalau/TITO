@@ -13,9 +13,9 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('pedidos', function () {
-    return view('pedidos');
-})->name('pedidos');
+Route::get('trackeo', function () {
+    return view('pedido.trackeo');
+})->name('trackeo');
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

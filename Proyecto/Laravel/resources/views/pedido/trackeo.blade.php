@@ -27,6 +27,9 @@
     <div id="resultado"></div>
 </div>
 
+<div style="position: sticky; bottom:0px">
+@include('layouts.footer')
+</div>
     
 
     <script>
