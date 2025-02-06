@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
+use App\Models\Pedido;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,7 +24,7 @@ Route::get('/track_pedido', function () {
 })->name('track.pedido.view');
 
 Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
-
+Route::get('/mis_pedidos', [PedidoController::class, 'misPedidos'])->name('mis.pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {
