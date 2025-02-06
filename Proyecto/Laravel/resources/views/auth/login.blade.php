@@ -21,15 +21,21 @@
         <div class="input-group">
             <x-text-input id="email" class="text-input" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder=" " />
             <x-input-label for="email" class="input-label" :value="__('Correo electrónico')" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="input-group">
             <x-text-input id="password" class="text-input" type="password" name="password" required autocomplete="current-password" placeholder=" " />
             <x-input-label for="password" class="input-label" :value="__('Contraseña')" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+
+        <!-- Contraseña olvidada -->
+        <div class="forgot-passwd">
+            <a href="#">¿Has olvidado tu contraseña?</a>
+        </div>
+        
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
         <!-- Botón de inicio de sesión -->
         <div class="flex items-center justify-end mt-4">
