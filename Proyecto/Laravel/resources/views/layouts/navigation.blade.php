@@ -27,13 +27,13 @@
                         <div id="popupMenu" class="popup-menu">
                             <ul class="popup-menu__list">
                                 <li>
-                                    <form id="recetasForm" method="POST" action="{{ route('recetas') }}">
+                                    <form id="recetasForm" method="GET" action="{{ route('recetas') }}">
                                         @csrf
                                         <button type="submit">Recetas favoritas</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form id="pedidosForm" method="POST" action="{{ route('pedidos') }}">
+                                    <form id="pedidosForm" method="GET" action="{{ route('pedidos') }}">
                                         @csrf
                                         <button type="submit">Mis pedidos</button>
                                     </form>
