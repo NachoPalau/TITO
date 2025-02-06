@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 class PedidoController extends Controller
 {
     // Función para generar código de seguimiento al hacerse un pedido
@@ -18,8 +18,17 @@ class PedidoController extends Controller
 
         if (!$pedido->codigo_seguimiento) {
             $pedido->codigo_seguimiento = 'TRK' . strtoupper(uniqid());
-            $pedido->save();
         }
+        $estados = ['En preparación', 'En camino', 'Repartido'];
+
+        if (empty($pedido->estado)) {
+            Log::info('Estado vacío o NULL detectado para pedido con ID: ' . $id_pedido);
+            $pedido->estado = $estados[array_rand($estados)];
+        }else{
+            Log::info('Estado NO vacío: ' . $pedido->estado . ' para pedido con ID: ' . $id_pedido);
+        }
+        $pedido->save();
+
 
         return response()->json([
             'codigo_seguimiento' => $pedido->codigo_seguimiento,
