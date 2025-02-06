@@ -3,8 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProductoController;
-use App\Models\Producto;
 
 Route::get('/', function () {
     return view('index');
@@ -13,10 +11,18 @@ Route::get('/', function () {
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-use App\Http\Controllers\PagoController;
 
+//Pago
 Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
+
+Route::get('/track_pedido', function () {
+    return view('pedido.trackeo');
+})->name('track.pedido.view');
+
+Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
+
+// Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
