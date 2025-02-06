@@ -21,13 +21,14 @@
 
 @include('layouts.navigation')
 <br><br>    
+<div style="margin: 10px;">
 <h1>Mis pedidos</h1>
 @if($pedidos->isEmpty())
     <p>No tienes pedidos registrados</p>
 @else 
     @foreach($pedidos as $pedido)
         <div class="card mb-2">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header d-flex justify-content-between" style="border-color:#B60200">
                 <span>Nº Pedido:</span>
                 <span>Estado:</span>
                 <button class="btn btn-outline-secondary btn-sm" onclick="toggleDetails({{ $pedido->id }})">Mostrar más ▼</button>
@@ -44,7 +45,7 @@
         </div>
     @endforeach
 @endif
-
+</div>
 <br><br><br><br><br>
 <div style="position: sticky; top:0px">
     @include('layouts.footer')
