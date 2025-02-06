@@ -24,34 +24,39 @@
     }
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
 
-        const usuarioAutenticado = document.body.dataset.usuario === 'true';
-        const estrellas = document.querySelectorAll("#estrella");
-        const popupLogin = document.getElementById("popupLogin");
-        const cerrarPopup = document.getElementById("cerrarPopup");
-        const listaFavoritos = document.getElementById("listaFavoritos");
+const usuarioAutenticado = document.body.dataset.usuario === 'true';
+const popupLogin = document.getElementById("popupLogin");
+const cerrarPopup = document.getElementById("cerrarPopup");
+const botonesCarrito = document.querySelectorAll(".agregar-carrito"); // Selecciona todos los botones con la clase 'agregar-carrito'
 
-        cerrarPopup.addEventListener("click", function() {
-            popupLogin.style.display = "none";
-        });
+cerrarPopup.addEventListener("click", function() {
+    popupLogin.style.display = "none";
+});
 
-        popupLogin.addEventListener("click", function(event) {
-            if (event.target === popupLogin) {
-                popupLogin.style.display = "none";
-            }
-        });
+popupLogin.addEventListener("click", function(event) {
+    if (event.target === popupLogin) {
+        popupLogin.style.display = "none";
+    }
+});
 
-        estrellas.forEach(estrella => {
-            estrella.addEventListener("click", function() {
-                if (!usuarioAutenticado) {
-                    popupLogin.style.display = "flex";
-                    return;
-                }
-            });
-        });
+// Agregar el evento a todos los botones de agregar al carrito
+botonesCarrito.forEach(boton => {
+    boton.addEventListener("click", function() {
+        if (!usuarioAutenticado) {
+            popupLogin.style.display = "flex";
+            return;
+        }
 
+        // Lógica para agregar al carrito si el usuario está autenticado
+        console.log("Producto agregado al carrito");
     });
+});
+
+});
+
+
 
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -285,7 +290,7 @@
         <strong>{{ $producto->nombre }}</strong>
         <p>Descripción: {{ $producto->descripcion }}</p>
         <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <button>Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
     </div>
     @endforeach
 </div>
@@ -312,7 +317,7 @@
             <p style="font-weight: bold; color:black">Ingredientes: </p>
             <p>{{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p style="font-weight: bold; color:black">Creador: {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+            <button class="agregar-carrito">Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
     </div>
