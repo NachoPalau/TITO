@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
 <nav class="container-fluid bg-light py-4">
         <div class="row justify-content-center">
             <div class="col-auto"><a href="{{ route('productos') }}" class="nav-link active" style="{{Route::currentRouteName() == 'productos' ? 

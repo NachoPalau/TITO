@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
 <footer class="container-fluid  text-white text-center py-4 mt-5" style="background-color: #6B0200;">
         <p>Añadir correo para recibir notificaciones</p>
         <div class="row justify-content-center">
