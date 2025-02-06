@@ -37,7 +37,6 @@
     margin: 50px auto;
     padding: 20px;
     text-align: center;
-    align: center;
 }
 
 /* Logo centrado */
@@ -144,4 +143,27 @@ a:visited {
     color: white;
     text-decoration: none;
     margin: 0 15px;
+}
+
+/* Link forgot password */
+.forgot-passwd {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.forgot-passwd a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    text-align: left;
+}
+
+li {
+    color: red;
+    font-weight: bold;
 }
