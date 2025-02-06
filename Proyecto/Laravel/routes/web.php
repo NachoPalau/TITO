@@ -3,17 +3,29 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
+<<<<<<< HEAD
 use App\Http\Controllers\PedidoController;
+=======
+
+>>>>>>> e537c2477c1122290eb69b7bb42f4b86b707c59e
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
+
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+<<<<<<< HEAD
+=======
+
+>>>>>>> e537c2477c1122290eb69b7bb42f4b86b707c59e
 
 //Pago
 Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
