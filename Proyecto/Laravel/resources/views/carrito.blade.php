@@ -34,23 +34,21 @@
         <img class="img-fluid" src="{{ asset('img/carrito/Close.png') }}" id="cerrarCarrito" alt="close" style="width: 50px; margin-top:10px; ">
         <h4 style="margin-left:15px; margin-top:10px;"><b>CARRITO</b></h4>
         @if(Auth::check())
-        @php
-            $carrito = json_decode(Auth::user()->carrito, true);
-        @endphp
-        @if (empty($carrito))
-        <div id="sinContenidoCarrito">
-            <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px; ">
-            <strong>Tu carrito está vacío</strong>
-        </div>
-        @else
-        <div id="contenidoCarrito">
-            <p>Tu carrito tiene articulos</p>
-        </div>
-        @endif
-        @else
-        <div id="sinContenidoCarrito">
-            <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px; ">
-            <strong>Tu carrito está vacío</strong>
-        </div>
-        @endif
+    @php
+        $carrito = json_decode(Auth::user()->carrito, true) ?? [];
+    @endphp
+
+    @if(empty($carrito))
+        <p>Tu carrito está vacío.</p>
+    @else
+        <ul>
+            @foreach($carrito as $productoId)
+                @php
+                    $producto = App\Models\Producto::find($productoId);
+                @endphp
+                <li>{{ $producto->nombre }} - ${{ number_format($producto->precio, 2) }}</li>
+            @endforeach
+        </ul>
+    @endif
+@endif
     </div>

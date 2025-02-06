@@ -24,49 +24,50 @@
     }
 </style>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
 
-const usuarioAutenticado = document.body.dataset.usuario === 'true';
-const estrellas = document.querySelectorAll("#estrella");
-const popupLogin = document.getElementById("popupLogin");
-const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
-const cerrarPopup = document.getElementById("cerrarPopup");
-const botonesCarrito = document.querySelectorAll(".agregar-carrito"); 
+        const usuarioAutenticado = document.body.dataset.usuario === 'true';
+        const estrellas = document.querySelectorAll("#estrella");
+        const popupLogin = document.getElementById("popupLogin");
+        const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
+        const cerrarPopup = document.getElementById("cerrarPopup");
+        const botonesCarrito = document.querySelectorAll(".agregar-carrito");
 
-cerrarPopup.addEventListener("click", function() {
-    popupLogin.style.display = "none";
-});
+        cerrarPopup.addEventListener("click", function() {
+            popupLogin.style.display = "none";
+        });
 
-popupLogin.addEventListener("click", function(event) {
-    if (event.target === popupLogin) {
-        popupLogin.style.display = "none";
-    }
-}); estrellas.forEach(estrella => {
-        estrella.addEventListener("click", function() {
-            if (!usuarioAutenticado) {
-                popupLogin.style.display = "flex";
-                return;
+        popupLogin.addEventListener("click", function(event) {
+            if (event.target === popupLogin) {
+                popupLogin.style.display = "none";
             }
         });
-    });
+        estrellas.forEach(estrella => {
+            estrella.addEventListener("click", function() {
+                if (!usuarioAutenticado) {
+                    popupLogin.style.display = "flex";
+                    return;
+                }
+            });
+        });
 
-botonesCarrito.forEach(boton => {
-    boton.addEventListener("click", function() {
-        if (!usuarioAutenticado) {
-            popupLogin.style.display = "flex";
-            return;
-        }
+        botonesCarrito.forEach(boton => {
+            boton.addEventListener("click", function() {
+                if (!usuarioAutenticado) {
+                    popupLogin.style.display = "flex";
+                    return;
+                }
 
-        
-        console.log("Producto agregado al carrito");
-    });
-});
-let soloFavoritos = false;
-mostrarFavoritosBtn.addEventListener("click", function() {
+
+                console.log("Producto agregado al carrito");
+            });
+        });
+        let soloFavoritos = false;
+        mostrarFavoritosBtn.addEventListener("click", function() {
             const recetas = document.querySelectorAll(".receta");
             let recetasFavoritas = [];
-            
-     
+
+
             if (!soloFavoritos) {
                 recetas.forEach(receta => {
                     const estrella = receta.querySelector("#estrella");
@@ -75,22 +76,22 @@ mostrarFavoritosBtn.addEventListener("click", function() {
                     }
                 });
 
-      
+
                 recetas.forEach(receta => {
                     if (!recetasFavoritas.includes(receta)) {
-                        receta.style.display = "none"; 
+                        receta.style.display = "none";
                     }
                 });
 
-               
+
                 soloFavoritos = true;
             } else {
-            
+
                 recetas.forEach(receta => {
-                    receta.style.display = "block"; 
+                    receta.style.display = "block";
                 });
 
-       
+
                 soloFavoritos = false;
             }
         });
@@ -298,12 +299,50 @@ mostrarFavoritosBtn.addEventListener("click", function() {
 <body data-usuario="{{ auth()->check() ? 'true' : 'false' }}">
     <img id="carrito" src="{{ asset('img/carrito/carritos.svg') }}">
     <div id="slideCarrito" class="slide-carrito">
-        <button id="cerrarCarrito">✖</button>
-        <h2>Carrito de Compras</h2>
-        <div id="contenidoCarrito">
-            <p>Tu carrito está vacío</p>
-        </div>
+        <img class="img-fluid" src="{{ asset('img/carrito/Close.png') }}" id="cerrarCarrito" alt="close" style="width: 50px; margin-top:10px; ">
+        <h4 style="margin-left:15px; margin-top:10px;"><b>CARRITO</b></h4>
+        @if(Auth::check())
+    @php
+        $carrito = json_decode(Auth::user()->carrito, true) ?? [];
+        $total = 0;
+    @endphp
+
+    @if(empty($carrito))
+        <p>Tu carrito está vacío.</p>
+    @else
+        <ul>
+            @foreach($carrito as $productoId)
+                @php
+                    $producto = App\Models\Producto::find($productoId);
+                    $total += $producto->precio;
+                @endphp
+                <li><img src="{{ asset('img/productos/' . $producto->imagen_url) }}" width="50">
+                {{ $producto->nombre }} - ${{ number_format($producto->precio, 2) }}
+                <button>-</button> 1 <button>+</button></li>
+            @endforeach
+        </ul>
+        <p><strong>Total: ${{ number_format($total, 2) }}</strong></p>
+    @endif
+@endif
     </div>
+    <div class="col-4 d-flex justify-content-end align-items-center gap-3" style="padding-right:3%">
+                <div class="usuario-container">
+                    <div id="menuUsuario" class="menu-usuario">
+                        @if(Auth::check())
+                        <img id="iconoUsuario" class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px; cursor: pointer;">
+                        <p>{{ Auth::user()->email }}
+                        <form id="logoutForm" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Cerrar sesión</button>
+                        </form>
+                        @else
+                        <a href="{{ route('login') }}">
+                            <img class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px;">
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
     <div id="popupLogin" class="popup">
         <div class="popup-contenido">
             <span id="cerrarPopup" class="popup-cerrar">✖</span>
@@ -315,23 +354,28 @@ mostrarFavoritosBtn.addEventListener("click", function() {
 
     <input type="text" id="busquedaTotal" placeholder="Buscar..." onkeyup="filtrarTotal()">
     <h1>Listado de productos</h1>
-<input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
-<button onclick="ordenarAscendente()">Ordenar A-Z</button>
-<button onclick="ordenarDescendente()">Ordenar Z-A</button>
-<button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
-<button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
-
-<div id="productos">
+    <input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+    <button onclick="ordenarAscendente()">Ordenar A-Z</button>
+    <button onclick="ordenarDescendente()">Ordenar Z-A</button>
+    <button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
+    <button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
+    <div id="productos">
     @foreach($productos as $producto)
     <div class="producto">
-    <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
+        <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
         <strong>{{ $producto->nombre }}</strong>
         <p>Descripción: {{ $producto->descripcion }}</p>
         <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+
+        <form action="{{ route('agregar.al.carrito') }}" method="POST">
+            @csrf
+            <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+            <button type="submit">Añadir al carrito</button>
+        </form>
     </div>
-    @endforeach
+@endforeach
 </div>
+
     <h1>Listado de recetas</h1>
     <input type="text" id="busquedaRecetas" placeholder="Buscar productos..." onkeyup="filtrarRecetas()">
     <button onclick="ordenarAscendenteRecetas()">Ordenar A-Z</button>
@@ -352,7 +396,7 @@ mostrarFavoritosBtn.addEventListener("click", function() {
             @endif
             @else
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-            @endif 
+            @endif
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>

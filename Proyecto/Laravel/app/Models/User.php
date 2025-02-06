@@ -47,4 +47,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // protected $casts = [
+    //     'carrito' => 'array',
+    // ];
 }

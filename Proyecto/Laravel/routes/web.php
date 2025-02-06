@@ -8,8 +8,7 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\FavoritoController;
-
+use App\Http\Controllers\CarritoController;
 
 Route::get('/', function () {
     return view('index');
@@ -72,4 +71,7 @@ use App\Http\Controllers\RecetaController;
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
+Route::post('/agregar-al-carrito', [CarritoController::class, 'agregarAlCarrito'])->name('agregar.al.carrito');
+Route::get('/carrito/sumar/{id}', [CarritoController::class, 'sumar']);
+Route::get('/carrito/restar/{id}', [CarritoController::class, 'restar']);
 
