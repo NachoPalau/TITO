@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "id_usuario": 1,
+        "estado": "En camino",
+        "direccion": "Calle tal/nº13 Valencia",
+        "codigo_seguimiento": "gsdasdffg"
+      },
+      {
+        "id": 2,
+        "id_usuario": 1,
+        "estado": "En camino",
+        "direccion": "Calle tal/nº13 Valencia",
+        "codigo_seguimiento": "123456789"
+      },
+      {
+        "id": 3,
+        "id_usuario": 1,
+        "estado": "En preparación",
+        "direccion": "Calle tal/nº13 Valencia",
+        "codigo_seguimiento": "123abc"
+      },
+      {
+        "id": 4,
+        "id_usuario": 1,
+        "estado": "En preparación",
+        "direccion": "Calle tal/nº13 Valencia",
+        "codigo_seguimiento": "123def"
+      },
+      {
+        "id": 5,
+        "id_usuario": 1,
+        "estado": "Repartido",
+        "direccion": "Calle tal/nº13 Valencia",
+        "codigo_seguimiento": "4567Abc"
+      }
+]
