@@ -48,35 +48,9 @@
                     popupLogin.style.display = "flex";
                     return;
                 }
-
-                let receta = estrella.closest(".receta");
-                let nombreReceta = receta.querySelector("strong").textContent;
-
-                if (estrella.src.includes("estrellaVacia.svg")) {
-                    estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
-                    agregarAFavoritos(nombreReceta);
-                } else {
-                    estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
-                    eliminarDeFavoritos(nombreReceta);
-                }
             });
         });
 
-        function agregarAFavoritos(nombre) {
-            let item = document.createElement("p");
-            item.textContent = nombre;
-            item.setAttribute("data-nombre", nombre);
-            listaFavoritos.appendChild(item);
-        }
-
-        function eliminarDeFavoritos(nombre) {
-            let items = listaFavoritos.querySelectorAll("p");
-            items.forEach(item => {
-                if (item.getAttribute("data-nombre") === nombre) {
-                    item.remove();
-                }
-            });
-        }
     });
 
 
@@ -324,11 +298,15 @@
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
-            @if(auth()->check() && in_array($receta->id, json_decode(auth()->user()->favoritas, true)))
-            <img  id="estrella" src="{{ asset('img/carrito/estrella.svg') }}" onclick="window.location.href='/eliminar-favorito/{{ $receta->id }}'">
+            @if(auth()->check())
+            @if(in_array($receta->id, json_decode(auth()->user()->favoritas, true)))
+            <img id="estrella" src="{{ asset('img/carrito/estrella.svg') }}" onclick="window.location.href='/eliminar-favorito/{{ $receta->id }}'">
             @else
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}" onclick="window.location.href='/guardar-favorito/{{ $receta->id }}'">
             @endif
+            @else
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            @endif 
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>
@@ -337,16 +315,6 @@
             <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
-    </div>
-    <div id="nombreUsuario">
-        @if(auth()->check())
-        Usuario autenticado:{{ auth()->user()->buscarUsuarioPorEmail(auth()->user()->email) }}
-        @else
-        No has iniciado sesión
-        @endif
-    </div>
-    <div id="listaFavoritos">
-        <h2>Recetas Favoritas</h2>
     </div>
 
 </body>
