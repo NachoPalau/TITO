@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/styles.css')}}">
 <!-- Session Status -->
 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -28,28 +29,11 @@
             <x-text-input id="password" class="text-input" type="password" name="password" required
                 autocomplete="current-password" placeholder=" " />
             <x-input-label for="password" class="input-label" :value="__('Contraseña')" />
-            <img id="ojo" src="{{asset('img/contraseña/cerrar-ojo.png')}}" alt="" 
-            style="cursor: pointer; width:20px; height: 20px;">
-
+           
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <script>
-            // Obtenemos el input de la contraseña y el ícono del ojo
-            const laContraseña = document.getElementById('password');
-            const elOjo = document.getElementById('ojo');
-
-            // Añadimos el evento para cambiar el tipo de input al hacer clic en el ojo
-            elOjo.addEventListener('click', () => {
-                if (laContraseña.type === 'password') {
-                    laContraseña.type = 'text';  // Muestra la contraseña
-                    elOjo.src = '{{asset("img/contraseña/ojo.png")}}';  // Cambia el ícono a ojo abierto
-                } else {
-                    laContraseña.type = 'password';  // Oculta la contraseña
-                    elOjo.src = '{{asset('img/contraseña/cerrar-ojo.png')}}';  // Cambia el ícono a ojo cerrado
-                }
-            });
-        </script>
+        
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="button-primary">
