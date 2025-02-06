@@ -27,9 +27,11 @@
   document.addEventListener("DOMContentLoaded", function() {
 
 const usuarioAutenticado = document.body.dataset.usuario === 'true';
+const estrellas = document.querySelectorAll("#estrella");
 const popupLogin = document.getElementById("popupLogin");
+const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
 const cerrarPopup = document.getElementById("cerrarPopup");
-const botonesCarrito = document.querySelectorAll(".agregar-carrito"); // Selecciona todos los botones con la clase 'agregar-carrito'
+const botonesCarrito = document.querySelectorAll(".agregar-carrito"); 
 
 cerrarPopup.addEventListener("click", function() {
     popupLogin.style.display = "none";
@@ -39,9 +41,15 @@ popupLogin.addEventListener("click", function(event) {
     if (event.target === popupLogin) {
         popupLogin.style.display = "none";
     }
-});
+}); estrellas.forEach(estrella => {
+        estrella.addEventListener("click", function() {
+            if (!usuarioAutenticado) {
+                popupLogin.style.display = "flex";
+                return;
+            }
+        });
+    });
 
-// Agregar el evento a todos los botones de agregar al carrito
 botonesCarrito.forEach(boton => {
     boton.addEventListener("click", function() {
         if (!usuarioAutenticado) {
@@ -49,14 +57,44 @@ botonesCarrito.forEach(boton => {
             return;
         }
 
-        // Lógica para agregar al carrito si el usuario está autenticado
+        
         console.log("Producto agregado al carrito");
     });
 });
+let soloFavoritos = false;
+mostrarFavoritosBtn.addEventListener("click", function() {
+            const recetas = document.querySelectorAll(".receta");
+            let recetasFavoritas = [];
+            
+     
+            if (!soloFavoritos) {
+                recetas.forEach(receta => {
+                    const estrella = receta.querySelector("#estrella");
+                    if (estrella && estrella.src.includes('estrella.svg')) {
+                        recetasFavoritas.push(receta);
+                    }
+                });
 
-});
+      
+                recetas.forEach(receta => {
+                    if (!recetasFavoritas.includes(receta)) {
+                        receta.style.display = "none"; 
+                    }
+                });
 
+               
+                soloFavoritos = true;
+            } else {
+            
+                recetas.forEach(receta => {
+                    receta.style.display = "block"; 
+                });
 
+       
+                soloFavoritos = false;
+            }
+        });
+    });
 
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -299,6 +337,9 @@ botonesCarrito.forEach(boton => {
     <button onclick="ordenarAscendenteRecetas()">Ordenar A-Z</button>
     <button onclick="ordenarDescendenteRecetas()">Ordenar Z-A</button>
     <button onclick="ordenarRecetasPorGuardados()">Mas guardados</button>
+    @if(auth()->check())
+    <button id="mostrarFavoritosBtn">Mostrar Recetas Favoritas</button>
+    @endif
     <div id="recetas">
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
