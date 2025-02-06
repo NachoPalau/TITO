@@ -47,8 +47,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    //Definición de la relacion entre usuarios y pedidos 
-    public function pedidos(){
-        return $this->hasMany(Pedido::class,'id_usuario','id');
-    }
 }

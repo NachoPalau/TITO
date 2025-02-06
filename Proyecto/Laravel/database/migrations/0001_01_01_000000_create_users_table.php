@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('telefono', 11);
             $table->integer('puntos')->default(0);
-            $table->longText('favoritas')->nullable();
-            $table->longText('carrito')->nullable();
+            $table->longText('favoritas')->default('[]');
+            $table->longText('carrito')->default('[]');
             $table->rememberToken();
             $table->timestamps();
         });
