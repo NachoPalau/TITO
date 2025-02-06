@@ -6,6 +6,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+use App\Http\Controllers\FavoritoController;
+
+
+
 
 Route::get('/', function () {
     return view('index');
@@ -49,3 +53,9 @@ Route::get('/eventos', function () {
 Route::get('/recetas', function () {
     return view('recetas');
 })->name('recetas');
+use App\Http\Controllers\RecetaController;
+
+Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
+Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
+
+

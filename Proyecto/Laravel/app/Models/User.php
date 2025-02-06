@@ -45,4 +45,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function buscarUsuarioPorEmail($email)
+{
+    $usuario = User::where('email', $email)->first();
+    if ($usuario) {
+        return $usuario;
+    } else {
+        return null;
+    }
+}
+
+
+    public function recetas()
+    {
+        return $this->belongsToMany(Receta::class);
+    }
+        
+
 }

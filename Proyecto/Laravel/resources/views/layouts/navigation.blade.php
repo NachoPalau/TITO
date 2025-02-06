@@ -57,12 +57,15 @@
                     <div id="menuUsuario" class="menu-usuario">
                         @if(Auth::check())
                         <img id="iconoUsuario" class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px; cursor: pointer;">
+                        <p>{{ Auth::user()->email }}
                         <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit">Cerrar sesión</button>
                         </form>
                         @else
-                        <a href="{{ route('login') }}"><img class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px;"></a>
+                        <a href="{{ route('login') }}">
+                            <img class="img-fluid" src="{{ asset('img/img_Header/login.png') }}" alt="Login" style="width: 40px; height: 40px;">
+                        </a>
                         @endif
                     </div>
                 </div>

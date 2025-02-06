@@ -27,19 +27,16 @@
     document.addEventListener("DOMContentLoaded", function() {
 
         const usuarioAutenticado = document.body.dataset.usuario === 'true';
-
         const estrellas = document.querySelectorAll("#estrella");
         const popupLogin = document.getElementById("popupLogin");
         const cerrarPopup = document.getElementById("cerrarPopup");
-
+        const listaFavoritos = document.getElementById("listaFavoritos");
 
         cerrarPopup.addEventListener("click", function() {
             popupLogin.style.display = "none";
         });
 
-
         popupLogin.addEventListener("click", function(event) {
-
             if (event.target === popupLogin) {
                 popupLogin.style.display = "none";
             }
@@ -47,19 +44,41 @@
 
         estrellas.forEach(estrella => {
             estrella.addEventListener("click", function() {
+                if (!usuarioAutenticado) {
+                    popupLogin.style.display = "flex";
+                    return;
+                }
+
+                let receta = estrella.closest(".receta");
+                let nombreReceta = receta.querySelector("strong").textContent;
+
                 if (estrella.src.includes("estrellaVacia.svg")) {
-                    if (!usuarioAutenticado) {
-                        popupLogin.style.display = "flex";
-                        return;
-                    } else {
-                        estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
-                    }
+                    estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
+                    agregarAFavoritos(nombreReceta);
                 } else {
                     estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
+                    eliminarDeFavoritos(nombreReceta);
                 }
             });
         });
+
+        function agregarAFavoritos(nombre) {
+            let item = document.createElement("p");
+            item.textContent = nombre;
+            item.setAttribute("data-nombre", nombre);
+            listaFavoritos.appendChild(item);
+        }
+
+        function eliminarDeFavoritos(nombre) {
+            let items = listaFavoritos.querySelectorAll("p");
+            items.forEach(item => {
+                if (item.getAttribute("data-nombre") === nombre) {
+                    item.remove();
+                }
+            });
+        }
     });
+
 
     document.addEventListener("DOMContentLoaded", function() {
         let carritoIcon = document.getElementById("carrito");
@@ -279,22 +298,23 @@
 
     <input type="text" id="busquedaTotal" placeholder="Buscar..." onkeyup="filtrarTotal()">
     <h1>Listado de productos</h1>
-    <input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
-    <button onclick="ordenarAscendente()">Ordenar A-Z</button>
-    <button onclick="ordenarDescendente()">Ordenar Z-A</button>
-    <button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
-    <button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
-    <div id="productos">
-        @foreach($productos as $producto)
-        <div class="producto">
-            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
-            <strong>{{ $producto->nombre }}</strong> {{ $producto->precio }} €
-            <p>{{ $producto->descripcion }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
-        </div>
-        @endforeach
-    </div>
+<input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+<button onclick="ordenarAscendente()">Ordenar A-Z</button>
+<button onclick="ordenarDescendente()">Ordenar Z-A</button>
+<button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
+<button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
 
+<div id="productos">
+    @foreach($productos as $producto)
+    <div class="producto">
+    <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
+        <strong>{{ $producto->nombre }}</strong>
+        <p>Descripción: {{ $producto->descripcion }}</p>
+        <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
+        <button>Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+    </div>
+    @endforeach
+</div>
     <h1>Listado de recetas</h1>
     <input type="text" id="busquedaRecetas" placeholder="Buscar productos..." onkeyup="filtrarRecetas()">
     <button onclick="ordenarAscendenteRecetas()">Ordenar A-Z</button>
@@ -304,7 +324,11 @@
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
-            <img src="{{asset('img/carrito/estrellaVacia.svg')}}" id="estrella">
+            @if(auth()->check() && in_array($receta->id, json_decode(auth()->user()->favoritas, true)))
+            <img  id="estrella" src="{{ asset('img/carrito/estrella.svg') }}" onclick="window.location.href='/eliminar-favorito/{{ $receta->id }}'">
+            @else
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}" onclick="window.location.href='/guardar-favorito/{{ $receta->id }}'">
+            @endif
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>
@@ -314,6 +338,17 @@
         </div>
         @endforeach
     </div>
+    <div id="nombreUsuario">
+        @if(auth()->check())
+        Usuario autenticado:{{ auth()->user()->buscarUsuarioPorEmail(auth()->user()->email) }}
+        @else
+        No has iniciado sesión
+        @endif
+    </div>
+    <div id="listaFavoritos">
+        <h2>Recetas Favoritas</h2>
+    </div>
+
 </body>
 
 </html>
