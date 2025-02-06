@@ -12,6 +12,11 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('pedidos', function () {
+    return view('pedidos');
+})->name('pedidos');
+
+
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
@@ -37,6 +42,7 @@ Route::get('/prueba',[ProductoController::class, 'index'])->name('prueba');
 Route::get('/api/productos', function () {
     return response()->json(Producto::all());
 });
+
 
 Route::get('/productos', function () {
     return view('prod');
