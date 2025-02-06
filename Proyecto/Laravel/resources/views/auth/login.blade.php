@@ -1,110 +1,110 @@
 <style>
-/* Contenedor principal del formulario */
-.form-container {
-    font-family: sans-serif;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    border: 1px solid #6B0200;
-    width: 350px;
-    margin: 50px auto;
-    margin-top: 4%;
-    padding: 20px;
-    text-align: center;
-}
+    /* Contenedor principal del formulario */
+    .form-container {
+        font-family: sans-serif;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+        border: 1px solid #6B0200;
+        width: 350px;
+        margin: 50px auto;
+        margin-top: 4%;
+        padding: 20px;
+        text-align: center;
+    }
 
-/* Logo centrado */
-.logo-container {
-    margin-top:20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
+    /* Logo centrado */
+    .logo-container {
+        margin-top: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
 
-/* Título */
-.form-title {
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+    /* Título */
+    .form-title {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-/* Contenedor de inputs */
-.input-group {
-    position: relative;
-    margin-bottom: 20px;
-    text-align: left;
-}
+    /* Contenedor de inputs */
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;
+        text-align: left;
+    }
 
-/* Etiqueta flotante */
-.input-label {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease-in-out;
-    font-weight: bold;
-    color:rgb(15, 1, 1);
-    pointer-events: none;
-}
+    /* Etiqueta flotante */
+    .input-label {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translateY(-50%);
+        transition: all 0.3s ease-in-out;
+        font-weight: bold;
+        color: rgb(15, 1, 1);
+        pointer-events: none;
+    }
 
-/* Levanta la etiqueta cuando el input está enfocado o tiene texto */
-.text-input:focus + .input-label,
-.text-input:not(:placeholder-shown) + .input-label {
-    top: 0;
-    font-size: 12px;
-    color:rgb(2, 0, 0);
-}
+    /* Levanta la etiqueta cuando el input está enfocado o tiene texto */
+    .text-input:focus+.input-label,
+    .text-input:not(:placeholder-shown)+.input-label {
+        top: 0;
+        font-size: 12px;
+        color: rgb(2, 0, 0);
+    }
 
-/* Estiliza los inputs */
-.text-input {
-    width: 85%;
-    padding: 10px 15px;
-    border: none;
-    border-bottom: 2px solid #6B0200;
-    outline: none;
-    font-size: 16px;
-}
+    /* Estiliza los inputs */
+    .text-input {
+        width: 85%;
+        padding: 10px 15px;
+        border: none;
+        border-bottom: 2px solid #6B0200;
+        outline: none;
+        font-size: 16px;
+    }
 
-/* Botón de inicio de sesión */
-.button-primary {
-    background-color: #6B0200;
-    color: white;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    font-weight: bold;
-    cursor: pointer;
-}
+    /* Botón de inicio de sesión */
+    .button-primary {
+        background-color: #6B0200;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-/* Botón de registro */
-.button-secondary {
-    display: block;
-    text-align: center;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    padding: 10px;
-    width: 94%;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    text-decoration: none;
-}
+    /* Botón de registro */
+    .button-secondary {
+        display: block;
+        text-align: center;
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        padding: 10px;
+        width: 94%;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        text-decoration: none;
+    }
 
-/* Footer */
-.footer {
-    background-color: #6B0200;
-    color: white;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
+    /* Footer */
+    .footer {
+        background-color: #6B0200;
+        color: white;
+        padding: 20px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
 
-.footer a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-}
+    .footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+    }
 </style>
 
 <!-- Session Status -->
@@ -126,19 +126,40 @@
 
         <!-- Email Address -->
         <div class="input-group">
-            <x-text-input id="email" class="text-input" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder=" " />
+            <x-text-input id="email" class="text-input" type="email" name="email" :value="old('email')" required
+                autofocus autocomplete="username" placeholder=" " />
             <x-input-label for="email" class="input-label" :value="__('Correo electrónico')" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="input-group">
-            <x-text-input id="password" class="text-input" type="password" name="password" required autocomplete="current-password" placeholder=" " />
+            <x-text-input id="password" class="text-input" type="password" name="password" required
+                autocomplete="current-password" placeholder=" " />
             <x-input-label for="password" class="input-label" :value="__('Contraseña')" />
+            <img id="ojo" src="{{asset('img/contraseña/cerrar-ojo.png')}}" alt="" 
+            style="cursor: pointer; width:20px; height: 20px;">
+
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Botón de inicio de sesión -->
+        <script>
+            // Obtenemos el input de la contraseña y el ícono del ojo
+            const laContraseña = document.getElementById('password');
+            const elOjo = document.getElementById('ojo');
+
+            // Añadimos el evento para cambiar el tipo de input al hacer clic en el ojo
+            elOjo.addEventListener('click', () => {
+                if (laContraseña.type === 'password') {
+                    laContraseña.type = 'text';  // Muestra la contraseña
+                    elOjo.src = '{{asset("img/contraseña/ojo.png")}}';  // Cambia el ícono a ojo abierto
+                } else {
+                    laContraseña.type = 'password';  // Oculta la contraseña
+                    elOjo.src = '{{asset('img/contraseña/cerrar-ojo.png')}}';  // Cambia el ícono a ojo cerrado
+                }
+            });
+        </script>
+
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="button-primary">
                 {{ __('INICIAR SESIÓN') }}
