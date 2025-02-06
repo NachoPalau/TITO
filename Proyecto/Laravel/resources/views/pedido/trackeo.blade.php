@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- esta linea es super importante para enlazar el codigo de seguimiento con la base de datos -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
     <title>Trackeo de pedido</title>
 </head>
 <body>
 @include('layouts.navigation')
 
-@include('layouts.subnavbar')
-    
+<br>
+
+<div>
 <h1>Seguimiento del pedido</h1>
     <form id="track-form" method="POST" action="{{ route('track.pedido') }}">
         @csrf
@@ -21,6 +25,9 @@
     </form>
 
     <div id="resultado"></div>
+</div>
+
+    
 
     <script>
         document.getElementById('track-form').addEventListener('submit', async function(e) {
