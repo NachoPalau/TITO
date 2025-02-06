@@ -8,7 +8,11 @@
     <title>Trackeo de pedido</title>
 </head>
 <body>
-    <h1>Seguimiento del pedido</h1>
+@include('layouts.navigation')
+
+@include('layouts.subnavbar')
+    
+<h1>Seguimiento del pedido</h1>
     <form id="track-form" method="POST" action="{{ route('track.pedido') }}">
         @csrf
         <label for="codigo">Código de seguimiento:</label>
