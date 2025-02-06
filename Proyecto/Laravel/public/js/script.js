@@ -1,3 +1,23 @@
+    document.addEventListener('DOMContentLoaded', function () {
+        const passwordField = document.getElementById('password');
+        const passwordConfirmField = document.getElementById('password2');
+        const errorElement = document.getElementById('password-error'); // El elemento de error
+
+        // Agregar un evento 'input' a los campos de contraseña
+        passwordField.addEventListener('input', validatePasswords);
+        passwordConfirmField.addEventListener('input', validatePasswords);
+
+        function validatePasswords() {
+            if (passwordField.value !== passwordConfirmField.value) {
+                // Mostrar mensaje de error si no coinciden
+                errorElement.style.display = 'block';
+            } else {
+                // Ocultar mensaje de error si coinciden
+                errorElement.style.display = 'none';
+            }
+        }
+    });
+    
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
     const eyeIcon = document.getElementById('eyeIcon');

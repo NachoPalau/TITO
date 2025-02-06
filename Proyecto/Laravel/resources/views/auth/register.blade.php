@@ -52,6 +52,10 @@
         <x-input-label for="password_confirmation" class="input-label" :value="__('Repetir Contraseña')" />
         </div>
 
+        <div id="password-error" style="color: red; display: none; font-weight: bold; margin-bottom: 10px;">
+            Las contraseñas no coinciden.
+        </div>
+
         <!-- Botón de Registro -->
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="button-primary">
