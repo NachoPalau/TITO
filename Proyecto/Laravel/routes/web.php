@@ -8,7 +8,6 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
-
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -34,7 +33,7 @@ Route::get('/track_pedido', function () {
 })->name('track.pedido.view');
 
 Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
-
+Route::get('/mis_pedidos', [PedidoController::class, 'misPedidos'])->name('mis.pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {

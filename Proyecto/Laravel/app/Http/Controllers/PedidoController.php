@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 class PedidoController extends Controller
 {
@@ -57,5 +58,13 @@ class PedidoController extends Controller
             'direccion' => $pedido->direccion,
             'actualizado_en' => $pedido->updated_at ? $pedido->updated_at->format('d-m-Y H:i:s') : 'No se han encontrado actualizaciones',
         ]);
+    }
+    public function misPedidos(){
+        if(!Auth::check()){
+            return redirect()->route('login')->with('error', 'Debes iniciar sesion para ver tus pedidos');
+        }
+        $pedidos = Pedido::where('id_usuario', Auth::id())->get();
+
+        return view('pedido.misPedidos',compact('pedidos'));
     }
 }
