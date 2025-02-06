@@ -30,8 +30,7 @@ Route::get('/track_pedido', function () {
     return view('pedido.trackeo');
 })->name('track.pedido.view');
 
-Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
-Route::get('/pedidos', [PedidoController::class, 'misPedidos'])->name('mis.pedidos')->middleware('auth');
+Route::get('/pedidos', [PedidoController::class, 'misPedidos'])->name('pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {
