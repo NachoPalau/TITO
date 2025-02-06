@@ -3,7 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
+use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PedidoController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
