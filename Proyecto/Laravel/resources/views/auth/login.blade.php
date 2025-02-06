@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+
 <!-- Session Status -->
 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -25,6 +26,9 @@
 
         <!-- Password -->
         <div class="input-group">
+            <button type="button" id="togglePassword">
+                <img src="{{asset('img/contraseña/cerrar-ojo.png')}}" alt="Ver contraseña" id="eyeIcon" style="width:20px;">
+            </button>
             <x-text-input id="password" class="text-input" type="password" name="password" required
                 autocomplete="current-password" placeholder=" " />
             <x-input-label for="password" class="input-label" :value="__('Contraseña')" />
@@ -59,3 +63,5 @@
         <a href="#">Contáctanos</a>
     </footer>
 </div>
+
+<script src="{{asset('js/script.js')}}"></script>
