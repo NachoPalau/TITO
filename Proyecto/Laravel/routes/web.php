@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PedidoController;
 
 Route::get('/', function () {
     return view('index');
@@ -24,9 +25,17 @@ Route::get('register', [RegisteredUserController::class, 'create'])->name('regis
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
+//Pago
 Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
+
+Route::get('/track_pedido', function () {
+    return view('pedido.trackeo');
+})->name('track.pedido.view');
+
+Route::post('/track_pedido', [PedidoController::class, 'track'])->name('track.pedido');
+
+// Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
