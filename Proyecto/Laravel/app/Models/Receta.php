@@ -24,4 +24,11 @@ public function usuariosQueGuardaron()
 {
     return $this->belongsToMany(User::class, 'receta_user')->withTimestamps();
 }
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
 }

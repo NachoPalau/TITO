@@ -24,46 +24,78 @@
     }
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Verificar si el usuario está autenticado
-        const usuarioAutenticado = document.body.dataset.usuario === 'true';
-        
-        const estrellas = document.querySelectorAll("#estrella");
-        const popupLogin = document.getElementById("popupLogin");
-        const cerrarPopup = document.getElementById("cerrarPopup");
+  document.addEventListener("DOMContentLoaded", function() {
 
-        // Event listener para cerrar el popup cuando se hace clic en la "X"
-        cerrarPopup.addEventListener("click", function() {
-            popupLogin.style.display = "none"; // Ocultar el popup cuando se cierre
-        });
+const usuarioAutenticado = document.body.dataset.usuario === 'true';
+const estrellas = document.querySelectorAll("#estrella");
+const popupLogin = document.getElementById("popupLogin");
+const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
+const cerrarPopup = document.getElementById("cerrarPopup");
+const botonesCarrito = document.querySelectorAll(".agregar-carrito"); 
 
-        // Event listener para cerrar el popup cuando se hace clic fuera del contenido del popup
-        popupLogin.addEventListener("click", function(event) {
-            // Verificar si el clic es en el fondo (no en el contenido)
-            if (event.target === popupLogin) {
-                popupLogin.style.display = "none"; // Cerrar el popup
+cerrarPopup.addEventListener("click", function() {
+    popupLogin.style.display = "none";
+});
+
+popupLogin.addEventListener("click", function(event) {
+    if (event.target === popupLogin) {
+        popupLogin.style.display = "none";
+    }
+}); estrellas.forEach(estrella => {
+        estrella.addEventListener("click", function() {
+            if (!usuarioAutenticado) {
+                popupLogin.style.display = "flex";
+                return;
             }
         });
+    });
 
-        estrellas.forEach(estrella => {
-            estrella.addEventListener("click", function() {
-           
-                if (estrella.src.includes("estrellaVacia.svg")) {
-                    if (!usuarioAutenticado) {
-                       
-                        popupLogin.style.display = "flex";
-                        return;
-                    } else {
-               
-                        estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
+botonesCarrito.forEach(boton => {
+    boton.addEventListener("click", function() {
+        if (!usuarioAutenticado) {
+            popupLogin.style.display = "flex";
+            return;
+        }
+
+        
+        console.log("Producto agregado al carrito");
+    });
+});
+let soloFavoritos = false;
+mostrarFavoritosBtn.addEventListener("click", function() {
+            const recetas = document.querySelectorAll(".receta");
+            let recetasFavoritas = [];
+            
+     
+            if (!soloFavoritos) {
+                recetas.forEach(receta => {
+                    const estrella = receta.querySelector("#estrella");
+                    if (estrella && estrella.src.includes('estrella.svg')) {
+                        recetasFavoritas.push(receta);
                     }
-                } else {
-           
-                    estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
-                }
-            });
+                });
+
+      
+                recetas.forEach(receta => {
+                    if (!recetasFavoritas.includes(receta)) {
+                        receta.style.display = "none"; 
+                    }
+                });
+
+               
+                soloFavoritos = true;
+            } else {
+            
+                recetas.forEach(receta => {
+                    receta.style.display = "block"; 
+                });
+
+       
+                soloFavoritos = false;
+            }
         });
     });
+
 
     document.addEventListener("DOMContentLoaded", function() {
         let carritoIcon = document.getElementById("carrito");
@@ -283,41 +315,54 @@
 
     <input type="text" id="busquedaTotal" placeholder="Buscar..." onkeyup="filtrarTotal()">
     <h1>Listado de productos</h1>
-    <input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
-    <button onclick="ordenarAscendente()">Ordenar A-Z</button>
-    <button onclick="ordenarDescendente()">Ordenar Z-A</button>
-    <button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
-    <button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
-    <div id="productos">
-        @foreach($productos as $producto)
-        <div class="producto">
-            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
-            <strong>{{ $producto->nombre }}</strong> {{ $producto->precio }} €
-            <p>{{ $producto->descripcion }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
-        </div>
-        @endforeach
-    </div>
+<input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+<button onclick="ordenarAscendente()">Ordenar A-Z</button>
+<button onclick="ordenarDescendente()">Ordenar Z-A</button>
+<button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
+<button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
 
+<div id="productos">
+    @foreach($productos as $producto)
+    <div class="producto">
+    <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
+        <strong>{{ $producto->nombre }}</strong>
+        <p>Descripción: {{ $producto->descripcion }}</p>
+        <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
+        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+    </div>
+    @endforeach
+</div>
     <h1>Listado de recetas</h1>
     <input type="text" id="busquedaRecetas" placeholder="Buscar productos..." onkeyup="filtrarRecetas()">
     <button onclick="ordenarAscendenteRecetas()">Ordenar A-Z</button>
     <button onclick="ordenarDescendenteRecetas()">Ordenar Z-A</button>
     <button onclick="ordenarRecetasPorGuardados()">Mas guardados</button>
+    @if(auth()->check())
+    <button id="mostrarFavoritosBtn">Mostrar Recetas Favoritas</button>
+    @endif
     <div id="recetas">
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
-            <img src="{{asset('img/carrito/estrellaVacia.svg')}}" id="estrella">
+            @if(auth()->check())
+            @if(in_array($receta->id, json_decode(auth()->user()->favoritas, true)))
+            <img id="estrella" src="{{ asset('img/carrito/estrella.svg') }}" onclick="window.location.href='/eliminar-favorito/{{ $receta->id }}'">
+            @else
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}" onclick="window.location.href='/guardar-favorito/{{ $receta->id }}'">
+            @endif
+            @else
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            @endif 
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>
             <p>{{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p style="font-weight: bold; color:black">Creador: {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <button>Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+            <button class="agregar-carrito">Añadir al carrito<img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
     </div>
+
 </body>
 
 </html>

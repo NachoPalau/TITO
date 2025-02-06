@@ -167,3 +167,31 @@ li {
     color: red;
     font-weight: bold;
 }
+
+.input-group {
+    position: relative;
+}
+
+.text-input {
+    padding-right: 40px;
+}
+
+button#togglePassword {
+    position: absolute;
+    padding: 0;
+    border: none;
+    background: transparent;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button#togglePassword2 {
+    position: absolute;
+    padding: 0;
+    border: none;
+    background: transparent;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
