@@ -24,49 +24,49 @@
     }
 </style>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
 
-const usuarioAutenticado = document.body.dataset.usuario === 'true';
-const estrellas = document.querySelectorAll("#estrella");
-const popupLogin = document.getElementById("popupLogin");
-const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
-const cerrarPopup = document.getElementById("cerrarPopup");
-const botonesCarrito = document.querySelectorAll(".agregar-carrito"); 
+        const usuarioAutenticado = document.body.dataset.usuario === 'true';
+        const estrellas = document.querySelectorAll("#estrella");
+        const popupLogin = document.getElementById("popupLogin");
+        const mostrarFavoritosBtn = document.getElementById('mostrarFavoritosBtn');
+        const cerrarPopup = document.getElementById("cerrarPopup");
+        const botonesCarrito = document.querySelectorAll(".agregar-carrito");
 
-cerrarPopup.addEventListener("click", function() {
-    popupLogin.style.display = "none";
-});
+        cerrarPopup.addEventListener("click", function() {
+            popupLogin.style.display = "none";
+        });
 
-popupLogin.addEventListener("click", function(event) {
-    if (event.target === popupLogin) {
-        popupLogin.style.display = "none";
-    }
-}); estrellas.forEach(estrella => {
-        estrella.addEventListener("click", function() {
-            if (!usuarioAutenticado) {
-                popupLogin.style.display = "flex";
-                return;
+        popupLogin.addEventListener("click", function(event) {
+            if (event.target === popupLogin) {
+                popupLogin.style.display = "none";
             }
         });
-    });
+        estrellas.forEach(estrella => {
+            estrella.addEventListener("click", function() {
+                if (!usuarioAutenticado) {
+                    popupLogin.style.display = "flex";
+                    return;
+                }
+            });
+        });
 
-botonesCarrito.forEach(boton => {
-    boton.addEventListener("click", function() {
-        if (!usuarioAutenticado) {
-            popupLogin.style.display = "flex";
-            return;
-        }
+        botonesCarrito.forEach(boton => {
+            boton.addEventListener("click", function() {
+                if (!usuarioAutenticado) {
+                    popupLogin.style.display = "flex";
+                    return;
+                }
 
-        
-        console.log("Producto agregado al carrito");
-    });
-});
-let soloFavoritos = false;
-mostrarFavoritosBtn.addEventListener("click", function() {
+
+            });
+        });
+        let soloFavoritos = false;
+        mostrarFavoritosBtn.addEventListener("click", function() {
             const recetas = document.querySelectorAll(".receta");
             let recetasFavoritas = [];
-            
-     
+
+
             if (!soloFavoritos) {
                 recetas.forEach(receta => {
                     const estrella = receta.querySelector("#estrella");
@@ -75,22 +75,22 @@ mostrarFavoritosBtn.addEventListener("click", function() {
                     }
                 });
 
-      
+
                 recetas.forEach(receta => {
                     if (!recetasFavoritas.includes(receta)) {
-                        receta.style.display = "none"; 
+                        receta.style.display = "none";
                     }
                 });
 
-               
+
                 soloFavoritos = true;
             } else {
-            
+
                 recetas.forEach(receta => {
-                    receta.style.display = "block"; 
+                    receta.style.display = "block";
                 });
 
-       
+
                 soloFavoritos = false;
             }
         });
@@ -296,14 +296,104 @@ mostrarFavoritosBtn.addEventListener("click", function() {
 </script>
 
 <body data-usuario="{{ auth()->check() ? 'true' : 'false' }}">
-    <img id="carrito" src="{{ asset('img/carrito/carritos.svg') }}">
+    <img class="img-fluid" src="{{ asset('img/img_Header/carrito.png') }}" id="carrito" alt="Carrito" style="width: 40px; height: 40px; ">
+    <div id="overlay"></div>
     <div id="slideCarrito" class="slide-carrito">
-        <button id="cerrarCarrito">✖</button>
-        <h2>Carrito de Compras</h2>
-        <div id="contenidoCarrito">
-            <p>Tu carrito está vacío</p>
+        <img class="img-fluid" src="{{ asset('img/carrito/Close.png') }}" id="cerrarCarrito" alt="close" style="width: 50px; margin-top:10px;">
+        <h4 style="margin-left:15px; margin-top:10px;"><b>CARRITO</b></h4>
+
+        @if(Auth::check())
+        @php
+        $carrito = json_decode(Auth::user()->carrito, true);
+        @endphp
+
+        @if (empty($carrito))
+        <div id="sinContenidoCarrito">
+            <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px;">
+            <strong>Tu carrito está vacío</strong>
         </div>
+        @else
+        <div id="contenidoCarrito">
+            <ul>
+            @foreach($carrito as $producto)
+    @php
+        $productoDetails = \App\Models\Producto::find($producto['idProducto']);
+    @endphp
+
+    <li class="producto-carrito" style="border-bottom: 1px solid #ccc; padding: 15px 0; list-style: none;">
+        <div class="producto-carrito-detalle" style="display: flex; align-items: center; justify-content: space-between;">
+
+            <!-- Sección de imagen y nombre del producto -->
+            <div class="producto-info" style="display: flex; align-items: center;">
+                <!-- Imagen del producto -->
+                <img src="{{ asset('img/productos/' . $productoDetails->imagen_url) }}" 
+                     alt="{{ $productoDetails->nombre }}" 
+                     class="producto-imagen" 
+                     style="width: 60px; height: 60px; margin-right: 15px; object-fit: cover;">
+
+                <!-- Nombre y precio del producto -->
+                <div class="producto-nombre">
+                    <strong>{{ $productoDetails->nombre }}</strong><br>
+                    <span class="producto-precio">${{ number_format($productoDetails->precio, 2) }}</span>
+                </div>
+            </div>
+
+            <!-- Sección de cantidad y total -->
+            <div class="producto-cantidad" style="text-align: right;">
+                <!-- Formulario de modificación de cantidad -->
+                <form action="{{ route('carrito.modificar') }}" method="POST" class="cantidad-form" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="producto_id" value="{{ $producto['idProducto'] }}">
+
+                    <div class="cantidad-controls" style="display: inline-flex; align-items: center;">
+                        <!-- Botón de decremento -->
+                        <button type="submit" name="cantidad" value="-1" 
+                                class="cantidad-btn" 
+                                style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
+                            -
+                        </button>
+
+                        <!-- Cantidad actual -->
+                        <span class="cantidad" style="padding: 0 10px;">{{ $producto['cantidad'] }}</span>
+
+                        <!-- Botón de incremento -->
+                        <button type="submit" name="cantidad" value="1" 
+                                class="cantidad-btn" 
+                                style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
+                            +
+                        </button>
+                    </div>
+                </form>
+
+                <div class="producto-total">
+                    <!-- Total del producto -->
+                    <span class="total">Total: ${{ number_format($productoDetails->precio * $producto['cantidad'], 2) }}</span>
+                </div>
+            </div>
+
+        </div>
+    </li>
+@endforeach
+
+
+
+            </ul>
+            <hr>
+            <div style="text-align: right;">
+                <strong>Total: ${{ number_format(array_sum(array_map(function($item) {
+            return $item['precio'] * $item['cantidad'];
+        }, $carrito)), 2) }}</strong>
+            </div>
+        </div>
+        @endif
+        @else
+        <div id="sinContenidoCarrito">
+            <img class="img-fluid" src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" style="width: 100px;">
+            <strong>Tu carrito está vacío</strong>
+        </div>
+        @endif
     </div>
+
     <div id="popupLogin" class="popup">
         <div class="popup-contenido">
             <span id="cerrarPopup" class="popup-cerrar">✖</span>
@@ -315,23 +405,31 @@ mostrarFavoritosBtn.addEventListener("click", function() {
 
     <input type="text" id="busquedaTotal" placeholder="Buscar..." onkeyup="filtrarTotal()">
     <h1>Listado de productos</h1>
-<input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
-<button onclick="ordenarAscendente()">Ordenar A-Z</button>
-<button onclick="ordenarDescendente()">Ordenar Z-A</button>
-<button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
-<button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
+    <input type="text" id="busqueda" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+    <button onclick="ordenarAscendente()">Ordenar A-Z</button>
+    <button onclick="ordenarDescendente()">Ordenar Z-A</button>
+    <button onclick="ordenarPrecioAscendente()">Ordenar Precio ↑</button>
+    <button onclick="ordenarPrecioDescendente()">Ordenar Precio ↓</button>
 
-<div id="productos">
-    @foreach($productos as $producto)
-    <div class="producto">
-    <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
-        <strong>{{ $producto->nombre }}</strong>
-        <p>Descripción: {{ $producto->descripcion }}</p>
-        <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+    <div id="productos">
+        @foreach($productos as $producto)
+        <div class="producto">
+            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}">
+            <strong>{{ $producto->nombre }}</strong>
+            <p>Descripción: {{ $producto->descripcion }}</p>
+            <p>Precio: ${{ number_format($producto->precio, 2) }}</p>
+            <!-- Aquí en tu vista de productos -->
+            <form action="{{ route('carrito.agregar') }}" method="POST">
+                @csrf
+                <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+                <input type="hidden" name="precio" value="{{ $producto->precio }}">
+                <input type="hidden" name="cantidad" value="1"> <!-- Puedes agregar lógica para manejar cantidades -->
+                <button type="submit" class="agregar-carrito">Añadir al carrito</button>
+            </form>
+
+        </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
     <h1>Listado de recetas</h1>
     <input type="text" id="busquedaRecetas" placeholder="Buscar productos..." onkeyup="filtrarRecetas()">
     <button onclick="ordenarAscendenteRecetas()">Ordenar A-Z</button>
@@ -352,7 +450,7 @@ mostrarFavoritosBtn.addEventListener("click", function() {
             @endif
             @else
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-            @endif 
+            @endif
             <p style="font-weight: bold; color:black">Descripcion:</p>
             <p>{{ $receta->descripcion }}</p>
             <p style="font-weight: bold; color:black">Ingredientes: </p>
