@@ -56,6 +56,10 @@
             Las contraseñas no coinciden.
         </div>
 
+        @error('email')
+            <div style="color: red; font-weight: bold; margin-bottom: 10px;">{{ $message }}</div>
+        @enderror
+
         <!-- Botón de Registro -->
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="button-primary">
