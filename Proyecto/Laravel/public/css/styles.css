@@ -145,6 +145,15 @@ a:visited {
     margin: 0 15px;
 }
 
+a {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
 /* Link forgot password */
 .forgot-passwd {
     position: relative;
