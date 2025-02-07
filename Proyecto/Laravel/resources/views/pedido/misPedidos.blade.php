@@ -21,31 +21,29 @@
 
 @include('layouts.navigation')
 <br><br>    
-<div style="margin: 10px;">
 <h1>Mis pedidos</h1>
 @if($pedidos->isEmpty())
     <p>No tienes pedidos registrados</p>
 @else 
     @foreach($pedidos as $pedido)
-        <div class="card mb-2">
-            <div class="card-header d-flex justify-content-between" style="border-color:#B60200">
-                <span>Nº Pedido:</span>
-                <span>Estado:</span>
+        <div class="border border-0 card mb-2 ">
+            <div class="card-header d-flex justify-content-between">
+                <p>Nº Pedido: {{ $pedido->codigo_seguimiento }}</p>
+                <p>Estado: {{ $pedido->estado }}</p>
                 <button class="btn btn-outline-secondary btn-sm" onclick="toggleDetails({{ $pedido->id }})">Mostrar más ▼</button>
             </div>
             <div id="details-{{ $pedido->id }}" class="card-body" style="display: none;">
-                <p><strong>Detalles</strong></p>
+                <p><strong>Detalles:</strong></p>
                 <p><strong>Dir:</strong> {{ $pedido->direccion }}</p>
                 <p><strong>Productos:</strong></p>
                 <div class="productos-list">
                     {{ implode(', ', $pedido->productos ?? []) }}
                 </div>
-                <p><strong>Total:</strong> {{ $pedido->total }}€</p>
+                <p><strong>Total:</strong> {{ $pedido->total }} €</p>
             </div>
         </div>
     @endforeach
 @endif
-</div>
 <br><br><br><br><br>
 <div style="position: sticky; top:0px">
     @include('layouts.footer')
