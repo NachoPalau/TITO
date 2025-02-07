@@ -36,7 +36,7 @@
 
         <!-- Contraseña olvidada -->
         <div class="forgot-passwd">
-            <a href="#">¿Has olvidado tu contraseña?</a>
+            <a href="{{route('password.request')}}">¿Has olvidado tu contraseña?</a>
         </div>
         
         <x-input-error :messages="$errors->get('email')" class="mt-2" />

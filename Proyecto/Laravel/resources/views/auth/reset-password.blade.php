@@ -1,39 +1,59 @@
-<x-guest-layout>
+<link rel="stylesheet" href="{{asset('css/styles.css')}}">
+
+<!-- Logo -->
+<div class="logo-container">
+    <a href="{{ route('index') }}">
+        <img src="{{ asset('img/img_Header/logo.png') }}" style="width: 150px;">
+    </a>
+</div>
+<div class="form-container">
+    <h2 class="form-title">RECUPERAR CONTRASEÑA</h2>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <!-- Correo Electrónico -->
+        <div class="input-group">
+            <x-text-input id="email" class="text-input" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" placeholder=" " />
+            <x-input-label for="email" class="input-label" :value="__('Correo electrónico')" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Contraseña -->
+        <div class="input-group">
+            <button type="button" id="togglePassword">
+                <img src="{{asset('img/contraseña/cerrar-ojo.png')}}" alt="Ver contraseña" id="eyeIcon" style="width:20px;">
+            </button> 
+            <x-text-input id="password" class="text-input" type="password" name="password" required autofocus autocomplete="password" placeholder=" " />
+            <x-input-label for="password" class="input-label" :value="__('Contraseña')" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <!-- Confirmar Contraseña -->
+        <div class="input-group">
+            <button type="button" id="togglePassword2">
+                <img src="{{asset('img/contraseña/cerrar-ojo.png')}}" alt="Ver contraseña" id="eyeIcon2" style="width:20px;">
+            </button>
+            <x-text-input id="password2" class="text-input" type="password" name="password_confirmation" required autofocus autocomplete="new-password" placeholder=" " />
+            <x-input-label for="password_confirmation" class="input-label" :value="__('Repetir Contraseña')" />
+        </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div id="password-error" style="color: red; display: none; font-weight: bold; margin-bottom: 10px;">
+            Las contraseñas no coinciden.
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
+            <x-primary-button class="button-primary">
+                {{ __('RESETEAR CONTRASEÑA') }}
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+    <!-- Footer -->
+    <footer class="footer">
+        <a href="#">Cookies</a>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Contáctanos</a>
+    </footer>
+</div>
+
+<script src="{{asset('js/script.js')}}"></script>
