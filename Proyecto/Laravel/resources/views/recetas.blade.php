@@ -18,14 +18,7 @@
     <!-- MAIN CONTAINER -->
     <div class="container">
     <div class="container">
-    <div id="popupLogin" class="popup" style="display: none;">
-    <div class="popup-contenido">
-        <span id="cerrarPopup" class="popup-cerrar">✖</span>
-        <h2>¡Debes iniciar sesión para añadir al carrito!</h2> 
-        <p>Para poder añadir el producto al carrito, primero necesitas iniciar sesión en tu cuenta.</p> 
-        <button onclick="window.location.href='/login'">Iniciar sesión</button>
-    </div>
-</div>
+    
 
         <!-- NOVEDADES -->
         <section class="novedades my-4">
@@ -42,7 +35,10 @@
         <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
         <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
         <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+        <button class="agregar-carrito" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
+    Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}">
+</button>
+
     </div>
     @endforeach
 </div>
@@ -69,6 +65,7 @@
     <button id="mostrarFavoritosBtn">Mostrar Recetas Favoritas</button>
     @endif
 
+
     <div id="recetas">
         @foreach($recetas as $receta)
         <div class="receta" data-guardados="{{ $receta->guardados }}">
@@ -85,9 +82,14 @@
         </div>
         @endforeach
     </div>
-        </section>
-
+    <div id="popupLogin" class="popup" style="display: none;">
+    <div class="popup-contenido">
+        <span id="cerrarPopup" class="popup-cerrar">✖</span>
+        <h2 id="popupTitulo">¡Debes iniciar sesión!</h2> 
+        <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p> 
+        <button onclick="window.location.href='/login'">Iniciar sesión</button>
     </div>
+</div>
 
     <!-- FOOTER -->
     <footer class="container-fluid  text-white text-center py-4 mt-5" style="background-color: rgb(131, 20, 20);">
@@ -126,6 +128,46 @@ document.addEventListener("DOMContentLoaded", function () {
             receta.style.display = nombre.includes(valor) ? "block" : "none";
         });
     }
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const popupLogin = document.getElementById("popupLogin");
+    const cerrarPopup = document.getElementById("cerrarPopup");
+    const popupTitulo = document.getElementById("popupTitulo");
+    const popupMensaje = document.getElementById("popupMensaje");
+
+    function mostrarPopup(titulo, mensaje) {
+        console.log("Mostrando popup:", titulo, mensaje); 
+        popupTitulo.textContent = titulo;
+        popupMensaje.textContent = mensaje;
+        popupLogin.style.display = "flex";
+    }
+
+    cerrarPopup.addEventListener("click", function () {
+        popupLogin.style.display = "none";
+    });
+
+    // Verificar si el usuario está logueado (desde Blade)
+    const usuarioLogueado = {{ auth()->check() ? 'true' : 'false' }};
+
+    // Bloquear "Añadir al carrito" si no está logueado
+    document.querySelectorAll(".agregar-carrito").forEach(button => {
+        button.addEventListener("click", function (event) {
+            if (!usuarioLogueado) {
+                event.preventDefault();
+                mostrarPopup("¡Debes iniciar sesión!", "Para añadir este producto al carrito, primero inicia sesión.");
+            }
+        });
+    });
+
+    // Bloquear "Guardar como favorito" si no está logueado
+    document.querySelectorAll("img#estrella").forEach(estrella => {
+        estrella.addEventListener("click", function (event) {
+            if (!usuarioLogueado) {
+                event.preventDefault();
+                mostrarPopup("¡Debes iniciar sesión!", "Para guardar esta receta como favorita, primero inicia sesión.");
+            }
+        });
+    });
 });
 
 </script>
