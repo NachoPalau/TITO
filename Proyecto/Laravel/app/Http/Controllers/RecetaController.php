@@ -47,5 +47,12 @@ public function eliminarDeFavoritos($recetaId)
     return redirect()->back();
 }
 
-
+public function index()
+{ 
+    $recetas = Receta::all();
+    return view('recetas', [
+        'recetas' => $recetas
+    ]);  
+   
+}
 }
