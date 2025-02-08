@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('puntos')->default(0);
             $table->longText('favoritas')->default('[]');
             $table->json('carrito')->default(json_encode([]));
+            $table->string('rol')->default('cliente');
             $table->rememberToken();
             $table->timestamps();
         });

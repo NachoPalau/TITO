@@ -20,6 +20,7 @@ class ProductSeeder extends Seeder
             'password' => bcrypt('TITO1234'),
             'telefono' => '1234567890',
             'puntos'=> 0,
+            'rol' => 'admin',
             'favoritas' => '[]',
             'carrito' => '[]'
         ]);
@@ -30,6 +31,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 100,
             'imagen_url' => 'manzana.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -38,6 +40,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.80,
             'stock' => 120,
             'imagen_url' => 'platano.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -46,6 +49,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.20,
             'stock' => 150,
             'imagen_url' => 'naranja.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -54,6 +58,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 200,
             'imagen_url' => 'uva.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -62,6 +67,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 80,
             'imagen_url' => 'fresa.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -70,6 +76,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.30,
             'stock' => 90,
             'imagen_url' => 'pera.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -78,6 +85,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.80,
             'stock' => 110,
             'imagen_url' => 'mango.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -86,6 +94,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 200,
             'imagen_url' => 'tomate.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -94,6 +103,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.90,
             'stock' => 150,
             'imagen_url' => 'zanahoria.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -102,6 +112,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.10,
             'stock' => 300,
             'imagen_url' => 'patata.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Lechugas',
@@ -109,6 +120,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.20,
             'stock' => 100,
             'imagen_url' => 'lechuga.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -117,6 +129,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 80,
             'imagen_url' => 'esparrago.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -125,6 +138,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 150,
             'imagen_url' => 'brocoli.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -133,6 +147,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 200,
             'imagen_url' => 'pepino.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -141,6 +156,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.40,
             'stock' => 120,
             'imagen_url' => 'pimiento.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -149,6 +165,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.90,
             'stock' => 180,
             'imagen_url' => 'cebolla.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -157,6 +174,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.50,
             'stock' => 300,
             'imagen_url' => 'ajo.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -165,6 +183,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.60,
             'stock' => 140,
             'imagen_url' => 'espinaca.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -173,6 +192,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.30,
             'stock' => 130,
             'imagen_url' => 'calabacin.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -181,6 +201,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.20,
             'stock' => 160,
             'imagen_url' => 'champino.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -189,6 +210,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.80,
             'stock' => 100,
             'imagen_url' => 'aguacate.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -197,6 +219,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 90,
             'imagen_url' => 'pina.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -205,6 +228,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 70,
             'imagen_url' => 'sandia.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -213,6 +237,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.80,
             'stock' => 60,
             'imagen_url' => 'melon.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -221,6 +246,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.70,
             'stock' => 300,
             'imagen_url' => 'limon.jpg',
+            'destacado' => false
         ]);
 
 
@@ -231,6 +257,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 200,
             'imagen_url' => 'pollo.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -239,6 +266,7 @@ class ProductSeeder extends Seeder
             'precio' => 8.00,
             'stock' => 150,
             'imagen_url' => 'carne_res.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -247,6 +275,7 @@ class ProductSeeder extends Seeder
             'precio' => 7.50,
             'stock' => 120,
             'imagen_url' => 'cerdo.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -255,6 +284,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.50,
             'stock' => 80,
             'imagen_url' => 'pavo.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Salchichas',
@@ -262,6 +292,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 200,
             'imagen_url' => 'salchicha.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -270,6 +301,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 150,
             'imagen_url' => 'bacon.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -278,6 +310,7 @@ class ProductSeeder extends Seeder
             'precio' => 6.00,
             'stock' => 100,
             'imagen_url' => 'pescado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -286,6 +319,7 @@ class ProductSeeder extends Seeder
             'precio' => 7.00,
             'stock' => 80,
             'imagen_url' => 'marisco.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -294,6 +328,7 @@ class ProductSeeder extends Seeder
             'precio' => 10.00,
             'stock' => 60,
             'imagen_url' => 'cordero.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -302,6 +337,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.00,
             'stock' => 120,
             'imagen_url' => 'embutido.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -310,6 +346,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'leche.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -318,6 +355,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 150,
             'imagen_url' => 'yogurt.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -326,6 +364,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 130,
             'imagen_url' => 'queso.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -334,6 +373,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.20,
             'stock' => 100,
             'imagen_url' => 'mantequilla.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -342,6 +382,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 140,
             'imagen_url' => 'margarina.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -350,6 +391,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 120,
             'imagen_url' => 'nata_liquida.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -358,6 +400,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.50,
             'stock' => 80,
             'imagen_url' => 'helado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -366,6 +409,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.20,
             'stock' => 250,
             'imagen_url' => 'pan.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -374,6 +418,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 200,
             'imagen_url' => 'pan_molde.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -382,6 +427,7 @@ class ProductSeeder extends Seeder
             'precio' => 0.80,
             'stock' => 180,
             'imagen_url' => 'panecillos.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -390,6 +436,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.30,
             'stock' => 150,
             'imagen_url' => 'bolleria.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -398,6 +445,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'galleta.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Pasteles',
@@ -405,6 +453,7 @@ class ProductSeeder extends Seeder
             'precio' => 10.00,
             'stock' => 50,
             'imagen_url' => 'pastel.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -413,6 +462,7 @@ class ProductSeeder extends Seeder
             'precio' => 12.00,
             'stock' => 40,
             'imagen_url' => 'tarta.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -421,6 +471,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 150,
             'imagen_url' => 'tortilla.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -429,6 +480,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 120,
             'imagen_url' => 'pan_pita.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -437,6 +489,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 200,
             'imagen_url' => 'agua.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -445,6 +498,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 180,
             'imagen_url' => 'Zumo.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -453,6 +507,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'refresco.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -461,6 +516,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.00,
             'stock' => 100,
             'imagen_url' => 'cafe.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Té (Verde, Negro, De Hierbas)',
@@ -468,6 +524,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 120,
             'imagen_url' => 'te.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -476,6 +533,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.80,
             'stock' => 150,
             'imagen_url' => 'leche_vegetal.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -484,6 +542,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.00,
             'stock' => 100,
             'imagen_url' => 'bebidas_alcoholicas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -492,6 +551,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.20,
             'stock' => 150,
             'imagen_url' => 'bebidas_energeticas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -500,6 +560,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 100,
             'imagen_url' => 'sopa_enlatada.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -508,6 +569,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 200,
             'imagen_url' => 'verduras_enlatadas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -516,6 +578,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 150,
             'imagen_url' => 'frutas_enlatadas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -524,6 +587,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 180,
             'imagen_url' => 'pescado_enlatado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -532,6 +596,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'tomate_enlatado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -540,6 +605,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.20,
             'stock' => 220,
             'imagen_url' => 'legumbres_conserva.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -548,6 +614,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 180,
             'imagen_url' => 'salsas_enlatadas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -556,6 +623,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 150,
             'imagen_url' => 'aceitunas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -564,6 +632,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.30,
             'stock' => 250,
             'imagen_url' => 'arroz.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -572,6 +641,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'pasta.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -580,6 +650,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 300,
             'imagen_url' => 'harina.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Galletas Saladas',
@@ -587,6 +658,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 150,
             'imagen_url' => 'galletas_salada.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -595,6 +667,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'pan_rallado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -603,6 +676,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.20,
             'stock' => 300,
             'imagen_url' => 'avena.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -611,6 +685,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.50,
             'stock' => 120,
             'imagen_url' => 'quinoa.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -619,6 +694,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 150,
             'imagen_url' => 'cuscus.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -627,6 +703,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 100,
             'imagen_url' => 'polenta.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -635,6 +712,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.00,
             'stock' => 200,
             'imagen_url' => 'aceite_oliva.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -643,6 +721,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 180,
             'imagen_url' => 'aceite_girasol.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -651,6 +730,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 150,
             'imagen_url' => 'vinagre.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -659,6 +739,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 250,
             'imagen_url' => 'sal.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -667,6 +748,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'pimienta.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -675,6 +757,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 180,
             'imagen_url' => 'salsa_soja.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -683,6 +766,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 250,
             'imagen_url' => 'salsa_tomate.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -691,6 +775,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'mostaza.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -699,6 +784,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 180,
             'imagen_url' => 'ketchup.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -707,6 +793,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 150,
             'imagen_url' => 'mayonesa.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -715,6 +802,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 100,
             'imagen_url' => 'pesto.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -723,6 +811,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 120,
             'imagen_url' => 'miel.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -731,6 +820,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 300,
             'imagen_url' => 'azucar.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -739,6 +829,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 150,
             'imagen_url' => 'salsas_especias.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -747,6 +838,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 180,
             'imagen_url' => 'verduras_congeladas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -755,6 +847,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 150,
             'imagen_url' => 'frutas_congeladas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -763,6 +856,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 100,
             'imagen_url' => 'comidas_congeladas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -771,6 +865,7 @@ class ProductSeeder extends Seeder
             'precio' => 5.00,
             'stock' => 80,
             'imagen_url' => 'pescado_congelado.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -779,6 +874,7 @@ class ProductSeeder extends Seeder
             'precio' => 7.00,
             'stock' => 100,
             'imagen_url' => 'carne_congelada.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -787,6 +883,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 180,
             'imagen_url' => 'nuggets_pollo.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -795,6 +892,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 250,
             'imagen_url' => 'detergente.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -803,6 +901,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 200,
             'imagen_url' => 'suavizante.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -811,6 +910,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 150,
             'imagen_url' => 'limpiador_multiusos.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -819,6 +919,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 100,
             'imagen_url' => 'desinfectantes.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -827,6 +928,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 200,
             'imagen_url' => 'jabon_platos.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -835,6 +937,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 300,
             'imagen_url' => 'bolsas_basura.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -843,6 +946,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 250,
             'imagen_url' => 'papel_higienico.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -851,6 +955,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 300,
             'imagen_url' => 'toallas_papel.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -859,6 +964,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 200,
             'imagen_url' => 'esponjas_trapos.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -867,6 +973,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 150,
             'imagen_url' => 'productos_bano.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -875,6 +982,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 120,
             'imagen_url' => 'filtros_agua.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -883,6 +991,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 180,
             'imagen_url' => 'velas_ambientadores.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -891,6 +1000,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.00,
             'stock' => 300,
             'imagen_url' => 'pilas.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Shampoo y Acondicionador',
@@ -898,6 +1008,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.50,
             'stock' => 200,
             'imagen_url' => 'shampoo_acondicionador.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -906,6 +1017,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.80,
             'stock' => 250,
             'imagen_url' => 'jabón_baño.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -914,6 +1026,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 300,
             'imagen_url' => 'pasta_dientes.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -922,6 +1035,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 200,
             'imagen_url' => 'desodorante.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -930,6 +1044,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 180,
             'imagen_url' => 'crema_hidratante.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -938,6 +1053,7 @@ class ProductSeeder extends Seeder
             'precio' => 10.00,
             'stock' => 100,
             'imagen_url' => 'afeitadora.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -946,6 +1062,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 150,
             'imagen_url' => 'productos_cabello.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -954,6 +1071,7 @@ class ProductSeeder extends Seeder
             'precio' => 6.00,
             'stock' => 120,
             'imagen_url' => 'protector_solar.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -962,6 +1080,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 250,
             'imagen_url' => 'toallitas_humedas.jpg',
+            'destacado' => false
         ]);
 
         Producto::create([
@@ -970,6 +1089,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.50,
             'stock' => 200,
             'imagen_url' => 'higiene_femenina.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -978,6 +1098,7 @@ class ProductSeeder extends Seeder
             'precio' => 7.50,
             'stock' => 100,
             'imagen_url' => 'conejo.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -986,6 +1107,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 200,
             'imagen_url' => 'judia_verde.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -994,6 +1116,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 120,
             'imagen_url' => 'garrofon.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1002,6 +1125,7 @@ class ProductSeeder extends Seeder
             'precio' => 8.50,
             'stock' => 80,
             'imagen_url' => 'azafran.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1010,6 +1134,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.00,
             'stock' => 300,
             'imagen_url' => 'huevos.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1018,6 +1143,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 500,
             'imagen_url' => 'pan.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1026,6 +1152,7 @@ class ProductSeeder extends Seeder
             'precio' => 4.50,
             'stock' => 100,
             'imagen_url' => 'habichuelas.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1034,6 +1161,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.00,
             'stock' => 180,
             'imagen_url' => 'chorizo.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1042,6 +1170,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.20,
             'stock' => 120,
             'imagen_url' => 'morcilla.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1050,6 +1179,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.80,
             'stock' => 150,
             'imagen_url' => 'pimenton.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1058,6 +1188,7 @@ class ProductSeeder extends Seeder
             'precio' => 15.00,
             'stock' => 60,
             'imagen_url' => 'pulpo.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1066,6 +1197,7 @@ class ProductSeeder extends Seeder
             'precio' => 1.50,
             'stock' => 300,
             'imagen_url' => 'sal_gorda.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1074,6 +1206,7 @@ class ProductSeeder extends Seeder
             'precio' => 25.00,
             'stock' => 50,
             'imagen_url' => 'cochinillo.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1082,6 +1215,7 @@ class ProductSeeder extends Seeder
             'precio' => 3.50,
             'stock' => 100,
             'imagen_url' => 'manteca_cerdo.jpg',
+            'destacado' => false
         ]);
         Producto::create([
             'nombre' => 'Caldo de Pollo',
@@ -1089,6 +1223,7 @@ class ProductSeeder extends Seeder
             'precio' => 2.50,
             'stock' => 200,
             'imagen_url' => 'caldo_pollo.jpg',
+            'destacado' => false
         ]);
         
         Producto::create([
@@ -1097,7 +1232,53 @@ class ProductSeeder extends Seeder
             'precio' => 4.00,
             'stock' => 150,
             'imagen_url' => 'tocino.jpg',
+            'destacado' => false
         ]);
+        Producto::create([
+            'nombre' => 'Leche de avena con sabor a frutos rojos',
+            'descripcion' => 'Leche vegetal saborizada con frutos rojos, ideal para personas con intolerancia a la lactosa.',
+            'precio' => 2.50,
+            'stock' => 200,
+            'imagen_url' => 'leche_avena_frutos_rojos.jpg',
+            'destacado' => true
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Snacks de algas',
+            'descripcion' => 'Snacks crujientes hechos a base de algas marinas, bajos en calorías y ricos en nutrientes.',
+            'precio' => 1.80,
+            'stock' => 100,
+            'imagen_url' => 'snacks_algas.jpg',
+            'destacado' => true
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Gel de ducha en barra',
+            'descripcion' => 'Gel de ducha sólido que se convierte en espuma al contacto con agua, ideal para una higiene ecológica.',
+            'precio' => 3.00,
+            'stock' => 50,
+            'imagen_url' => 'gel_ducha_barra.jpg',
+            'destacado' => true
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Pasta de garbanzo',
+            'descripcion' => 'Pasta sin gluten hecha de garbanzo, rica en proteínas y fibra, ideal para dietas saludables.',
+            'precio' => 2.80,
+            'stock' => 180,
+            'imagen_url' => 'pasta_garbanzo.jpg',
+            'destacado' => true
+        ]);
+        
+        Producto::create([
+            'nombre' => 'Kéfir de coco',
+            'descripcion' => 'Kéfir probiótico hecho con leche de coco, ideal para dietas veganas y sin lácteos.',
+            'precio' => 3.50,
+            'stock' => 120,
+            'imagen_url' => 'kefir_coco.jpg',
+            'destacado' => true
+        ]);
+        
         DB::table('recetas')->insert([
             [
                 'titulo' => 'Paella Valenciana',

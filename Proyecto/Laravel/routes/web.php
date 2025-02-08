@@ -56,9 +56,7 @@ Route::get('/api/productos', function () {
 });
 
 
-Route::get('/productos', function () {
-    return view('prod');
-})->name('productos');
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 //->middleware(['auth', 'verified'])
 
 Route::get('/eventos', function () {
