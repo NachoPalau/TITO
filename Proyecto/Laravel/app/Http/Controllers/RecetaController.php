@@ -50,8 +50,11 @@ public function eliminarDeFavoritos($recetaId)
 public function index()
 { 
     $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
     return view('recetas', [
-        'recetas' => $recetas
+        'recetas' => $recetas,
+        'recetasMas' => $recetasMas
+
     ]);  
    
 }

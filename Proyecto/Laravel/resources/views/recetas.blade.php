@@ -29,49 +29,23 @@
 
         <!-- NOVEDADES -->
         <section class="novedades my-4">
-            <h2 class="text-center">DESTACADAS</h2>
-            <div class="row row-cols-2 row-cols-md-5 g-3">
-                <div class="col">
-                    <div class="producto card text-center p-3">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto">
-                        <div class="card-body">
-                            <p class="card-text">Nombre</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="producto card text-center p-3">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto">
-                        <div class="card-body">
-                            <p class="card-text">Nombre</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="producto card text-center p-3">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto">
-                        <div class="card-body">
-                            <p class="card-text">Nombre</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="producto card text-center p-3">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto">
-                        <div class="card-body">
-                            <p class="card-text">Nombre</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="producto card text-center p-3">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto">
-                        <div class="card-body">
-                            <p class="card-text">Nombre</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="productosDes">
+    @foreach($recetasMas as $receta)
+    <div class="receta" data-guardados="{{ $receta->guardados }}">
+        <strong>{{ $receta->titulo }}</strong>
+        @if(auth()->check())
+        <img id="estrella" src="{{ asset(in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? 'img/carrito/estrella.svg' : 'img/carrito/estrellaVacia.svg') }}" 
+             onclick="window.location.href='{{ in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? '/eliminar-favorito/' . $receta->id : '/guardar-favorito/' . $receta->id }}'">
+        @else
+        <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+        @endif
+        <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
+        <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
+        <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+        <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+    </div>
+    @endforeach
+</div>
         </section>
 
         <!-- FILTROS -->
@@ -131,55 +105,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const inputBusqueda = document.getElementById("busquedaTotal");
+document.addEventListener("DOMContentLoaded", function () {
+    const inputBusqueda = document.getElementById("busquedaTotal");
 
-        if (!inputBusqueda) {
-            console.error("No se encontró el input de búsqueda.");
-            return;
-        }
+    if (!inputBusqueda) {
+        console.error("No se encontró el input de búsqueda.");
+        return;
+    }
 
-        inputBusqueda.addEventListener("keyup", function () {
-            filtrarTotal(this.value);
-        });
-
-        function filtrarTotal(valor) {
-            valor = valor.toLowerCase();
-            const productos = document.querySelectorAll("#productos .producto");
-
-            productos.forEach(producto => {
-                const nombre = producto.querySelector("strong").textContent.toLowerCase();
-                producto.style.display = nombre.includes(valor) ? "block" : "none";
-            });
-        }
-
-        // Popup Login
-        const popupLogin = document.getElementById("popupLogin");
-        const cerrarPopup = document.getElementById("cerrarPopup");
-
-        // Agregar evento de cerrar popup
-        cerrarPopup.addEventListener("click", function () {
-            popupLogin.style.display = "none";
-        });
-
-        // Obtén todos los botones de añadir al carrito
-        const botonesCarrito = document.querySelectorAll(".agregar-carrito");
-
-        botonesCarrito.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevenir el envío del formulario
-
-                // Verificar si el usuario está logueado
-                if (!{{ auth()->check() ? 'true' : 'false' }}) { // Usamos Blade para pasar la variable de autenticación
-                    // Mostrar popup de login si no está logueado
-                    popupLogin.style.display = "flex";
-                } else {
-                    // Si está logueado, proceder con la acción de agregar al carrito
-                    this.closest('form').submit(); // Enviar el formulario
-                }
-            });
-        });
+    inputBusqueda.addEventListener("keyup", function () {
+        filtrarTotal(this.value);
     });
+
+    function filtrarTotal(valor) {
+        valor = valor.toLowerCase();
+
+        const recetas = document.querySelectorAll("#recetas .receta");
+        recetas.forEach(receta => {
+            const nombre = receta.querySelector("strong").textContent.toLowerCase();
+            receta.style.display = nombre.includes(valor) ? "block" : "none";
+        });
+    }
+});
+
 </script>
 
 </html>
