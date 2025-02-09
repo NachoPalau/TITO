@@ -10,6 +10,10 @@ use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\RecetaController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -63,21 +67,25 @@ Route::get('/api/productos', function () {
 });
 
 
-Route::get('/productos', function () {
-    return view('prod');
-})->name('productos');
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 //->middleware(['auth', 'verified'])
 
 Route::get('/eventos', function () {
     return view('eventos');
 })->name('eventos');
 
-Route::get('/recetas', function () {
-    return view('recetas');
-})->name('recetas');
-use App\Http\Controllers\RecetaController;
+Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
+
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+    Route::post('/carrito/eliminar/{productoId}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+    Route::post('/carrito/modificar', [CarritoController::class, 'modificarCantidad'])->name('carrito.modificar');
+    Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');
+});
 

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('telefono', 11);
             $table->integer('puntos')->default(0);
             $table->longText('favoritas')->default('[]');
-            $table->longText('carrito')->default('[]');
+            $table->json('carrito')->default(json_encode([]));
+            $table->string('rol')->default('cliente');
             $table->rememberToken();
             $table->timestamps();
         });

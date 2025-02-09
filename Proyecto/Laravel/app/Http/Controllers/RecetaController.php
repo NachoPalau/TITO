@@ -47,5 +47,15 @@ public function eliminarDeFavoritos($recetaId)
     return redirect()->back();
 }
 
+public function index()
+{ 
+    $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    return view('recetas', [
+        'recetas' => $recetas,
+        'recetasMas' => $recetasMas
 
+    ]);  
+   
+}
 }
