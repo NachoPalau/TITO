@@ -46,7 +46,6 @@
             <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
             <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
         </div>
         @endforeach
     </div>

@@ -78,7 +78,9 @@ Route::get('/eventos', function () {
 })->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
-Route::post('newReceta', [RecetaController::class, 'index3'])->name('newReceta');
+Route::get('newReceta', [RecetaController::class, 'index2'])->name('newReceta');
+Route::get('recetas/create', [RecetaController::class, 'create'])->name('recetas.create');
+Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store');
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');

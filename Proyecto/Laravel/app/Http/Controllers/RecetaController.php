@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Receta;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -61,11 +62,9 @@ public function index()
 }
 public function index2()
 { 
-    $recetas = Receta::all();
-    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
-    return view('miReceta', [
-        'recetas' => $recetas,
-        'recetasMas' => $recetasMas
+    $productos = Producto::all();
+    return view('newReceta', [
+        'productos' => $productos,
 
     ]);  
    
@@ -77,5 +76,29 @@ public function index3()
 
     return view('miReceta', compact('recetas')); 
    
+}
+public function create()
+    {
+        return view('newReceta'); 
+    }
+
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string|max:255',
+        'ingredientes' => 'required|string', 
+        'guardados' => 'boolean', 
+    ]);
+
+    Receta::create([
+        'titulo' => $validated['titulo'],
+        'descripcion' => $validated['descripcion'],
+        'ingredientes' => $validated['ingredientes'],
+        'guardados' => $request->has('guardados') ? true : false, 
+        'id_usuario' => Auth::id(), 
+    ]);
+
+    return redirect()->route('misrecetas')->with('success', 'Receta creada con éxito');
 }
 }
