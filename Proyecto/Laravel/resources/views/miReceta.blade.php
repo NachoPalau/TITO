@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .container-center {
             height: 100vh; /* Ocupar toda la altura de la pantalla */
@@ -54,6 +55,7 @@
         <div class="actions">
             <a href="{{ route('recetas.edit', $receta->id) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
             <button class="btn btn-danger btn-sm delete-button" data-id="{{ $receta->id }}">❌ Eliminar</button>
+
         </div>
     </div>
     @endforeach
@@ -78,28 +80,38 @@
             autoplay: true,
             path: "{{ asset('animations/recipe.json') }}"
         });
+ 
         document.addEventListener("DOMContentLoaded", function () {
-    // Confirmación antes de eliminar
     document.querySelectorAll(".delete-button").forEach(button => {
         button.addEventListener("click", function () {
             const id = this.getAttribute("data-id");
+            console.log("Botón de eliminación presionado para la receta con ID: " + id); // Añade un log aquí para verificar
             if (confirm("¿Estás seguro de que quieres eliminar esta receta?")) {
                 fetch(`/recetas/${id}`, {
                     method: "DELETE",
                     headers: {
-                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                        "Content-Type": "application/json"
                     }
-                }).then(response => {
+                })
+                .then(response => {
                     if (response.ok) {
-                        location.reload();
+                        console.log("Receta eliminada con éxito");
+                        location.reload();  // Recargar la página si la eliminación fue exitosa
                     } else {
+                        console.error("Error al eliminar la receta");
                         alert("Hubo un error al eliminar la receta.");
                     }
+                })
+                .catch(error => {
+                    console.error("Error:", error); // Esto nos ayudará a ver si hay un error en el fetch
                 });
             }
         });
     });
 });
+
+
     </script>
 </body>
 </html>

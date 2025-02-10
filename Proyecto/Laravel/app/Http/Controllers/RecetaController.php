@@ -115,15 +115,18 @@ public function create()
     public function destroy($id)
     {
         $receta = Receta::findOrFail($id);
-        
-        // Eliminar relaciones si es necesario
-        $receta->ingredientes()->delete();
-        
-        // Luego eliminar la receta
+    
+        // Eliminar relaciones si es necesario (si hay alguna relación a eliminar, por ejemplo, ingredientes)
+        // Si no tienes una relación directa con ingredientes, puedes omitir esto.
+        // $receta->ingredientes()->delete();
+    
+        // Eliminar la receta
         $receta->delete();
     
-        return redirect()->route('misrecetas')->response()->json(['success' => 'Receta eliminada correctamente']);
+        // Responder con un JSON indicando que la receta fue eliminada correctamente
+        return response()->json(['success' => 'Receta eliminada correctamente']);
     }
+    
 public function edit($id)
 {
     $receta = Receta::findOrFail($id);

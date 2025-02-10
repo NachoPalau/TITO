@@ -83,7 +83,7 @@ Route::get('recetas/create', [RecetaController::class, 'create'])->name('recetas
 Route::get('/recetas/{id}/edit', [RecetaController::class, 'edit'])->name('recetas.edit');
 Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store');
 Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
-Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy'); 
+Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy');
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
