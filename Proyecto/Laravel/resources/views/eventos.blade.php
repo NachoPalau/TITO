@@ -75,7 +75,7 @@
                     <img src="{{ asset('img/productos/bombones_mym.jpg') }}"  class="img-fluid" alt="Receta 1">
                 </div>
                 <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}"class="img-fluid" alt="Receta 2">
+                    <img src="{{ asset('img/productos/taza_sanvalentin.jpg') }}"class="img-fluid" alt="Receta 2">
                 </div>
             </div>
         </section>
@@ -86,7 +86,7 @@
     <script>
         const nuevasImagenes = [
             "{{ asset('img/productos/bombones_mym.jpg') }}",
-            "{{ asset('img/img_eventos/recetasGanadoras.jpg') }}",
+            "{{ asset('img/productos/taza_sanvalentin.jpg') }}",
            
         ];
         

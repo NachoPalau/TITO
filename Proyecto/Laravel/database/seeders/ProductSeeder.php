@@ -1126,6 +1126,13 @@ class ProductSeeder extends Seeder
             'stock' => 200,
             'imagen_url' => 'corazon_kinder.jpg',
         ]);
+        Producto::create([
+            'nombre' => 'Taza de san valentín',
+            'descripcion' => 'Bonita taza para regalar a tu pareja.',
+            'precio' => 7.00,
+            'stock' => 50,
+            'imagen_url' => 'taza_sanvalentin.jpg',
+        ]);
         
         DB::table('recetas')->insert([
             [
