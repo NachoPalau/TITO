@@ -17,8 +17,6 @@
 
     <!-- MAIN CONTAINER -->
     <div class="container">
-    <div class="container">
-    
 
         <!-- NOVEDADES -->
         <section class="novedades my-4">
@@ -35,9 +33,12 @@
         <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
         <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
         <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-        <button class="agregar-carrito" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
-    Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}">
-</button>
+                <div class="flex items-center justify-end mt-4" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
+                    <x-primary-button class="button-primary agregar-carrito">
+                        {{ __('Añadir al carrito') }}
+                        <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                    </x-primary-button>
+                </div>
 
     </div>
     @endforeach
@@ -45,24 +46,15 @@
         </section>
 
         <!-- FILTROS -->
-        <section class="filtros d-flex justify-content-between my-4">
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    Filtrar
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Precio más bajo</a></li>
-                    <li><a class="dropdown-item" href="#">Precio más alto</a></li>
-                    <li><a class="dropdown-item" href="#">Más vendidos</a></li>
-                </ul>
-            </div>
-            <button class="btn btn-outline-secondary">A-Z ⬆⬇</button>
-            <button class="btn btn-outline-secondary">Precio ⬆⬇</button>
-        </section>
+        @include('components.filtrar')
 
         <!-- PRODUCTOS -->
         @if(auth()->check())
-    <button id="mostrarFavoritosBtn">Mostrar Recetas Favoritas</button>
+        <div class="flex items-center mt-4" >
+                    <x-primary-button class="button-primary agregar-carrito" id="mostrarFavoritosBtn">
+                        {{ __('Mostrar Recetas Favoritas') }}
+                    </x-primary-button>
+                </div>
     @endif
 
 
@@ -78,7 +70,12 @@
             <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
             <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <button class="agregar-carrito">Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}"></button>
+            <div class="flex items-center justify-end mt-4" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
+                    <x-primary-button class="button-primary agregar-carrito">
+                        {{ __('Añadir al carrito') }}
+                        <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                    </x-primary-button>
+                </div>
         </div>
         @endforeach
     </div>
@@ -89,8 +86,8 @@
         <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p> 
         <button onclick="window.location.href='/login'">Iniciar sesión</button>
     </div>
+    </div>
 </div>
-
     <!-- FOOTER -->
     @include( 'layouts.footer')
     
