@@ -80,7 +80,10 @@ Route::get('/eventos', function () {
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
 Route::get('newReceta', [RecetaController::class, 'index2'])->name('newReceta');
 Route::get('recetas/create', [RecetaController::class, 'create'])->name('recetas.create');
+Route::get('/recetas/{id}/edit', [RecetaController::class, 'edit'])->name('recetas.edit');
 Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store');
+Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
+Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy'); 
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');

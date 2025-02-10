@@ -32,23 +32,32 @@
                 </form>
             </div>
         @else  
-            <!-- Si el usuario tiene recetas, las mostramos -->
-            <h1 class="text-center mt-4">Mis Recetas</h1>
-          <div id="recetas">
-        @foreach($recetas as $receta)
-        <div class="receta" data-guardados="{{ $receta->guardados }}">
-            <strong>{{ $receta->titulo }}</strong>
-            @if(auth()->check())
-            <img id="estrella" src="{{ asset(in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? 'img/carrito/estrella.svg' : 'img/carrito/estrellaVacia.svg') }}" onclick="window.location.href='{{ in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? '/eliminar-favorito/' . $receta->id : '/guardar-favorito/' . $receta->id }}'">
-            @else
+        <h1 class="text-center mt-4">Mis Recetas</h1>
+<div id="recetas">
+    @foreach($recetas as $receta)
+    <div class="receta" data-guardados="{{ $receta->guardados }}">
+        <strong>{{ $receta->titulo }}</strong>
+
+        <!-- Icono de Favoritos -->
+        @if(auth()->check())
+            <img id="estrella" src="{{ asset(in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? 'img/carrito/estrella.svg' : 'img/carrito/estrellaVacia.svg') }}" 
+                 onclick="window.location.href='{{ in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? '/eliminar-favorito/' . $receta->id : '/guardar-favorito/' . $receta->id }}'">
+        @else
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-            @endif
-            <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
-            <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
-            <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+        @endif
+
+        <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
+        <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
+        <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+
+        <!-- Botones de Editar y Eliminar -->
+        <div class="actions">
+            <a href="{{ route('recetas.edit', $receta->id) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
+            <button class="btn btn-danger btn-sm delete-button" data-id="{{ $receta->id }}">❌ Eliminar</button>
         </div>
-        
-        @endforeach
+    </div>
+    @endforeach
+</div>
       
     </div>
     <form action="{{ route('newReceta') }}" method="GET">
@@ -69,6 +78,28 @@
             autoplay: true,
             path: "{{ asset('animations/recipe.json') }}"
         });
+        document.addEventListener("DOMContentLoaded", function () {
+    // Confirmación antes de eliminar
+    document.querySelectorAll(".delete-button").forEach(button => {
+        button.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+            if (confirm("¿Estás seguro de que quieres eliminar esta receta?")) {
+                fetch(`/recetas/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert("Hubo un error al eliminar la receta.");
+                    }
+                });
+            }
+        });
+    });
+});
     </script>
 </body>
 </html>
