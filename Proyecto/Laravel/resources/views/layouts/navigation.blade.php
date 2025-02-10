@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky-top">
 
     <header class="container-fluid bg-white border-bottom py-1 sticky-top">
         <div class="row align-items-center">

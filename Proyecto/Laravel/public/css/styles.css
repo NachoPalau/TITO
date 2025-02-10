@@ -105,6 +105,32 @@
     transition: font-weight ease;
 }
 
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 16 16'%3E%3Cpath fill='red' d='M11.354 1.354a.5.5 0 0 1 0 .708L5.707 8l5.647 5.938a.5.5 0 0 1-.708.708l-6-6.25a.5.5 0 0 1 0-.708l6-6.25a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+    transition: filter 0.3s ease-in-out;
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 16 16'%3E%3Cpath fill='red' d='M4.646 1.354a.5.5 0 0 1 .708 0l6 6.25a.5.5 0 0 1 0 .708l-6 6.25a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.062a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    transition: filter 0.3s ease-in-out;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    filter: brightness(1.5);
+}
+
+.carousel-control-prev:active .carousel-control-prev-icon,
+.carousel-control-next:active .carousel-control-next-icon {
+    filter: brightness(2);
+}
+
+
+.button-eventos{
+    background: none !important;
+
+}
+
 .button-primary:hover {
     font-weight: bold;
 }

@@ -21,44 +21,26 @@
         .carousel-container {
             position: absolute;
             left: 40%;
-            transform: translate(-50%, -50%);
-            width: 80%;
+            transform: translate(-50%, -75%);
+            width: 70%;
             z-index: 10;
             margin: 10%;
+        }
+            .carousel-container img {
+            width: 250px; /* Ancho fijo para todas las imágenes */
+            height: 250px; /* Altura fija */
+            object-fit: cover;/* Ajusta la imagen sin distorsionarla */
+
         }
 
         .eventos {
             flex: 1;
-            margin: 20% auto;
+            margin: 10%;
+            margin-top: 20% ;
             width: 80%;
-            padding: 50px 0;
+            
         }
-
         
-        .footer {
-            background-color: #800000;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .formulario {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #f8f9fa;
-        }
     </style>
 </head>
 
@@ -67,7 +49,7 @@
     @include('layouts.subnavbar')
 
     <section class="contenedor-imagen">
-        <img src="{{ asset('img/img_eventos/eventoHindi.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
         
         <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -82,15 +64,15 @@
                     <div class="d-flex justify-content-center gap-3">
                         <img src="{{ asset('img/productos/bombones_mym.jpg') }}" class="d-block w-25" alt="Evento 4">
                         <img src="{{ asset('img/productos/taza_sanvalentin.jpg') }}" class="d-block w-25" alt="Evento 5">
-                        <img src="{{ asset('img/productos/pack_sanvalentin.jpg') }}" class="d-block w-25" alt="Evento 6">
+                        <img src="{{ asset('img/img_eventos/corazon.jpg') }}" class="d-block w-25" alt="Evento 6">
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <button class="carousel-control-prev button-eventos" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <button class="carousel-control-next button-eventos" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -98,33 +80,20 @@
     </section>
 
     <div class="eventos">
-        <h2 class="text-center my-4">Próximos eventos</h2>
-        <section class="text-center py-5">
-            <div class="row">
-                <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid" alt="Receta 1">
-                </div>
-                <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/pepito.jpg') }}" class="img-fluid" alt="Receta 2">
-                </div>
+    <h2 class="text-center my-2">Próximos eventos</h2>
+    <section class="py-5">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
+                <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Receta 1">
             </div>
-        </section>
-    </div>
-
-    <div class="formulario">
-        <form>
-            <label for="email">Añadir correo para recibir notificaciones:</label>
-            <input type="email" id="email" name="email" class="form-control d-inline-block w-auto mx-2">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-    </div>
-
-    <footer class="footer">
-        <div>TITO o LOGO</div>
-        <div>
-            <a href="#">Contactanos</a> | <a href="#">Términos y condiciones</a> | <a href="#">Cookies</a>
+            <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
+                <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Receta 2">
+            </div>
         </div>
-    </footer>
+    </section>
+</div>
+        @include('layouts.footer')
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
