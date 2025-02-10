@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Receta;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 class RecetaController extends Controller
@@ -56,6 +57,25 @@ public function index()
         'recetasMas' => $recetasMas
 
     ]);  
+   
+}
+public function index2()
+{ 
+    $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    return view('miReceta', [
+        'recetas' => $recetas,
+        'recetasMas' => $recetasMas
+
+    ]);  
+   
+}
+public function index3()
+{ 
+    $user = Auth::user();
+    $recetas = Receta::where('id_usuario', $user->id)->get();
+
+    return view('miReceta', compact('recetas')); 
    
 }
 }

@@ -17,7 +17,6 @@
 
     <!-- MAIN CONTAINER -->
     <div class="container">
-    <div class="container">
     
 
         <!-- NOVEDADES -->

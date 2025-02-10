@@ -27,6 +27,7 @@ Route::post('register', [RegisteredUserController::class, 'store'])->name('regis
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('miReceta', [RecetaController::class, 'index3'])->name('misrecetas');
 Route::post('editProducto', [ProductoController::class, 'index2'])->name('editProducto');
 
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -77,7 +78,7 @@ Route::get('/eventos', function () {
 })->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
-
+Route::post('newReceta', [RecetaController::class, 'index3'])->name('newReceta');
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');

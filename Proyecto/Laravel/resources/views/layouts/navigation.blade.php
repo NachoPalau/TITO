@@ -27,9 +27,9 @@
                         <div id="popupMenu" class="popup-menu">
                             <ul class="popup-menu__list">
                                 <li>
-                                    <form id="recetasForm" method="GET" action="{{ route('recetas') }}">
+                                    <form id="recetasForm" method="GET" action="{{ route('misrecetas') }}">
                                         @csrf
-                                        <button type="submit">Recetas favoritas</button>
+                                        <button type="submit">Mis Recetas</button>
                                     </form>
                                 </li>
                                 <li>
@@ -42,7 +42,7 @@
                                 <li>
                                 <form id="EditarProductos" method="POST" action="{{ route('editProducto') }}">
                                         @csrf
-                                        <button type="submit">EditarProductos</button>
+                                        <button type="submit">Editar Productos</button>
                                     </form>
                                 </li>
                                 @endif
