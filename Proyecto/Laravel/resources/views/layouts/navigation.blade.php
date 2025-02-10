@@ -11,7 +11,7 @@
 
             <!-- Columna del buscador (centrado) -->
             <div class="col-4 d-flex justify-content-center">
-                <input type="text" class="form-control w-100 rounded-0 custom-border" style="border: none; border:1px solid #6B0200" placeholder="Buscar">
+                <input type="text" id="busquedaTotal" class="form-control w-100 rounded-0 custom-border" style="border: none; border:1px solid #6B0200" placeholder="Buscar" onkeyup="filtrarTotal()">
             </div>
 
             <!-- Columna del login y carrito (derecha) -->
@@ -37,6 +37,15 @@
                                         @csrf
                                         <button type="submit">Mis pedidos</button>
                                     </form>
+                                </li>
+                                @if(auth()->user()->rol === 'admin')
+                                <li>
+                                <form id="EditarProductos" method="POST" action="{{ route('editProducto') }}">
+                                        @csrf
+                                        <button type="submit">EditarProductos</button>
+                                    </form>
+                                </li>
+                                @endif
                                 <li>
                                     <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                                         @csrf

@@ -4,10 +4,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\RecetaController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -17,10 +23,23 @@ Route::get('/', function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('editProducto', [ProductoController::class, 'index2'])->name('editProducto');
+
+Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+->name('password.request');
+
+Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+->name('password.email');
+
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+->name('password.reset');
+
+Route::post('reset-password', [NewPasswordController::class, 'store'])
+->name('password.store');
 
 //Pago
 Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
@@ -49,21 +68,26 @@ Route::get('/api/productos', function () {
 });
 
 
-Route::get('/productos', function () {
-    return view('prod');
-})->name('productos');
-//->middleware(['auth', 'verified'])
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+Route::get('/products/{id}/edit', [ProductoController::class, 'edit']);
+Route::post('/products/{id}/update', [ProductoController::class, 'update']);
 
 Route::get('/eventos', function () {
     return view('eventos');
 })->name('eventos');
 
-Route::get('/recetas', function () {
-    return view('recetas');
-})->name('recetas');
-use App\Http\Controllers\RecetaController;
+Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
+
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+    Route::post('/carrito/eliminar/{productoId}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+    Route::post('/carrito/modificar', [CarritoController::class, 'modificarCantidad'])->name('carrito.modificar');
+    Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');
+});
 

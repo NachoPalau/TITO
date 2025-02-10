@@ -1,22 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Producto;
-use App\Models\Receta;
 
 class ProductoController extends Controller
 {
     public function index()
     { $productos = Producto::all();
-        $recetas = Receta::all();
-    
-        return view('prueba', [
-            'productos' => $productos,
-            'recetas' => $recetas
-        ]);  
+        $productosDestacados = Producto::where('destacado', true)->get();
+        return view('prod',['productos'=>$productos,'productosDestacados' => $productosDestacados,]);
     }
-    
+    public function index2()
+    { $productos = Producto::all();
+        $productosDestacados = Producto::where('destacado', true)->get();
+        return view('editProducto',['productos'=>$productos,'productosDestacados' => $productosDestacados,]);
+    }
+    public function edit($id)
+    {
+        $product = Producto::findOrFail($id);
+        return response()->json($product);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $product = Producto::findOrFail($id);
+        $product->update($request->all());
+
+        return response()->json(['success' => 'Producto actualizado correctamente']);
+    }
 
 
 }
