@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+use App\Models\Receta;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\FavoritoController;
@@ -16,7 +17,8 @@ use App\Http\Controllers\RecetaController;
 
 
 Route::get('/', function () {
-    return view('index');
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    return view('index',['recetas'=>$recetasMas]);
 })->name('index');
 
 
