@@ -1121,7 +1121,7 @@ class ProductSeeder extends Seeder
         ]);
         Producto::create([
             'nombre' => 'Corazón kinder',
-            'descripcion' => 'Champagne de calidad y deliciosos bombones.',
+            'descripcion' => 'Corazon de barritas de kinder',
             'precio' => 9.00,
             'stock' => 200,
             'imagen_url' => 'corazon_kinder.jpg',
