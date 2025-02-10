@@ -71,11 +71,11 @@
         <h2 class="text-center my-4">Próximos eventos</h2>
         <section class="text-center py-5">
             <div class="row">
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/eventoHindi.jpg') }}" class="img-fluid" alt="Receta 1">
+                <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
+                    <img src="{{ asset('img/img_eventos/fallas.jpg') }}"  class="img-fluid" alt="Receta 1">
                 </div>
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/eventoHindi.jpg') }}" class="img-fluid" alt="Receta 2">
+                <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
+                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}"class="img-fluid" alt="Receta 2">
                 </div>
             </div>
         </section>
