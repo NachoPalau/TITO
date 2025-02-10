@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+use App\Models\Receta;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\FavoritoController;
@@ -16,7 +17,8 @@ use App\Http\Controllers\RecetaController;
 
 
 Route::get('/', function () {
-    return view('index');
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    return view('index',['recetas'=>$recetasMas]);
 })->name('index');
 
 
@@ -27,6 +29,7 @@ Route::post('register', [RegisteredUserController::class, 'store'])->name('regis
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('miReceta', [RecetaController::class, 'index3'])->name('misrecetas');
 Route::post('editProducto', [ProductoController::class, 'index2'])->name('editProducto');
 
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -77,7 +80,12 @@ Route::get('/eventos', function () {
 })->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
-
+Route::get('newReceta', [RecetaController::class, 'index2'])->name('newReceta');
+Route::get('recetas/create', [RecetaController::class, 'create'])->name('recetas.create');
+Route::get('/recetas/{id}/edit', [RecetaController::class, 'edit'])->name('recetas.edit');
+Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store');
+Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
+Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy');
 
 Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');

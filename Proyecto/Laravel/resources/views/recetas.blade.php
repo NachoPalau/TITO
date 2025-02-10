@@ -17,7 +17,6 @@
 
     <!-- MAIN CONTAINER -->
     <div class="container">
-
         <!-- NOVEDADES -->
         <section class="novedades my-4">
         <div id="productosDes">
