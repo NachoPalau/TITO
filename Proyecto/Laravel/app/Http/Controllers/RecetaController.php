@@ -83,22 +83,33 @@ public function create()
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'titulo' => 'required|string|max:255',
-        'descripcion' => 'required|string|max:255',
-        'ingredientes' => 'required|string', 
-        'guardados' => 'boolean', 
-    ]);
-
-    Receta::create([
-        'titulo' => $validated['titulo'],
-        'descripcion' => $validated['descripcion'],
-        'ingredientes' => $validated['ingredientes'],
-        'guardados' => $request->has('guardados') ? true : false, 
-        'id_usuario' => Auth::id(), 
-    ]);
-
-    return redirect()->route('misrecetas')->with('success', 'Receta creada con éxito');
-}
+    {
+        $validated = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'ingredientes' => 'required|string',
+            'guardados' => 'boolean',
+        ]);
+    
+        $usuario = Auth::user();
+    
+     
+        $receta = Receta::create([
+            'titulo' => $validated['titulo'],
+            'descripcion' => $validated['descripcion'],
+            'ingredientes' => $validated['ingredientes'],
+            'guardados' => $request->has('guardados') ? 1 : 0, 
+            'id_usuario' => $usuario->id,
+        ]);
+    
+        
+        $favoritas = json_decode($usuario->favoritas, true) ?? []; 
+        if (!in_array($receta->id, $favoritas)) {
+            $favoritas[] = $receta->id; 
+            $usuario->favoritas = json_encode($favoritas); 
+            $usuario->save(); 
+        }
+    
+        return redirect()->route('misrecetas')->with('success', 'Receta creada y añadida a favoritas con éxito');
+    }
 }

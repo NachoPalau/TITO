@@ -47,8 +47,17 @@
             <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
         </div>
+        
         @endforeach
+      
     </div>
+    <form action="{{ route('newReceta') }}" method="GET">
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="button-primary">
+                            {{ __('Crear receta') }}
+                        </x-primary-button>
+                    </div>
+                </form>
         @endif  
     </div>
 
