@@ -1098,6 +1098,35 @@ class ProductSeeder extends Seeder
             'stock' => 150,
             'imagen_url' => 'tocino.jpg',
         ]);
+        Producto::create([
+            'nombre' => 'Bombones M&M',
+            'descripcion' => 'Bombones M&M de san valentín',
+            'precio' => 5.00,
+            'stock' => 150,
+            'imagen_url' => 'bombones_m&m.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Pack de champagne y bombones',
+            'descripcion' => 'Champagne de calidad y deliciosos bombones.',
+            'precio' => 15.00,
+            'stock' => 200,
+            'imagen_url' => 'pack_sanvalentin.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Ramo rosas',
+            'descripcion' => 'Ramo de preciosas rosas.',
+            'precio' => 5.00,
+            'stock' => 100,
+            'imagen_url' => 'ramo_rosas.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Corazón kinder',
+            'descripcion' => 'Champagne de calidad y deliciosos bombones.',
+            'precio' => 9.00,
+            'stock' => 200,
+            'imagen_url' => 'corazon_kinder.jpg',
+        ]);
+        
         DB::table('recetas')->insert([
             [
                 'titulo' => 'Paella Valenciana',
