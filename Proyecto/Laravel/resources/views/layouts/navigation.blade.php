@@ -37,6 +37,15 @@
                                         @csrf
                                         <button type="submit">Mis pedidos</button>
                                     </form>
+                                </li>
+                                @if(auth()->user()->rol === 'admin')
+                                <li>
+                                <form id="EditarProductos" method="POST" action="{{ route('editProducto') }}">
+                                        @csrf
+                                        <button type="submit">EditarProductos</button>
+                                    </form>
+                                </li>
+                                @endif
                                 <li>
                                     <form id="logoutForm" method="POST" action="{{ route('logout') }}">
                                         @csrf

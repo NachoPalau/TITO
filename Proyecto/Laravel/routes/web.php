@@ -23,10 +23,11 @@ Route::get('/', function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('editProducto', [ProductoController::class, 'index2'])->name('editProducto');
 
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
 ->name('password.request');
@@ -68,7 +69,8 @@ Route::get('/api/productos', function () {
 
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
-//->middleware(['auth', 'verified'])
+Route::get('/products/{id}/edit', [ProductoController::class, 'edit']);
+Route::post('/products/{id}/update', [ProductoController::class, 'update']);
 
 Route::get('/eventos', function () {
     return view('eventos');
