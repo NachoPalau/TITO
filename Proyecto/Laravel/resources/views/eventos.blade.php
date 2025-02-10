@@ -60,9 +60,9 @@
         
         <div class="superpuesto" id="contenedorImagenes">
             <button class="btn btn-secondary" onclick="cambiarImagen(-1)">&#9665;</button>
-            <img src="{{ asset('img/img_eventos/mona.jpg') }}" class="imagen-cubo" alt="Evento 1">
-            <img src="{{ asset('img/img_eventos/pepito.jpg') }}" class="imagen-cubo" alt="Evento 2">
-            <img src="{{ asset('img/img_eventos/titaina.jpg') }}" class="imagen-cubo" alt="Evento 3">
+            <img src="{{ asset('img/productos/corazon_kinder.jpg') }}" class="imagen-cubo" alt="Evento 1">
+            <img src="{{ asset('img/productos/ramo_rosas.jpg') }}" class="imagen-cubo" alt="Evento 2">
+            <img src="{{ asset('img/productos/pack_sanvalentin.jpg') }}" class="imagen-cubo" alt="Evento 3">
             <button class="btn btn-secondary" onclick="cambiarImagen(1)">&#9655;</button>
         </div>
     </section>
@@ -72,7 +72,7 @@
         <section class="text-center py-5">
             <div class="row">
                 <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
-                    <img src="{{ asset('img/img_eventos/fallas.jpg') }}"  class="img-fluid" alt="Receta 1">
+                    <img src="{{ asset('img/productos/bombones_mym.jpg') }}"  class="img-fluid" alt="Receta 1">
                 </div>
                 <div style="width: 500px;" class="col-md-4 col-sm-6 mb-4">
                     <img src="{{ asset('img/img_eventos/pascua.jpg') }}"class="img-fluid" alt="Receta 2">
@@ -85,7 +85,7 @@
 
     <script>
         const nuevasImagenes = [
-            "{{ asset('img/img_eventos/receta.jpg') }}",
+            "{{ asset('img/productos/bombones_mym.jpg') }}",
             "{{ asset('img/img_eventos/recetasGanadoras.jpg') }}",
            
         ];

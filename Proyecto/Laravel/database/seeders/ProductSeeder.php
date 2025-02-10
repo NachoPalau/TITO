@@ -1103,7 +1103,7 @@ class ProductSeeder extends Seeder
             'descripcion' => 'Bombones M&M de san valentín',
             'precio' => 5.00,
             'stock' => 150,
-            'imagen_url' => 'bombones_m&m.jpg',
+            'imagen_url' => 'bombones_mym.jpg',
         ]);
         Producto::create([
             'nombre' => 'Pack de champagne y bombones',
