@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#sinContenidoCarrito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    text-align: center;
+    margin: 30px;
+}
+
+#sinContenidoCarrito img {
+    margin-bottom: 10px;
+}
+
+#contenidoCarrito {
+    height: 73vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1;
+}
+
+/* Contenedor principal del formulario */
+.form-container {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid #6B0200;
+    width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Logo centrado */
+.logo-container {
+    margin-top:20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* Título */
+.form-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Etiqueta flotante */
+.input-label {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    color:rgb(15, 1, 1);
+    pointer-events: none;
+}
+
+/* Levanta la etiqueta cuando el input está enfocado o tiene texto */
+.text-input:focus + .input-label,
+.text-input:not(:placeholder-shown) + .input-label {
+    top: 0;
+    font-size: 12px;
+    color:rgb(2, 0, 0);
+}
+
+/* Estiliza los inputs */
+.text-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-bottom: 2px solid #6B0200;
+    outline: none;
+    font-size: 16px;
+}
+
+/* Botón de inicio de sesión */
+.button-primary {
+    display: block;
+    text-align: center;
+    background-color: #6B0200;
+    font-size: 90%;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: normal;
+    cursor: pointer;
+    text-decoration: none;
+    transition: font-weight ease;
+}
+
+.button-primary:hover {
+    font-weight: bold;
+}
+
+/* Botón de registro */
+.button-secondary {
+    display: block;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;
+    font-weight: normal;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: font-weight ease;
+}
+
+.button-secondary:hover {
+    font-weight: bold;
+}
+
+a:visited {
+    color: black;
+}
+
+/* Footer */
+.footer {
+    background-color: #6B0200;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+/* Link forgot password */
+.forgot-passwd {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.forgot-passwd a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    text-align: left;
+}
+
+li {
+    font-weight: bold;
+}
+
+.input-group {
+    position: relative;
+}
+
+.text-input {
+    padding-right: 40px;
+}
+
+button#togglePassword {
+    position: absolute;
+    padding: 0;
+    border: none;
+    background: transparent;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button#togglePassword2 {
+    position: absolute;
+    padding: 0;
+    border: none;
+    background: transparent;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+#productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+#productosDes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+.producto {
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto img {
+    width: 150px;
+    height: 150px;
+    align-self: center;
+}
+
+.producto strong {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.producto p {
+    font-size: 1em;
+    color: #555;
+    flex-grow: 1;
+}
+
+#carrito {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle; 
+    margin-left: 8px; 
+    color:white;
+}
+
+#recetas{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+.receta {
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.receta strong {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.receta p {
+    font-size: 1em;
+    color: #555;
+    flex-grow: 1;
+}
+
+.slide-carrito {
+    position: fixed;
+    top: 0;
+    right: -500px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#carrito {
+    cursor: pointer;
+}
+
+#cerrarCarrito {
+    padding: 5px 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.slide-abierto {
+    right: 0 !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
+/* Menú desplegable */
+.popup-menu {
+    position: absolute;
+    top: 60px;
+    right: 90px; 
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    border-radius: 0px;
+    z-index: 2;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.popup-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.popup-menu__list li button {
+    all: unset;
+    text-align: left;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: block;
+    color: black;
+}
+
+/* Hacer el menú visible */
+.popup-menu.show {
+    display: block;
+    opacity: 1;
+}
+
+.receta img#estrella {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: px;
+    cursor: pointer;
+}
+@media (max-width: 1024px) { 
+    #productos{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    #recetas {
+        grid-template-columns: repeat(3, 1fr);
+        
+    }
+    #productosDes {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 768px) { 
+    #productos {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    #recetas {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    #productosDes {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 480px) { 
+    #productos {
+        grid-template-columns: 1fr; 
+    }
+    #recetas{
+        grid-template-columns: 1fr;  
+    }
+    #productosDes {
+        grid-template-columns:1fr; 
+    }
+    
+}
+
+    .popup {
+        display: none; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .popup-contenido {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 400px;
+        width: 80%;
+        position: relative; 
+    }
+
+    .popup-cerrar {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .popup button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .popup button:hover {
+        background-color: #0056b3;
+    }
+
+
+    #productos,
+    #recetas {
+        max-height: 780px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .producto,
+    .receta {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .cantidad-controls {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .cantidad-btn {
+        padding: 0px 5px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        align-self: center;
+    }
+
+    .producto-carrito {
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0;
+        list-style: none;
+    }
+
+    .producto-carrito-detalle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .producto-imagen {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        object-fit: cover;
+    }
+
+    .producto-nombre {
+        font-weight: bold;
+    }
+
+    .producto-precio {
+        color: #333;
+    }
+
+    .producto-cantidad {
+        border: black solid 1px;
+    }
+
+    .producto-total {
+        align-self: center;
+    }
+
+    .total {
+        font-weight: bold;
+    }
+
+    #popupLogin {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-contenido {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 300px;
+    }
+
+    .popup-cerrar {
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .popup-contenido button {
+        margin-top: 10px;
+    }
+
+    #slideCarrito.slide-abierto {
+        right: 0;
+    }

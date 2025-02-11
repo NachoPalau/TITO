@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "nombre": "Tomate",
+    "descripcion": "descripcion del tomate",
+    "precio": 3,
+    "stock": 100,
+    "imagen_url": "public/images/tomate.jpeg"
+  },
+  {
+    "id": 2,
+    "nombre": "Naranja",
+    "descripcion": "descripcion de la naranja",
+    "precio": 2,
+    "stock": 100,
+    "imagen_url": "public/images/naranja.jpeg"
+  },
+  {
+    "id": 3,
+    "nombre": "Mandarina",
+    "descripcion": "descripcion de la mandarina.",
+    "precio": 2,
+    "stock": 100,
+    "imagen_url": "public/images/mandarina.jpeg"
+  },
+  {
+    "id": 4,
+    "nombre": "Sandía",
+    "descripcion": "descripcion de la sandia",
+    "precio": 2.19,
+    "stock": 100,
+    "imagen_url": "public/images/sandia.jpeg"
+  },
+  {
+    "id": 5,
+    "nombre": "Panceta",
+    "descripcion": "descripcion de la panceta",
+    "precio": 3,
+    "stock": "50",
+    "imagen_url": "public/images/panceta.jpeg"
+  },
+  {
+    "id": 6,
+    "nombre": "Cereales Nesquik",
+    "descripcion": "descripcion del Nesquik",
+    "precio": 3,
+    "stock": 100,
+    "imagen_url": "public/images/cereales.jpeg"
+  },
+  {
+    "id": 7,
+    "nombre": "Tomate frito",
+    "descripcion": "descripcion del tomate frito",
+    "precio": 3,
+    "stock": 20,
+    "imagen_url": "public/images/tomate-frito.jpeg"
+  },
+  {
+    "id": 8,
+    "nombre": "Café",
+    "descripcion": "descripcion del café",
+    "precio": 3,
+    "stock": 21,
+    "imagen_url": "public/images/cafe.jpeg"
+  },
+  {
+    "id": 9,
+    "nombre": "Jabón",
+    "descripcion": "descripcion del jabón.",
+    "precio": 1.79,
+    "stock": 30,
+    "imagen_url": "public/images/jabon.jpeg"
+  },
+  {
+    "id": 10,
+    "nombre": "Manzana",
+    "descripcion": "descripcion de la manzana",
+    "precio": 2,
+    "stock": 100,
+    "imagen_url": "public/images/manzana.jpeg"
+  }
+]

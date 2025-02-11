@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->string('estado');
             $table->string('direccion');
-
-            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }
 
