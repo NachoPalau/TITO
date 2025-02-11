@@ -89,7 +89,7 @@ public function index()
     $recetas = Receta::all();
     $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
     $user = auth()->user();
-    $favoritas = $user ? $user->favoritas : [];
+    $favoritas = auth()->check() ? $user->favoritas : [];
 
     foreach ($recetas as $receta) {
         $precioReceta = 0;
@@ -105,6 +105,28 @@ public function index()
     }
 
     return view('recetas', compact('recetas', 'recetasMas', 'favoritas'));
+}
+public function index5()
+{
+    $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    $user = auth()->user();
+    $favoritas = $user ? $user->favoritas : [];
+
+    foreach ($recetas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+    foreach ($recetasMas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+
+    return view('index', compact('recetas', 'recetasMas', 'favoritas'));
 }
 
 private function calcularPrecioTotal($ingredientesArray) {

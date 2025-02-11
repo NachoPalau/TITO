@@ -16,10 +16,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\RecetaController;
 
 
-Route::get('/', function () {
-    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
-    return view('index',['recetas'=>$recetasMas]);
-})->name('index');
+Route::get('/', [RecetaController::class, 'index5'])->name('index');
 
 
 

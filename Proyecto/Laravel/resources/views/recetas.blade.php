@@ -95,29 +95,30 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const inputBusqueda = document.getElementById("busquedaTotal");
+   document.addEventListener("DOMContentLoaded", function () {
+    // Lógica independiente del estado de usuario logueado
+    const inputBusqueda = document.getElementById("busquedaTotal");
 
-        if (!inputBusqueda) {
-            console.error("No se encontró el input de búsqueda.");
-            return;
-        }
+    if (!inputBusqueda) {
+        console.error("No se encontró el input de búsqueda.");
+        return;
+    }
 
-        inputBusqueda.addEventListener("keyup", function () {
-            filtrarTotal(this.value);
-        });
-
-        function filtrarTotal(valor) {
-            valor = valor.toLowerCase();
-
-            const recetas = document.querySelectorAll("#recetas .receta");
-            recetas.forEach(receta => {
-                const nombre = receta.querySelector("strong").textContent.toLowerCase();
-                receta.style.display = nombre.includes(valor) ? "block" : "none";
-            });
-        }
+    inputBusqueda.addEventListener("keyup", function () {
+        filtrarTotal(this.value);
     });
-document.addEventListener("DOMContentLoaded", function () {
+
+    function filtrarTotal(valor) {
+        valor = valor.toLowerCase();
+
+        const recetas = document.querySelectorAll("#recetas .receta");
+        recetas.forEach(receta => {
+            const nombre = receta.querySelector("strong").textContent.toLowerCase();
+            receta.style.display = nombre.includes(valor) ? "block" : "none";
+        });
+    }
+
+    // Lógica de usuario logueado o no
     const popupLogin = document.getElementById("popupLogin");
     const cerrarPopup = document.getElementById("cerrarPopup");
     const popupTitulo = document.getElementById("popupTitulo");
@@ -126,26 +127,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const usuarioLogueado = {{ auth()->check() ? 'true' : 'false' }};
     const favoritasBackend = JSON.parse(@json($favoritas)); // Convertir a JS
 
-    function getCookie(name) {
-        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? JSON.parse(match[2]) : null;
-    }
-
-    function setCookie(name, value, days) {
-        let d = new Date();
-        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = name + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
+    function mostrarPopup(titulo, mensaje) {
+        popupTitulo.textContent = titulo;
+        popupMensaje.textContent = mensaje;
+        popupLogin.style.display = "flex";
     }
 
     if (usuarioLogueado) {
-    setCookie('favoritos', favoritasBackend, 7);
-    actualizarEstrellas();
-  } else {
-    // Si el usuario no está logueado, vaciar la cookie
-    setCookie('favoritos', [], 7);
-    actualizarEstrellas();
-  }
+        // Lógica para el usuario logueado
+        setCookie('favoritos', favoritasBackend, 7);
+        actualizarEstrellas();
+    } else {
+        // Lógica para el usuario no logueado
+        setCookie('favoritos', [], 7);
+        actualizarEstrellas();
+
+        document.querySelectorAll("img#estrella, .agregar-carrito").forEach(elemento => {
+            elemento.addEventListener("click", function(event) {
+                event.preventDefault();
+                mostrarPopup("¡Debes iniciar sesión!", "Para realizar esta acción, primero inicia sesión.");
+            });
+        });
+    }
+
     let favoritos = getCookie('favoritos');
     if (!favoritos) {
         setCookie('favoritos', favoritasBackend, 7);
@@ -191,30 +195,33 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
-            let mostrandoFavoritos = false; // Variable para controlar el estado
 
-            mostrarFavoritosBtn.addEventListener("click", function () {
-                mostrandoFavoritos = !mostrandoFavoritos; // Cambiar el estado
+    // Código para mostrar favoritos
+    const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
+    let mostrandoFavoritos = false; // Variable para controlar el estado
 
-                const recetas = document.querySelectorAll("#recetas .receta");
-                recetas.forEach(receta => {
-                    const estrella = receta.querySelector("img#estrella");
-                    if (estrella) { // Verifica si la estrella existe
-                        const recetaFavorita = estrella.src.includes("estrella.svg"); // Verifica si la estrella está marcada
+    mostrarFavoritosBtn.addEventListener("click", function () {
+        mostrandoFavoritos = !mostrandoFavoritos; // Cambiar el estado
 
-                        if (mostrandoFavoritos) {
-                            receta.style.display = recetaFavorita ? "block" : "none";
-                        } else {
-                            receta.style.display = "block"; // Mostrar todas las recetas
-                        }
-                    }
-                });
+        const recetas = document.querySelectorAll("#recetas .receta");
+        recetas.forEach(receta => {
+            const estrella = receta.querySelector("img#estrella");
+            if (estrella) { // Verifica si la estrella existe
+                const recetaFavorita = estrella.src.includes("estrella.svg"); // Verifica si la estrella está marcada
 
-                // Cambiar el texto del botón
-                mostrarFavoritosBtn.textContent = mostrandoFavoritos ? "Mostrar Todas las Recetas" : "Mostrar Recetas Favoritas";
-            });
-            const ordenarAZBtn = document.querySelector('.filtros .btn:first-child'); // Botón A-Z
+                if (mostrandoFavoritos) {
+                    receta.style.display = recetaFavorita ? "block" : "none";
+                } else {
+                    receta.style.display = "block"; // Mostrar todas las recetas
+                }
+            }
+        });
+
+        // Cambiar el texto del botón
+        mostrarFavoritosBtn.textContent = mostrandoFavoritos ? "Mostrar Todas las Recetas" : "Mostrar Recetas Favoritas";
+    });
+
+    const ordenarAZBtn = document.querySelector('.filtros .btn:first-child'); // Botón A-Z
     let ordenAscendente = true; // Variable para controlar el orden
 
     ordenarAZBtn.addEventListener("click", function () {
@@ -238,47 +245,38 @@ const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
         // Cambiar el texto del botón
         ordenarAZBtn.textContent = ordenAscendente ? "A-Z ⬆" : "Z-A ⬇";
     });
+
     const ordenarPrecioBtn = document.querySelector('.filtros .btn:nth-child(2)'); // Botón de precio
-            let ordenPrecioAscendente = true;
+    let ordenPrecioAscendente = true;
 
-            ordenarPrecioBtn.addEventListener("click", function() {
-                ordenPrecioAscendente = !ordenPrecioAscendente;
+    ordenarPrecioBtn.addEventListener("click", function() {
+        ordenPrecioAscendente = !ordenPrecioAscendente;
 
-                const recetas = Array.from(document.querySelectorAll("#recetas .receta"));
+        const recetas = Array.from(document.querySelectorAll("#recetas .receta"));
 
-                recetas.sort((a, b) => {
-                    const precioA = parseFloat(a.dataset.precio);
-                    const precioB = parseFloat(b.dataset.precio);
+        recetas.sort((a, b) => {
+            const precioA = parseFloat(a.dataset.precio);
+            const precioB = parseFloat(b.dataset.precio);
 
-                    if (isNaN(precioA) || isNaN(precioB)) {
-                        // Manejar casos donde el precio no es un número válido
-                        return 0; // O alguna otra lógica que consideres apropiada
-                    }
+            if (isNaN(precioA) || isNaN(precioB)) {
+                // Manejar casos donde el precio no es un número válido
+                return 0; // O alguna otra lógica que consideres apropiada
+            }
 
-                    return ordenPrecioAscendente ? precioA - precioB : precioB - precioA;
-                });
+            return ordenPrecioAscendente ? precioA - precioB : precioB - precioA;
+        });
 
-                const contenedorRecetas = document.getElementById("recetas");
-                contenedorRecetas.innerHTML = "";
+        const contenedorRecetas = document.getElementById("recetas");
+        contenedorRecetas.innerHTML = "";
 
-                recetas.forEach(receta => {
-                    contenedorRecetas.appendChild(receta);
-                });
+        recetas.forEach(receta => {
+            contenedorRecetas.appendChild(receta);
+        });
 
-                ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇";
-            });
-});
+        ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇";
+    });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    let csrfToken = null;
-    const metaTag = document.querySelector('meta[name="csrf-token"]');
-    if (metaTag) {
-        csrfToken = metaTag.getAttribute('content');
-    } else {
-        console.error("No se encontró el token CSRF");
-    }
-
+    // Aquí comienza la lógica para guardar los favoritos cuando el documento pierde foco
     document.addEventListener('visibilitychange', function (e) {
         if (document.visibilityState === 'hidden' && csrfToken) {
             guardarFavoritos(csrfToken);
@@ -286,12 +284,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function guardarFavoritos(token) {
-        // Obtener la cookie llamada 'favoritos'
         const favoritosCookie = document.cookie.split('; ').find(row => row.startsWith('favoritos='));
 
-        // Verificar si la cookie existe
         if (favoritosCookie) {
-            // Extraer el valor de la cookie y parsearlo como JSON
             try {
                 const favoritos = JSON.parse(favoritosCookie.split('=')[1]);
 
@@ -301,22 +296,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': token
                     },
-                    body: JSON.stringify({ favoritos: favoritos }) // Enviar los favoritos como JSON
+                    body: JSON.stringify({ favoritos: favoritos })
                 })
                 .then(response => {
                     if (!response.ok) {
-                        return response.json().then(err => {throw new Error(err.message)}); // Lanza error si la respuesta no es ok
+                        return response.json().then(err => {throw new Error(err.message)});
                     }
                     console.log('Favoritos guardados:', response);
                 })
                 .catch(error => {
                     console.error('Error al guardar favoritos:', error);
-                    // Aquí puedes agregar código para manejar el error, por ejemplo, mostrar un mensaje al usuario.
                 });
-
             } catch (error) {
                 console.error("Error al parsear la cookie de favoritos:", error);
-                // Manejar el error de parseo de la cookie
             }
 
         } else {
@@ -324,7 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-    </script>
+</script>
 
     </html>
