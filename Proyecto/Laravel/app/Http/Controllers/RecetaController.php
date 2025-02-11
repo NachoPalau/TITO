@@ -11,22 +11,24 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 class RecetaController extends Controller
 {
-public function agregarAFavoritos($recetaId)
-{
-    $usuario = auth()->user();
 
-    $favoritas = json_decode($usuario->favoritas, true);
 
-    if (!in_array($recetaId, $favoritas)) {
-        $favoritas[] = $recetaId;
+    public function agregarAFavoritos(Request $request)
+    {
+        $usuario = auth()->user();
+        $favoritos = $request->input('favoritos', []);
+    
+        // Convertir los IDs a enteros y eliminar duplicados
+        $favoritos = array_unique(array_map('intval', $favoritos));
+    
+        // Guardar como JSON en la base de datos
+        $usuario->favoritas = json_encode($favoritos);
+        $usuario->save();
+    
+        return response()->json(['success' => 'Favoritos guardados correctamente']);
     }
+    
 
-  
-    $usuario->favoritas = json_encode($favoritas);
-    $usuario->save();
-
-    return redirect()->back();
-}
 
 public function eliminarDeFavoritos($recetaId)
 {
@@ -53,9 +55,14 @@ public function index()
 { 
     $recetas = Receta::all();
     $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    $user = auth()->user();
+
+    // Obtener recetas favoritas del usuario
+    $favoritas = $user ? $user->favoritas : [];
     return view('recetas', [
         'recetas' => $recetas,
-        'recetasMas' => $recetasMas
+        'recetasMas' => $recetasMas,
+        'favoritas'=>$favoritas
 
     ]);  
    
