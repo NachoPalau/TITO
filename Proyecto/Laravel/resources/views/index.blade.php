@@ -45,10 +45,55 @@
         @endforeach
         </div>
             </section>
+            <div id="popupLogin" class="popup" style="display: none;">
+            <div class="popup-contenido">
+                <span id="cerrarPopup" class="popup-cerrar">✖</span>
+                <h2 id="popupTitulo">¡Debes iniciar sesión!</h2>
+                <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p>
+                <button onclick="window.location.href='/login'">Iniciar sesión</button>
+            </div>
+        </div>
     </div>
     
     @include('layouts.footer')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popupLogin = document.getElementById("popupLogin");
+            const cerrarPopup = document.getElementById("cerrarPopup");
+            const popupTitulo = document.getElementById("popupTitulo");
+            const popupMensaje = document.getElementById("popupMensaje");
 
+            const usuarioLogueado = {{ auth()->check() ? 'true' : 'false' }};
+
+            function mostrarPopup(titulo, mensaje) {
+                popupTitulo.textContent = titulo;
+                popupMensaje.textContent = mensaje;
+                popupLogin.style.display = "flex";
+            }
+
+            document.getElementById("cerrarPopup").addEventListener("click", function() {
+                popupLogin.style.display = "none";
+            });
+
+            document.querySelectorAll("img#estrella, .agregar-carrito").forEach(elemento => {
+                elemento.addEventListener("click", function(event) {
+                    if (!usuarioLogueado) {
+                        event.preventDefault();
+                        mostrarPopup("¡Debes iniciar sesión!", "Para realizar esta acción, primero inicia sesión.");
+                    } else {
+                        // Usuario logueado, continuar con la acción (estrella o carrito)
+                        if (this.id === "estrella") {
+                            // Lógica para la estrella (favoritos)
+                            console.log("Estrella clicada (favoritos)"); // Reemplaza con tu lógica
+                        } else if (this.classList.contains("agregar-carrito")) {
+                            // Lógica para el carrito
+                            console.log("Añadir al carrito"); // Reemplaza con tu lógica
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
