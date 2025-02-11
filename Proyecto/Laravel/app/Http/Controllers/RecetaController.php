@@ -85,20 +85,19 @@ public function eliminarDeFavoritos($recetaId)
 }
 
 public function index()
-{ 
-    $recetas = Receta::all();
-    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+{
+    $recetas = Receta::with('productos')->get(); // Carga los productos relacionados
+
+    foreach ($recetas as $receta) {
+        $receta->precio_total = $receta->productos->sum('precio'); // Calcula el precio total
+    }
+
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get(); //Recetas destacadas
+
     $user = auth()->user();
-
-    // Obtener recetas favoritas del usuario
     $favoritas = $user ? $user->favoritas : [];
-    return view('recetas', [
-        'recetas' => $recetas,
-        'recetasMas' => $recetasMas,
-        'favoritas'=>$favoritas
 
-    ]);  
-   
+    return view('recetas', compact('recetas', 'recetasMas', 'favoritas'));
 }
 public function index2()
 { 

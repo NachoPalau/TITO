@@ -22,8 +22,9 @@
             <section class="novedades my-4">
             <div id="productosDes">
         @foreach($recetasMas as $receta)
-        <div class="receta"  data-id="{{ $receta->id }}" data-guardados="{{ $receta->guardados }}">
+        <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
             <strong>{{ $receta->titulo }}</strong>
+            <p class="precio-receta">Precio: {{ $receta->precio_total ?? 0 }}€</p>
             @if(auth()->check())
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
             @else
@@ -59,8 +60,9 @@
 
         <div id="recetas">
             @foreach($recetas as $receta)
-            <div class="receta"  data-id="{{ $receta->id }}" data-guardados="{{ $receta->guardados }}">
+            <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
                 <strong>{{ $receta->titulo }}</strong>
+                <p class="precio-receta">Precio: {{ $receta->precio_total ?? 0 }}€</p>
                 @if(auth()->check())
                 <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
                 @else
@@ -189,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-    const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
+const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
             let mostrandoFavoritos = false; // Variable para controlar el estado
 
             mostrarFavoritosBtn.addEventListener("click", function () {
