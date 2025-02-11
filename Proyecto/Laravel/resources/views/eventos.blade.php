@@ -42,7 +42,16 @@
             margin: 10%;
             margin-top: 20%;
             width: 80%;
+            margin-bottom: -3%;
+        }
 
+        .evento-img {
+            height: 350px;
+            /* Ajusta según necesites */
+            object-fit: cover;
+            /* Mantiene la proporción sin deformar */
+            width: 100%;
+            /* Asegura que ocupen el mismo ancho dentro de su contenedor */
         }
     </style>
 </head>
@@ -63,24 +72,24 @@
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-center gap-3">
                         @foreach($array1 as $producto)
-                            <div class="producto" data-nombre="{{ $producto->nombre }}"
-                                data-precio="{{ $producto->precio }}">
-                                <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
-                                    alt="{{ $producto->nombre }}">
-                                <strong>{{ $producto->nombre }}</strong>
-                                <p>Descripción: {{ $producto->descripcion }}</p>
-                                <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-                                <form action="{{ route('carrito.agregar') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
-                                    <input type="hidden" name="precio" value="{{ $producto->precio }}">
-                                    <input type="hidden" name="cantidad" value="1">
-                                    <button type="submit" class="agregar-carrito">
-                                        Añadir al carrito
-                                        <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-                                    </button>
-                                </form>
-                            </div>
+                        <div class="producto" data-nombre="{{ $producto->nombre }}"
+                            data-precio="{{ $producto->precio }}">
+                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
+                                alt="{{ $producto->nombre }}">
+                            <strong>{{ $producto->nombre }}</strong>
+                            <p>Descripción: {{ $producto->descripcion }}</p>
+                            <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
+                            <form action="{{ route('carrito.agregar') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+                                <input type="hidden" name="precio" value="{{ $producto->precio }}">
+                                <input type="hidden" name="cantidad" value="1">
+                                <button type="submit" class="agregar-carrito">
+                                    Añadir al carrito
+                                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                                </button>
+                            </form>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -88,24 +97,24 @@
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-center gap-3">
                         @foreach($array1 as $producto)
-                            <div class="producto" data-nombre="{{ $producto->nombre }}"
-                                data-precio="{{ $producto->precio }}">
-                                <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
-                                    alt="{{ $producto->nombre }}">
-                                <strong>{{ $producto->nombre }}</strong>
-                                <p>Descripción: {{ $producto->descripcion }}</p>
-                                <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-                                <form action="{{ route('carrito.agregar') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="producto_id" value="{{ $producto->id }}">
-                                    <input type="hidden" name="precio" value="{{ $producto->precio }}">
-                                    <input type="hidden" name="cantidad" value="1">
-                                    <button type="submit" class="agregar-carrito">
-                                        Añadir al carrito
-                                        <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-                                    </button>
-                                </form>
-                            </div>
+                        <div class="producto" data-nombre="{{ $producto->nombre }}"
+                            data-precio="{{ $producto->precio }}">
+                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
+                                alt="{{ $producto->nombre }}">
+                            <strong>{{ $producto->nombre }}</strong>
+                            <p>Descripción: {{ $producto->descripcion }}</p>
+                            <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
+                            <form action="{{ route('carrito.agregar') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+                                <input type="hidden" name="precio" value="{{ $producto->precio }}">
+                                <input type="hidden" name="cantidad" value="1">
+                                <button type="submit" class="agregar-carrito">
+                                    Añadir al carrito
+                                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                                </button>
+                            </form>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -127,11 +136,13 @@
         <h2 class="text-center my-2">Próximos eventos</h2>
         <section class="py-5">
             <div class="row justify-content-center text-center">
-                <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                    <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Receta 1">
+                <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                    <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Fallas">
+                    <p class="mt-3"><strong>Las Fallas:</strong> Disfruta de esta festividad llena de fuego y tradición. Cada marzo, Valencia se ilumina con impresionantes monumentos falleros que arden en una noche mágica. Además de los espectaculares castillos de fuegos artificiales, podrás disfrutar de música, gastronomía típica y una atmósfera vibrante. ¡No te lo pierdas!</p>
                 </div>
-                <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Receta 2">
+                <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Pascua">
+                    <p class="mt-3"><strong>Pascua:</strong> Celebra con nosotros la llegada de la primavera y las tradiciones pascuales. Disfruta de la típica mona de Pascua, los juegos con huevos de chocolate y reuniones familiares llenas de alegría. Esta es una época perfecta para compartir, relajarse y degustar los sabores de la temporada. ¡Únete a la celebración!</p>
                 </div>
             </div>
         </section>
