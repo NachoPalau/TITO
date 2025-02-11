@@ -72,9 +72,7 @@ Route::get('/productos', [ProductoController::class, 'index'])->name('productos'
 Route::get('/products/{id}/edit', [ProductoController::class, 'edit']);
 Route::post('/products/{id}/update', [ProductoController::class, 'update']);
 
-Route::get('/eventos', function () {
-    return view('eventos');
-})->name('eventos');
+Route::get('/eventos', [ProductoController::class, 'arraysEventos'])->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
 
