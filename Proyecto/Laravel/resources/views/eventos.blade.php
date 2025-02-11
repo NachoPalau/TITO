@@ -21,7 +21,7 @@
         .carousel-container {
             position: absolute;
             left: 40%;
-            transform: translate(-50%, -90%);
+            transform: translate(-50%, -100%);
             width: 70%;
             z-index: 10;
             margin: 10%;
@@ -42,7 +42,17 @@
             margin: 10%;
             margin-top: 20%;
             width: 80%;
+            margin-bottom: -4%;
 
+        }
+
+        .evento-img {
+            height: 350px;
+            /* Ajusta según necesites */
+            object-fit: cover;
+            /* Mantiene la proporción sin deformar */
+            width: 100%;
+            /* Asegura que ocupen el mismo ancho dentro de su contenedor */
         }
     </style>
 </head>
@@ -55,30 +65,16 @@
     @include('layouts.subnavbar')
 
     <section class="contenedor-imagen">
-    <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal"
-        style="width: 100%; height: 400px">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
 
-    <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Primer grupo de imágenes -->
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center gap-3">
-                    @foreach($array1 as $producto)
-                        <div class="producto text-center">
-                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25 img-fluid"
-                                style="object-fit: cover; max-height: 200px;" alt="{{ $producto->nombre }}">
-                            <strong>{{ $producto->nombre }}</strong>
-                            <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-                            <form action="{{ route('carrito.agregar') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="producto_id" value="{{ $producto->id }}">
-                                <button type="submit" class="agregar-carrito">
-                                    Añadir al carrito
-                                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-                                </button>
-                            </form>
-                        </div>
-                    @endforeach
+        <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center gap-3">
+                        <img src="{{ asset('img/productos/corazon_kinder.jpg') }}" class="d-block w-25" alt="Evento 1">
+                        <img src="{{ asset('img/productos/ramo_rosas.jpg') }}" class="d-block w-25" alt="Evento 2">
+                        <img src="{{ asset('img/productos/pack_sanvalentin.jpg') }}" class="d-block w-25" alt="Evento 3">
+                    </div>
                 </div>
             </div>
 
@@ -119,18 +115,25 @@
 
 
     <div class="eventos">
-        <h2 class="text-center my-2">Próximos eventos</h2>
-        <section class="py-5">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                    <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Receta 1">
-                </div>
-                <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                    <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Receta 2">
-                </div>
+    <h2 class="text-center my-2">Próximos eventos</h2>
+    <section class="py-5">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Fallas">
+                <h2 class="mt-2">Fallas</h2>
+                <p class="mt-2">¡Las Fallas ya están aquí! Y en <strong>TITO</strong> lo celebramos con grandes descuentos en productos tradicionales. Ven y disfruta de nuestras ofertas especiales en buñuelos, chocolate a la taza y figuras falleras de chocolate. ¡Además, consigue tu caja especial de churros con chocolate por solo 5€!<br>*Promoción válida hasta el 19 de marzo.</p>
             </div>
-        </section>
-    </div>
+            <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Pascua">
+                <h2 class="mt-2">Pascua</h2>
+                <p class="mt-2">¡Pascua casi está aquí! Y en <strong>TITO</strong> lo celebraremos con grandes descuestos en tus dulces favoritos. Ven en su momento y encuentra el huevo de chocolate gigante de KitKat por tan solo 10€. ¡No te lo pierdas! <br>*Hasta el 25 de marzo.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
     @include('layouts.footer')
 
 
