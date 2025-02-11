@@ -262,6 +262,15 @@ button#togglePassword2 {
     display: flex;
     flex-direction: column;
 }
+
+.producto-eventos{
+    background-color: white;
+
+}
+.pProdEventos{
+    margin-bottom: 25%;
+}
+
 producto2{
     padding: 10px;
     text-align: center;
@@ -405,6 +414,7 @@ producto2{
     height: px;
     cursor: pointer;
 }
+
 @media (max-width: 1024px) { 
     
    
@@ -421,10 +431,8 @@ producto2{
 }
 
 @media (max-width: 768px) { 
-    .desaparecer{
-        display: none;
-    }
-
+   
+    
     #productos {
         grid-template-columns: repeat(2, 1fr); 
     }
