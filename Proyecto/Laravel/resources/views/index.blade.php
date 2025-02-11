@@ -22,27 +22,29 @@
 
         <h2>Recetas Mas Guardadas</h2>
         <section class="novedades my-4">
-        <div id="productosDes">
-    @foreach($recetas as $receta)
-    <div class="receta" data-guardados="{{ $receta->guardados }}">
-        <strong>{{ $receta->titulo }}</strong>
-        @if(auth()->check())
-        <img id="estrella" src="{{ asset(in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? 'img/carrito/estrella.svg' : 'img/carrito/estrellaVacia.svg') }}" 
-             onclick="window.location.href='{{ in_array($receta->id, json_decode(auth()->user()->favoritas, true)) ? '/eliminar-favorito/' . $receta->id : '/guardar-favorito/' . $receta->id }}'">
-        @else
-        <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-        @endif
-        <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
-        <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
-        <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-        <button class="agregar-carrito" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
-    Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}">
-</button>
+            <div id="productosDes">
+        @foreach($recetas as $receta)
+        <div class="receta"  data-id="{{ $receta->id }}" data-guardados="{{ $receta->guardados }}">
+            <strong>{{ $receta->titulo }}</strong>
+            @if(auth()->check())
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            @else
+            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            @endif
+            <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
+            <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
+            <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="button-primary agregar-carrito">
+                            {{ __('Añadir al carrito') }}
+                            <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                        </x-primary-button>
+                    </div>
 
-    </div>
-    @endforeach
-</div>
-        </section>
+        </div>
+        @endforeach
+        </div>
+            </section>
     </div>
     
     @include('layouts.footer')
