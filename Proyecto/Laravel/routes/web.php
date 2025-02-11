@@ -87,7 +87,7 @@ Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store'
 Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
 Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy');
 
-Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
+Route::post('/guardar-favoritos', [RecetaController::class, 'guardarFavoritos']);
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
 

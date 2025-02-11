@@ -12,20 +12,41 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 class RecetaController extends Controller
 {
 
-
-    public function agregarAFavoritos(Request $request)
+    
+    public function guardarFavoritos(Request $request)
     {
-        $usuario = auth()->user();
-        $favoritos = $request->input('favoritos', []);
+        // 1. Obtener el usuario autenticado
+        $user = Auth::user();
     
-        // Convertir los IDs a enteros y eliminar duplicados
-        $favoritos = array_unique(array_map('intval', $favoritos));
+        // 2. Validar que el usuario esté autenticado
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401);
+        }
     
-        // Guardar como JSON en la base de datos
-        $usuario->favoritas = json_encode($favoritos);
-        $usuario->save();
+        // 3. Obtener el array o JSON de favoritos
+        $favoritos = $request->input('favoritos');
     
-        return response()->json(['success' => 'Favoritos guardados correctamente']);
+        // 4. Validar que se haya enviado el array o JSON
+        if (!$favoritos) {
+            return response()->json(['error' => 'No se enviaron favoritos'], 400);
+        }
+    
+        // 5. Convertir a array si es JSON
+        if (is_string($favoritos)) {
+            $favoritos = json_decode($favoritos, true);
+        }
+    
+        // 6. Validar que sea un array
+        if (!is_array($favoritos)) {
+            return response()->json(['error' => 'Formato de favoritos incorrecto'], 400);
+        }
+    
+        // 7. Guardar los favoritos en la base de datos
+        $user->favoritas = json_encode($favoritos);
+        $user->save();
+    
+        // 8. Devolver una respuesta exitosa
+        return response()->json(['message' => 'Favoritos guardados correctamente'], 200);
     }
     
 

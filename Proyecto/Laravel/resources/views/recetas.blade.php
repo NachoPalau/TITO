@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <link rel="stylesheet" href="styles.css">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             favoritos.push(id);
         }
-
+        console.log(favoritos);
         setCookie('favoritos', favoritos, 7);
         actualizarEstrellas();
     }
@@ -186,6 +186,60 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    let csrfToken = null;
+    const metaTag = document.querySelector('meta[name="csrf-token"]');
+    if (metaTag) {
+        csrfToken = metaTag.getAttribute('content');
+    } else {
+        console.error("No se encontró el token CSRF");
+    }
+
+    document.addEventListener('visibilitychange', function (e) {
+        if (document.visibilityState === 'hidden' && csrfToken) {
+            guardarFavoritos(csrfToken);
+        }
+    });
+
+    function guardarFavoritos(token) {
+        // Obtener la cookie llamada 'favoritos'
+        const favoritosCookie = document.cookie.split('; ').find(row => row.startsWith('favoritos='));
+
+        // Verificar si la cookie existe
+        if (favoritosCookie) {
+            // Extraer el valor de la cookie y parsearlo como JSON
+            try {
+                const favoritos = JSON.parse(favoritosCookie.split('=')[1]);
+
+                fetch('/guardar-favoritos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: JSON.stringify({ favoritos: favoritos }) // Enviar los favoritos como JSON
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {throw new Error(err.message)}); // Lanza error si la respuesta no es ok
+                    }
+                    console.log('Favoritos guardados:', response);
+                })
+                .catch(error => {
+                    console.error('Error al guardar favoritos:', error);
+                    // Aquí puedes agregar código para manejar el error, por ejemplo, mostrar un mensaje al usuario.
+                });
+
+            } catch (error) {
+                console.error("Error al parsear la cookie de favoritos:", error);
+                // Manejar el error de parseo de la cookie
+            }
+
+        } else {
+            console.log("No se encontró la cookie de favoritos.");
+        }
+    }
+});
 
     </script>
 
