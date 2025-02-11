@@ -24,7 +24,6 @@
         @foreach($recetasMas as $receta)
         <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
             <strong>{{ $receta->titulo }}</strong>
-            <p class="precio-receta">Precio: {{ $receta->precio_total ?? 0 }}€</p>
             @if(auth()->check())
             <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
             @else
@@ -33,6 +32,7 @@
             <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
             <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
             <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+            <p class="precio-receta"><strong>Precio:</strong> {{ $receta->precio_total ?? 0 }}€</p>
                     <div class="flex items-center justify-end mt-4">
                         <x-primary-button class="button-primary agregar-carrito">
                             {{ __('Añadir al carrito') }}
@@ -62,7 +62,6 @@
             @foreach($recetas as $receta)
             <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
                 <strong>{{ $receta->titulo }}</strong>
-                <p class="precio-receta">Precio: {{ $receta->precio_total ?? 0 }}€</p>
                 @if(auth()->check())
                 <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
                 @else
@@ -71,6 +70,7 @@
                 <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
                 <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
                 <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+                <p class="precio-receta"><strong>Precio:</strong> {{ $receta->precio_total ?? 0 }}€</p>
                 <div class="flex items-center justify-end mt-4" >
                         <x-primary-button class="button-primary agregar-carrito">
                             {{ __('Añadir al carrito') }}
@@ -238,6 +238,35 @@ const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
         // Cambiar el texto del botón
         ordenarAZBtn.textContent = ordenAscendente ? "A-Z ⬆" : "Z-A ⬇";
     });
+    const ordenarPrecioBtn = document.querySelector('.filtros .btn:nth-child(2)'); // Botón de precio
+            let ordenPrecioAscendente = true;
+
+            ordenarPrecioBtn.addEventListener("click", function() {
+                ordenPrecioAscendente = !ordenPrecioAscendente;
+
+                const recetas = Array.from(document.querySelectorAll("#recetas .receta"));
+
+                recetas.sort((a, b) => {
+                    const precioA = parseFloat(a.dataset.precio);
+                    const precioB = parseFloat(b.dataset.precio);
+
+                    if (isNaN(precioA) || isNaN(precioB)) {
+                        // Manejar casos donde el precio no es un número válido
+                        return 0; // O alguna otra lógica que consideres apropiada
+                    }
+
+                    return ordenPrecioAscendente ? precioA - precioB : precioB - precioA;
+                });
+
+                const contenedorRecetas = document.getElementById("recetas");
+                contenedorRecetas.innerHTML = "";
+
+                recetas.forEach(receta => {
+                    contenedorRecetas.appendChild(receta);
+                });
+
+                ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇";
+            });
 });
 
 

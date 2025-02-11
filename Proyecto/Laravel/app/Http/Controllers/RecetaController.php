@@ -86,18 +86,67 @@ public function eliminarDeFavoritos($recetaId)
 
 public function index()
 {
-    $recetas = Receta::with('productos')->get(); // Carga los productos relacionados
-
-    foreach ($recetas as $receta) {
-        $receta->precio_total = $receta->productos->sum('precio'); // Calcula el precio total
-    }
-
-    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get(); //Recetas destacadas
-
+    $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
     $user = auth()->user();
     $favoritas = $user ? $user->favoritas : [];
 
+    foreach ($recetas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+    foreach ($recetasMas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+
     return view('recetas', compact('recetas', 'recetasMas', 'favoritas'));
+}
+
+private function calcularPrecioTotal($ingredientesArray) {
+    $precioTotal = 0;
+
+    if (is_array($ingredientesArray)) {
+        foreach ($ingredientesArray as $id_producto) {
+            if (is_numeric($id_producto)) {
+                $id_producto = intval($id_producto);
+                $producto = Producto::find($id_producto);
+
+                if ($producto) {
+                    $precioTotal += $producto->precio;
+                }
+            }
+        }
+    }
+
+    return $precioTotal;
+}
+
+private function obtenerNombresProductos($ingredientesArray, &$precioTotal = 0) {
+    $nombresProductos = [];
+
+    if (is_array($ingredientesArray)) {
+        foreach ($ingredientesArray as $id_producto) {
+            if (is_numeric($id_producto)) {
+                $id_producto = intval($id_producto);
+                $producto = Producto::find($id_producto);
+
+                if ($producto) {
+                    $nombresProductos[] = $producto->nombre;
+                } else {
+                    $nombresProductos[] = "Producto no encontrado (ID: " . $id_producto . ")";
+                }
+            } else {
+                $nombresProductos[] = $id_producto;
+            }
+        }
+    }
+
+    return $nombresProductos;
 }
 public function index2()
 { 

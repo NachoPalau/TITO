@@ -30,7 +30,7 @@ public function usuariosQueGuardaron()
         return $this->belongsToMany(User::class);
     }
     public function productos() {
-        return $this->belongsToMany(Producto::class, 'receta_producto', 'receta_id', 'producto_id');
+        return $this->belongsToMany(Producto::class);
     }
 
 }
