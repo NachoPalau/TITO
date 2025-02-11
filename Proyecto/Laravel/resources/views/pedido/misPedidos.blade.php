@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     <style>
+        h1 {
+            padding-left: 3.5%;
+        }
+
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -16,26 +20,44 @@
             padding: 10px 15px;
         }
 
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            margin-left: 3%;
+            /* Alineación con el número de pedido */
+        }
+
+        .card-body p {
+            margin: 5px 0;
+            /* Espaciado entre los elementos */
+        }
+
+
         .pedido-info {
             display: flex;
+            padding-left: 3%;
             align-items: center;
             justify-content: space-between;
             width: 100%;
         }
 
         .pedido-numero {
-            width: 250px; /* Fijamos un ancho para que todo esté alineado */
+            width: 250px;
+            /* Fijamos un ancho para que todo esté alineado */
             text-align: left;
         }
 
         .estado-text {
-            width: 200px; /* Fijamos un ancho fijo para alinear todas las filas */
+            width: 200px;
+            /* Fijamos un ancho fijo para alinear todas las filas */
             text-align: left;
         }
 
         .btn-toggle {
             min-width: 130px;
             text-align: center;
+            margin-right: 3%;
+            /* Este margen negativo moverá el botón hacia la izquierda */
         }
     </style>
 
