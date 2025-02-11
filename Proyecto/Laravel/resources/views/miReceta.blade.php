@@ -34,6 +34,13 @@
             </div>
         @else  
         <h1 class="text-center mt-4">Mis Recetas</h1>
+        <form action="{{ route('newReceta') }}" method="GET">
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="button-primary">
+                            {{ __('Crear receta') }}
+                        </x-primary-button>
+                    </div>
+                </form>
 <div id="recetas">
     @foreach($recetas as $receta)
     <div class="receta" data-guardados="{{ $receta->guardados }}">
@@ -62,13 +69,7 @@
 </div>
       
     </div>
-    <form action="{{ route('newReceta') }}" method="GET">
-                    <div class="flex items-center justify-end mt-4">
-                        <x-primary-button class="button-primary">
-                            {{ __('Crear receta') }}
-                        </x-primary-button>
-                    </div>
-                </form>
+    
         @endif  
     </div>
 

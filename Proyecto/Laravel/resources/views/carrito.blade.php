@@ -50,40 +50,61 @@
                 @php
                 $productoDetails = \App\Models\Producto::find($producto['idProducto']);
                 @endphp
-                <li class="producto-carrito">
-                    <div class="producto-carrito-detalle">
-                        <div class="producto-info">
+                <li class="producto-carrito container d-flex">
+                    <div class="producto-carrito-detalle col-3">
+                        <div class="producto-img">
                             <img src="{{ asset('img/productos/' . $productoDetails->imagen_url) }}" alt="{{ $productoDetails->nombre }}" class="producto-imagen">
-                            <div class="producto-nombre">
-                                <strong>{{ $productoDetails->nombre }}</strong><br>
-                                <span class="producto-precio">${{ number_format($productoDetails->precio, 2) }}</span>
-                            </div>
-                        </div>
-                        <div class="producto-cantidad">
-                            <form action="{{ route('carrito.modificar') }}" method="POST" class="cantidad-form">
-                                @csrf
-                                <input type="hidden" name="producto_id" value="{{ $producto['idProducto'] }}">
-                                <div class="cantidad-controls">
-                                    <button type="submit" name="cantidad" value="-1" class="cantidad-btn">-</button>
-                                    <span class="cantidad">{{ $producto['cantidad'] }}</span>
-                                    <button type="submit" name="cantidad" value="1" class="cantidad-btn">+</button>
-                                </div>
-                            </form>
-                            <div class="producto-total">
-                                <span class="total">Total: ${{ number_format($productoDetails->precio * $producto['cantidad'], 2) }}</span>
-                            </div>
                         </div>
                     </div>
+                        <div class="producto-desc col-9">
+                            <div class="row">
+                                <div class="producto-nombre pe-3 d-flex">
+                                    <div class="col-10">
+                                        <strong>{{ $productoDetails->nombre }}</strong><br>
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="{{asset('img/carrito/Empty Trash.png')}}" alt="trash" style="width: 20px; margin-bottom: 2px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex">
+                                <div class="col-6">
+                                <form action="{{ route('carrito.modificar') }}" method="POST" class="cantidad-form">
+                                @csrf
+                                <input type="hidden" name="producto_id" value="{{ $producto['idProducto'] }}">
+                                <div class="cantidad-controls producto-cantidad">
+                                    <button type="submit" name="cantidad" value="-1" class="cantidad-btn"><img src="{{asset('img/carrito/Subtract.png')}}" alt="-" style="width: 20px;  margin-bottom: 2px;"></button>
+                                    <span class="cantidad">{{ $producto['cantidad'] }}</span>
+                                    <button type="submit" name="cantidad" value="1" class="cantidad-btn"><img src="{{asset('img/carrito/Plus.png')}}" alt="+"  style="width: 20px; margin-bottom: 2px;"></button>
+                                </div>
+                                </form>
+                                </div>
+                            
+                            <div class="producto-total col-6 text-end pe-3">
+                                <span class="total">{{ number_format($productoDetails->precio * $producto['cantidad'], 2) }}€</span>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    
                 </li>
                 @endforeach
             </ul>
-            <hr>
-            <div style="text-align: right;">
-                <strong>Total: ${{ number_format(array_sum(array_map(function($item) {
-                    return $item['precio'] * $item['cantidad'];
-                }, $carrito)), 2) }}</strong>
-            </div>
         </div>
+        <hr>
+            <div class="footer-carrito">
+                <div style="text-align: right; font-size: 1.2rem;">
+                    <strong>Total: {{ number_format(array_sum(array_map(function($item) {
+                        return $item['precio'] * $item['cantidad'];
+                    }, $carrito)), 2) }}€</strong>
+                </div>
+                <div class="flex items-center justify-end mt-4">
+                    <x-primary-button class="button-primary">
+                        {{ __('TRAMITAR PEDIDO') }}
+                    </x-primary-button>
+                </div>
+        </div>
+        
         @endif
         @else
         <div id="sinContenidoCarrito">

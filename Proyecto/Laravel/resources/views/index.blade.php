@@ -35,8 +35,12 @@
         <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
         <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
         <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-        <button class="agregar-carrito" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
-    Añadir al carrito <img id="carrito" src="{{ asset('img/carrito/carrito.svg') }}">
+        <div class="flex items-center justify-end mt-4" onclick="agregarAlCarrito({{ json_encode(json_decode($receta->ingredientes, true)) }})">
+            <x-primary-button class="button-primary agregar-carrito">
+                {{ __('Añadir al carrito') }}
+                <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+            </x-primary-button>
+        </div>
 </button>
 
     </div>
