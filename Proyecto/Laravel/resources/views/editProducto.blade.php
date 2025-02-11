@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Productos</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .container { display: flex; gap: 20px; }
         .listado { width: 50%; border-right: 1px solid #ccc; padding-right: 20px; height: 90vh; overflow-y: auto; }
@@ -17,7 +19,10 @@
     </style>
 </head>
 <body>
+@include('layouts.navigation')
+    <br>
     <h2>Listado de Productos</h2>
+    <br>
 
     <div class="container">
         <!-- Listado de productos -->

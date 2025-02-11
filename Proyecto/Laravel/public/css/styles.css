@@ -95,6 +95,7 @@
     display: block;
     text-align: center;
     background-color: #6B0200;
+    font-size: 90%;
     color: white;
     border: none;
     padding: 10px;
@@ -151,7 +152,7 @@
     transition: font-weight ease;
 }
 
-.button-primary:hover {
+.button-secondary:hover {
     font-weight: bold;
 }
 
@@ -258,11 +259,14 @@ button#togglePassword2 {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 300px;
+    display: flex;
+    flex-direction: column;
 }
 
 .producto img {
     width: 150px;
     height: 150px;
+    align-self: center;
 }
 
 .producto strong {
@@ -277,26 +281,6 @@ button#togglePassword2 {
     flex-grow: 1;
 }
 
-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    width: auto;
-    text-align: center;
-    background-color: red;
-
-}
-
-button:hover {
-    background-color:#c20000;
-}
-
 #carrito {
     width: 20px;
     height: 20px;
@@ -304,7 +288,6 @@ button:hover {
     margin-left: 8px; 
     color:white;
 }
-
 
 #recetas{
     display: grid;
@@ -318,6 +301,8 @@ button:hover {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 300px;
+    display: flex;
+    flex-direction: column;
 }
 .receta strong {
     display: block;
@@ -334,8 +319,8 @@ button:hover {
 .slide-carrito {
     position: fixed;
     top: 0;
-    right: -400px;
-    width: 350px;
+    right: -500px;
+    width: 400px;
     height: 100vh;
     background: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -344,7 +329,6 @@ button:hover {
     overflow-y: auto;
     z-index: 1000;
 }
-
 
 #carrito {
     cursor: pointer;
@@ -357,19 +341,6 @@ button:hover {
     top: 15px;
     right: 15px;
 }
-
-#cerrarCarrito {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
 
 
 .slide-abierto {
@@ -463,7 +434,6 @@ button:hover {
     }
     
 }
-
 
     .popup {
         display: none; 
@@ -609,21 +579,6 @@ button:hover {
         margin-top: 10px;
     }
 
-    #slideCarrito {
-        position: fixed;
-        top: 0;
-        right: -400px;
-        width: 300px;
-        height: 100%;
-        background: white;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-        transition: right 0.3s ease;
-    }
-
     #slideCarrito.slide-abierto {
         right: 0;
-    }
-
-    .no-scroll {
-        overflow: hidden;
     }

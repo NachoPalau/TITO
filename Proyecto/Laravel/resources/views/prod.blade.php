@@ -40,10 +40,12 @@
             <input type="hidden" name="producto_id" value="{{ $producto->id }}">
             <input type="hidden" name="precio" value="{{ $producto->precio }}">
             <input type="hidden" name="cantidad" value="1">
-            <button type="submit" class="agregar-carrito">
-                Añadir al carrito 
+        <div class="flex items-center justify-end mt-4">
+            <x-primary-button class="button-primary agregar-carrito">
+                {{ __('Añadir al carrito') }}
                 <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-            </button>
+            </x-primary-button>
+        </div>
         </form>
     </div>
     @endforeach
@@ -52,11 +54,12 @@
         </section>
 
         <!-- FILTROS -->
-       
-        <button id="ordenarAscendente">Ordenar A-Z</button>
+        @include('components.filtrar')
+
+        <!-- <button id="ordenarAscendente">Ordenar A-Z</button>
 <button id="ordenarDescendente">Ordenar Z-A</button>
 <button id="ordenarPrecioAscendente">Ordenar Precio ↑</button>
-<button id="ordenarPrecioDescendente">Ordenar Precio ↓</button>
+<button id="ordenarPrecioDescendente">Ordenar Precio ↓</button> -->
 
 <div id="productos">
     @foreach($productos as $producto)
@@ -65,21 +68,21 @@
         <strong>{{ $producto->nombre }}</strong>
         <p>Descripción: {{ $producto->descripcion }}</p>
         <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <form action="{{ route('carrito.agregar') }}" method="POST">
+        <form action="{{ route('carrito.agregar') }}" method="POST" onsubmit="mostrarPopup(event, '{{ $producto->nombre }}')">
             @csrf
             <input type="hidden" name="producto_id" value="{{ $producto->id }}">
             <input type="hidden" name="precio" value="{{ $producto->precio }}">
             <input type="hidden" name="cantidad" value="1">
-            <button type="submit" class="agregar-carrito">
-                Añadir al carrito 
-                <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-            </button>
+            <div class="flex items-center justify-end mt-4">
+                <x-primary-button class="button-primary agregar-carrito">
+                    {{ __('Añadir al carrito') }}
+                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                </x-primary-button>
+            </div>
         </form>
     </div>
     @endforeach
 </div>
-
-        </section>
 
     </div>
 
