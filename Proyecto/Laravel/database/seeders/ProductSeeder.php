@@ -1242,7 +1242,7 @@ class ProductSeeder extends Seeder
             'imagen_url' => 'bombones_mym.jpg',
         ]);
         Producto::create([
-            'nombre' => 'Pack de champagne y bombones',
+            'nombre' => 'Champagne y bombones',
             'descripcion' => 'Champagne de calidad y deliciosos bombones.',
             'precio' => 15.00,
             'stock' => 200,

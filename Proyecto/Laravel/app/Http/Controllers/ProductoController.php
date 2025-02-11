@@ -15,7 +15,7 @@ class ProductoController extends Controller
     public function arraysEventos(){ 
         $productos = Producto::all();
             $array1 = Producto::whereIn('imagen_url', ['bombones_mym.jpg', 'corazon_kinder.jpg', 'ramo_rosas.jpg'])->get();
-            $array2 = Producto::whereIn('imagen_url', ['taza_sanvalentin.jpg', 'pack_sanvalentin.jpg', '6'])->get();
+            $array2 = Producto::whereIn('imagen_url', ['taza_sanvalentin.jpg', 'pack_sanvalentin.jpg', 'corazon_lindor.jpg'])->get();
             
             return view('eventos',['array1'=>$array1,'array2' => $array2]);
     }

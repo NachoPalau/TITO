@@ -262,6 +262,14 @@ button#togglePassword2 {
     display: flex;
     flex-direction: column;
 }
+producto2{
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 10px;
+    display: flex;
+    flex-direction: column;
+}
 
 .producto img {
     width: 150px;
@@ -398,6 +406,8 @@ button#togglePassword2 {
     cursor: pointer;
 }
 @media (max-width: 1024px) { 
+    
+   
     #productos{
         grid-template-columns: repeat(3, 1fr);
     }
@@ -411,6 +421,10 @@ button#togglePassword2 {
 }
 
 @media (max-width: 768px) { 
+    .desaparecer{
+        display: none;
+    }
+
     #productos {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -432,9 +446,9 @@ button#togglePassword2 {
     #productosDes {
         grid-template-columns:1fr; 
     }
-    
-}
 
+
+}
     .popup {
         display: none; 
         position: fixed;
@@ -582,3 +596,4 @@ button#togglePassword2 {
     #slideCarrito.slide-abierto {
         right: 0;
     }
+    

@@ -21,7 +21,7 @@
         .carousel-container {
             position: absolute;
             left: 40%;
-            transform: translate(-50%, -90%);
+            transform: translate(-50%, -70%);
             width: 70%;
             z-index: 10;
             margin: 10%;
@@ -40,7 +40,7 @@
         .eventos {
             flex: 1;
             margin: 10%;
-            margin-top: 20%;
+            margin-top: 25%;
             width: 80%;
             margin-bottom: -3%;
         }
@@ -64,8 +64,10 @@
     @include('layouts.subnavbar')
 
     <section class="contenedor-imagen">
-        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal"
-            style="width: 100%; height:400px">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" 
+     alt="Imagen principal" 
+     class="img-fluid w-100" 
+     style="max-height: 400px; object-fit: cover;">
 
         <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -74,10 +76,9 @@
                         @foreach($array1 as $producto)
                         <div class="producto" data-nombre="{{ $producto->nombre }}"
                             data-precio="{{ $producto->precio }}">
-                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
+                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-20"
                                 alt="{{ $producto->nombre }}">
                             <strong>{{ $producto->nombre }}</strong>
-                            <p>Descripción: {{ $producto->descripcion }}</p>
                             <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
                             <form action="{{ route('carrito.agregar') }}" method="POST">
                                 @csrf
@@ -94,15 +95,14 @@
                     </div>
                 </div>
 
-                <div class="carousel-item active">
+                <div class="carousel-item">
                     <div class="d-flex justify-content-center gap-3">
-                        @foreach($array1 as $producto)
+                        @foreach($array2 as $producto)
                         <div class="producto" data-nombre="{{ $producto->nombre }}"
                             data-precio="{{ $producto->precio }}">
-                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25"
+                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-20"
                                 alt="{{ $producto->nombre }}">
                             <strong>{{ $producto->nombre }}</strong>
-                            <p>Descripción: {{ $producto->descripcion }}</p>
                             <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
                             <form action="{{ route('carrito.agregar') }}" method="POST">
                                 @csrf
