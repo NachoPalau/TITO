@@ -24,7 +24,7 @@
         <section class="novedades my-4">
 
             <div id="productosDes">
-        @foreach($recetas as $receta)
+        @foreach($recetasMas as $receta)
         <div class="receta"  data-id="{{ $receta->id }}" data-guardados="{{ $receta->guardados }}">
             <strong>{{ $receta->titulo }}</strong>
             @if(auth()->check())
