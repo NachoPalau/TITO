@@ -77,7 +77,11 @@
                     <input type="number" name="amount" id="amount" class="form-control" step="0.1" min="0.50" required>
                 </div>
                 <div class="mb-3" id="tarjeta"></div>
-                <button type="submit" class="btn button-pago w-100">Pagar</button>
+                <div class="flex items-center justify-end mt-4">
+                    <x-primary-button class="button-primary">
+                        {{ __('Pagar') }}
+                    </x-primary-button>
+                </div>
             </form>
         </div>
     </div>
