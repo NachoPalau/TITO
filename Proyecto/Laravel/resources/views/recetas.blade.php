@@ -189,7 +189,53 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+    const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
+            let mostrandoFavoritos = false; // Variable para controlar el estado
 
+            mostrarFavoritosBtn.addEventListener("click", function () {
+                mostrandoFavoritos = !mostrandoFavoritos; // Cambiar el estado
+
+                const recetas = document.querySelectorAll("#recetas .receta");
+                recetas.forEach(receta => {
+                    const estrella = receta.querySelector("img#estrella");
+                    if (estrella) { // Verifica si la estrella existe
+                        const recetaFavorita = estrella.src.includes("estrella.svg"); // Verifica si la estrella está marcada
+
+                        if (mostrandoFavoritos) {
+                            receta.style.display = recetaFavorita ? "block" : "none";
+                        } else {
+                            receta.style.display = "block"; // Mostrar todas las recetas
+                        }
+                    }
+                });
+
+                // Cambiar el texto del botón
+                mostrarFavoritosBtn.textContent = mostrandoFavoritos ? "Mostrar Todas las Recetas" : "Mostrar Recetas Favoritas";
+            });
+            const ordenarAZBtn = document.querySelector('.filtros .btn:first-child'); // Botón A-Z
+    let ordenAscendente = true; // Variable para controlar el orden
+
+    ordenarAZBtn.addEventListener("click", function () {
+        ordenAscendente = !ordenAscendente; // Cambiar el orden
+
+        const recetas = Array.from(document.querySelectorAll("#recetas .receta")); // Convertir a array
+
+        recetas.sort((a, b) => {
+            const tituloA = a.querySelector("strong").textContent.toLowerCase();
+            const tituloB = b.querySelector("strong").textContent.toLowerCase();
+            return ordenAscendente ? tituloA.localeCompare(tituloB) : tituloB.localeCompare(tituloA);
+        });
+
+        const contenedorRecetas = document.getElementById("recetas");
+        contenedorRecetas.innerHTML = ""; // Limpiar el contenedor
+
+        recetas.forEach(receta => {
+            contenedorRecetas.appendChild(receta); // Agregar las recetas ordenadas
+        });
+
+        // Cambiar el texto del botón
+        ordenarAZBtn.textContent = ordenAscendente ? "A-Z ⬆" : "Z-A ⬇";
+    });
 });
 
 
