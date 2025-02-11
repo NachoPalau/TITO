@@ -104,6 +104,19 @@
     text-decoration: none;
     transition: font-weight ease;
 }
+.button-pago {
+    display: block;
+    text-align: center;
+    background-color: #6B0200;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: normal;
+    cursor: pointer;
+    text-decoration: none;
+    transition: font-weight ease;
+}
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 16 16'%3E%3Cpath fill='red' d='M11.354 1.354a.5.5 0 0 1 0 .708L5.707 8l5.647 5.938a.5.5 0 0 1-.708.708l-6-6.25a.5.5 0 0 1 0-.708l6-6.25a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");

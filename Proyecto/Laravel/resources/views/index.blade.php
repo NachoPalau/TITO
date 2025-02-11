@@ -14,14 +14,12 @@
 
     @include('layouts.subnavbar')
     
+    <section class="contenedor-imagen">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
     <div class="container my-4">
-      
-        <section class=" bg-light text-center py-5">
-        <img src=" ./img_eventos/eventoHindi.jpg" alt="" style="width: 100%">
         </section>
-
-        <h2>Recetas Ganadoras</h2>
         <section class="text-center py-5">
+        <h2>Recetas Ganadoras</h2>
             <div class="row">
                 <div class="col-md-4 col-sm-6 mb-4">
                     <img src="./img_eventos/eventoHindi.jpg" class="img-fluid" alt="Receta 1">

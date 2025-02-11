@@ -21,26 +21,39 @@
         .carousel-container {
             position: absolute;
             left: 40%;
-            transform: translate(-50%, -75%);
+            transform: translate(-50%, -100%);
             width: 70%;
             z-index: 10;
             margin: 10%;
         }
-            .carousel-container img {
-            width: 250px; /* Ancho fijo para todas las imágenes */
-            height: 250px; /* Altura fija */
-            object-fit: cover;/* Ajusta la imagen sin distorsionarla */
+
+        .carousel-container img {
+            width: 250px;
+            /* Ancho fijo para todas las imágenes */
+            height: 250px;
+            /* Altura fija */
+            object-fit: cover;
+            /* Ajusta la imagen sin distorsionarla */
 
         }
 
         .eventos {
             flex: 1;
             margin: 10%;
-            margin-top: 20% ;
+            margin-top: 20%;
             width: 80%;
-            
+            margin-bottom: -4%;
+
         }
-        
+
+        .evento-img {
+            height: 350px;
+            /* Ajusta según necesites */
+            object-fit: cover;
+            /* Mantiene la proporción sin deformar */
+            width: 100%;
+            /* Asegura que ocupen el mismo ancho dentro de su contenedor */
+        }
     </style>
 </head>
 
@@ -50,7 +63,7 @@
 
     <section class="contenedor-imagen">
         <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
-        
+
         <div id="carouselExample" class="carousel slide carousel-container" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -83,16 +96,23 @@
     <h2 class="text-center my-2">Próximos eventos</h2>
     <section class="py-5">
         <div class="row justify-content-center text-center">
-            <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Receta 1">
+            <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Fallas">
+                <h2 class="mt-2">Fallas</h2>
+                <p class="mt-2">¡Las Fallas ya están aquí! Y en <strong>TITO</strong> lo celebramos con grandes descuentos en productos tradicionales. Ven y disfruta de nuestras ofertas especiales en buñuelos, chocolate a la taza y figuras falleras de chocolate. ¡Además, consigue tu caja especial de churros con chocolate por solo 5€!<br>*Promoción válida hasta el 19 de marzo.</p>
             </div>
-            <div class="col-md-5 col-sm-6 mb-4 d-flex justify-content-center">
-                <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Receta 2">
+            <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
+                <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Pascua">
+                <h2 class="mt-2">Pascua</h2>
+                <p class="mt-2">¡Pascua casi está aquí! Y en <strong>TITO</strong> lo celebraremos con grandes descuestos en tus dulces favoritos. Ven en su momento y encuentra el huevo de chocolate gigante de KitKat por tan solo 10€. ¡No te lo pierdas! <br>*Hasta el 25 de marzo.</p>
             </div>
         </div>
     </section>
 </div>
-        @include('layouts.footer')
+
+
+
+    @include('layouts.footer')
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
