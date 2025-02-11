@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->json('ingredientes');
             $table->integer('guardados');
+            $table->json('id_ingredientes')->nullable();
 
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
