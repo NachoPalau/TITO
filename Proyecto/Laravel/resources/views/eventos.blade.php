@@ -56,6 +56,9 @@
         }
     </style>
 </head>
+<?php
+
+?>
 
 <body>
     @include('layouts.navigation')
@@ -73,24 +76,43 @@
                         <img src="{{ asset('img/productos/pack_sanvalentin.jpg') }}" class="d-block w-25" alt="Evento 3">
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center gap-3">
-                        <img src="{{ asset('img/productos/bombones_mym.jpg') }}" class="d-block w-25" alt="Evento 4">
-                        <img src="{{ asset('img/productos/taza_sanvalentin.jpg') }}" class="d-block w-25" alt="Evento 5">
-                        <img src="{{ asset('img/img_eventos/corazon.jpg') }}" class="d-block w-25" alt="Evento 6">
-                    </div>
+            </div>
+
+            <!-- Segundo grupo de imágenes (Usando array2) -->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center gap-3">
+                    @foreach($array2 as $producto)
+                        <div class="producto text-center">
+                            <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-25 img-fluid"
+                                style="object-fit: cover; max-height: 200px;" alt="{{ $producto->nombre }}">
+                            <strong>{{ $producto->nombre }}</strong>
+                            <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
+                            <form action="{{ route('carrito.agregar') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="producto_id" value="{{ $producto->id }}">
+                                <button type="submit" class="agregar-carrito">
+                                    Añadir al carrito
+                                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                                </button>
+                            </form>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            <button class="carousel-control-prev button-eventos" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next button-eventos" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-    </section>
+
+        <!-- Controles del carrusel -->
+        <button class="carousel-control-prev button-eventos" type="button" data-bs-target="#carouselExample"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next button-eventos" type="button" data-bs-target="#carouselExample"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
 
     <div class="eventos">
     <h2 class="text-center my-2">Próximos eventos</h2>
