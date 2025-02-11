@@ -43,7 +43,19 @@ class RecetaController extends Controller
     
         // 7. Guardar los favoritos en la base de datos
         $user->favoritas = json_encode($favoritos);
-        $user->save();
+        $user->save(); 
+        // 1. Obtener todas las recetas
+    $recetas = Receta::all();
+
+    // 2. Recorrer las recetas
+    foreach ($recetas as $receta) {
+        // 3. Contar cuántas veces aparece el ID de esta receta en la columna "favoritas" de todos los usuarios
+        $conteo = User::whereRaw('JSON_CONTAINS(favoritas, \''.$receta->id.'\')')->count();
+
+        // 4. Actualizar la columna "guardados" de la receta
+        $receta->guardados = $conteo;
+        $receta->save();
+    }
     
         // 8. Devolver una respuesta exitosa
         return response()->json(['message' => 'Favoritos guardados correctamente'], 200);

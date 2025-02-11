@@ -136,7 +136,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.cookie = name + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
     }
 
-    // Inicializar la cookie de favoritos si no existe
+    if (usuarioLogueado) {
+    setCookie('favoritos', favoritasBackend, 7);
+    actualizarEstrellas();
+  } else {
+    // Si el usuario no está logueado, vaciar la cookie
+    setCookie('favoritos', [], 7);
+    actualizarEstrellas();
+  }
     let favoritos = getCookie('favoritos');
     if (!favoritos) {
         setCookie('favoritos', favoritasBackend, 7);
