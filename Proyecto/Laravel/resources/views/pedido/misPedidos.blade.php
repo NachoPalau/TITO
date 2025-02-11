@@ -18,18 +18,19 @@
 
         .pedido-info {
             display: flex;
+            align-items: center;
             justify-content: space-between;
             width: 100%;
-            align-items: center; /* Alineamos verticalmente los elementos */
         }
 
-        .pedido-info p {
-            margin: 0; /* Eliminamos márgenes para evitar desalineaciones */
+        .pedido-numero {
+            width: 250px; /* Fijamos un ancho para que todo esté alineado */
+            text-align: left;
         }
 
         .estado-text {
-            min-width: 200px; /* Definimos un ancho fijo para el estado */
-            text-align: center;
+            width: 200px; /* Fijamos un ancho fijo para alinear todas las filas */
+            text-align: left;
         }
 
         .btn-toggle {
@@ -68,7 +69,7 @@
     <div class="border border-0 card mb-2">
         <div class="card-header">
             <div class="pedido-info">
-                <p>Nº Pedido: {{ $pedido->codigo_seguimiento }}</p>
+                <p class="pedido-numero">Nº Pedido: {{ $pedido->codigo_seguimiento }}</p>
                 <p class="estado-text">Estado: {{ $pedido->estado }}</p>
                 <button id="btn-toggle-{{ $pedido->id }}" class="btn btn-outline-secondary btn-sm btn-toggle" onclick="toggleDetails({{ $pedido->id }})">
                     Mostrar más ▼

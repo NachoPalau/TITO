@@ -1419,7 +1419,7 @@ class ProductSeeder extends Seeder
             [
                 'id' => 5,
                 'id_usuario' => 1,
-                'estado' => 'Repartido',
+                'estado' => 'Entregado',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '4567Abc',
                 'created_at' => now(),
