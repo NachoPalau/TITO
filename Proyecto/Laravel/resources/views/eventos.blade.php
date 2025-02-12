@@ -53,6 +53,13 @@
             width: 100%;
             /* Asegura que ocupen el mismo ancho dentro de su contenedor */
         }
+        @media (max-width: 480px) { 
+            .prodRespo{
+                text-align: center;
+            }
+
+        }
+
     </style>
 </head>
 <?php
@@ -71,7 +78,7 @@
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-center gap-3">
                         @foreach($array1 as $producto)
-                            <div class="producto d-flex producto-eventos" style="max-width:25%;  max-height:30%" data-nombre="{{ $producto->nombre }}"
+                            <div class="producto d-flex producto-eventos prodRespo" style="max-width:25%;  max-height:30%" data-nombre="{{ $producto->nombre }}"
                                 data-precio="{{ $producto->precio }}">
                                 <img src="{{ asset('img/productos/' . $producto->imagen_url) }}" class="d-block w-20"
                                     alt="{{ $producto->nombre }}">
@@ -129,20 +136,20 @@
         </div>
     </section>
 
-    <div class="eventos">
+    <div class="">
         <h2 class="text-center my-2">Próximos eventos</h2>
         <section class="py-5">
             <div class="row justify-content-center text-center">
                 <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
                     <img src="{{ asset('img/img_eventos/fallas.jpg') }}" class="img-fluid evento-img" alt="Fallas">
-                    <p class="mt-3"><strong>Las Fallas:</strong> Disfruta de esta festividad llena de fuego y tradición.
+                    <p class="mt-3" style="padding:5%"><strong>Las Fallas:</strong><br> Disfruta de esta festividad llena de fuego y tradición.
                         Cada marzo, Valencia se ilumina con impresionantes monumentos falleros que arden en una noche
                         mágica. Además de los espectaculares castillos de fuegos artificiales, podrás disfrutar de
                         música, gastronomía típica y una atmósfera vibrante. ¡No te lo pierdas!</p>
                 </div>
                 <div class="col-md-5 col-sm-6 mb-4 d-flex flex-column align-items-center">
                     <img src="{{ asset('img/img_eventos/pascua.jpg') }}" class="img-fluid evento-img" alt="Pascua">
-                    <p class="mt-3"><strong>Pascua:</strong> Celebra con nosotros la llegada de la primavera y las
+                    <p class="mt-3" style="padding:5%"><strong>Pascua:</strong><br> Celebra con nosotros la llegada de la primavera y las
                         tradiciones pascuales. Disfruta de la típica mona de Pascua, los juegos con huevos de chocolate
                         y reuniones familiares llenas de alegría. Esta es una época perfecta para compartir, relajarse y
                         degustar los sabores de la temporada. ¡Únete a la celebración!</p>
@@ -224,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             /* Margen superior para evitar superposición */
             .contenedor-imagen {
-                margin-top: 70px !important;
+                margin-top: 0px !important;
             }
             
             /* Ajustes de espaciado */
@@ -240,8 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .producto-eventos {
                 flex-direction: column !important;
                 align-items: center !important;
+                text-align:center;
                 gap: 10px !important;
-                padding: 10px !important;
+                padding-left: 10% !important;
             }
             
             .producto-eventos img {
