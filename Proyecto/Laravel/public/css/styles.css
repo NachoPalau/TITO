@@ -41,7 +41,7 @@
     border: 1px solid #6B0200;
     width: 350px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 20px 30px;
     text-align: center;
 }
 
@@ -129,6 +129,7 @@
     margin-top: 10px;
     text-decoration: none;
     transition: font-weight ease;
+    margin-bottom: 20px;
 }
 
 .button-secondary:hover {
