@@ -11,22 +11,57 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 class RecetaController extends Controller
 {
-public function agregarAFavoritos($recetaId)
-{
-    $usuario = auth()->user();
 
-    $favoritas = json_decode($usuario->favoritas, true);
+    
+    public function guardarFavoritos(Request $request)
+    {
+        // 1. Obtener el usuario autenticado
+        $user = Auth::user();
+    
+        // 2. Validar que el usuario esté autenticado
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401);
+        }
+    
+        // 3. Obtener el array o JSON de favoritos
+        $favoritos = $request->input('favoritos');
+    
+        // 4. Validar que se haya enviado el array o JSON
+        if (!$favoritos) {
+            return response()->json(['error' => 'No se enviaron favoritos'], 400);
+        }
+    
+        // 5. Convertir a array si es JSON
+        if (is_string($favoritos)) {
+            $favoritos = json_decode($favoritos, true);
+        }
+    
+        // 6. Validar que sea un array
+        if (!is_array($favoritos)) {
+            return response()->json(['error' => 'Formato de favoritos incorrecto'], 400);
+        }
+    
+        // 7. Guardar los favoritos en la base de datos
+        $user->favoritas = json_encode($favoritos);
+        $user->save(); 
+        // 1. Obtener todas las recetas
+    $recetas = Receta::all();
 
-    if (!in_array($recetaId, $favoritas)) {
-        $favoritas[] = $recetaId;
+    // 2. Recorrer las recetas
+    foreach ($recetas as $receta) {
+        // 3. Contar cuántas veces aparece el ID de esta receta en la columna "favoritas" de todos los usuarios
+        $conteo = User::whereRaw('JSON_CONTAINS(favoritas, \''.$receta->id.'\')')->count();
+
+        // 4. Actualizar la columna "guardados" de la receta
+        $receta->guardados = $conteo;
+        $receta->save();
     }
+    
+        // 8. Devolver una respuesta exitosa
+        return response()->json(['message' => 'Favoritos guardados correctamente'], 200);
+    }
+    
 
-  
-    $usuario->favoritas = json_encode($favoritas);
-    $usuario->save();
-
-    return redirect()->back();
-}
 
 public function eliminarDeFavoritos($recetaId)
 {
@@ -50,15 +85,90 @@ public function eliminarDeFavoritos($recetaId)
 }
 
 public function index()
-{ 
+{
     $recetas = Receta::all();
     $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
-    return view('recetas', [
-        'recetas' => $recetas,
-        'recetasMas' => $recetasMas
+    $user = auth()->user();
+    $favoritas = auth()->check() ? $user->favoritas : [];
 
-    ]);  
-   
+    foreach ($recetas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+    foreach ($recetasMas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+
+    return view('recetas', compact('recetas', 'recetasMas', 'favoritas'));
+}
+public function index5()
+{
+    $recetas = Receta::all();
+    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
+    $user = auth()->user();
+    $favoritas = $user ? $user->favoritas : [];
+
+    foreach ($recetas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+    foreach ($recetasMas as $receta) {
+        $precioReceta = 0;
+        $ingredientesArray = json_decode($receta->id_ingredientes, true);
+        $receta->nombres_productos = $this->obtenerNombresProductos($ingredientesArray);
+        $receta->precio_total = $this->calcularPrecioTotal($ingredientesArray);
+    }
+
+    return view('index', compact('recetas', 'recetasMas', 'favoritas'));
+}
+
+private function calcularPrecioTotal($ingredientesArray) {
+    $precioTotal = 0;
+
+    if (is_array($ingredientesArray)) {
+        foreach ($ingredientesArray as $id_producto) {
+            if (is_numeric($id_producto)) {
+                $id_producto = intval($id_producto);
+                $producto = Producto::find($id_producto);
+
+                if ($producto) {
+                    $precioTotal += $producto->precio;
+                }
+            }
+        }
+    }
+
+    return $precioTotal;
+}
+
+private function obtenerNombresProductos($ingredientesArray, &$precioTotal = 0) {
+    $nombresProductos = [];
+
+    if (is_array($ingredientesArray)) {
+        foreach ($ingredientesArray as $id_producto) {
+            if (is_numeric($id_producto)) {
+                $id_producto = intval($id_producto);
+                $producto = Producto::find($id_producto);
+
+                if ($producto) {
+                    $nombresProductos[] = $producto->nombre;
+                } else {
+                    $nombresProductos[] = "Producto no encontrado (ID: " . $id_producto . ")";
+                }
+            } else {
+                $nombresProductos[] = $id_producto;
+            }
+        }
+    }
+
+    return $nombresProductos;
 }
 public function index2()
 { 
