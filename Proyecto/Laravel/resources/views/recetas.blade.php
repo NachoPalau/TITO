@@ -13,7 +13,7 @@
 
 @include('layouts.navigation')
 
-@include('layouts.subnavbar')
+
 
     <!-- MAIN CONTAINER -->
     <div class="container">
