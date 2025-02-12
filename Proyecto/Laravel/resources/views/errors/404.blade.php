@@ -34,7 +34,7 @@
 <body>
     <div class="error">
         <h2 class="title">404</h2>
-        <img src="img/error/error404img.jpg" alt="">
+        <img src="/img/error/error404img.jpg" alt="">
         <h3 class="subtitle">Ooops! Liada parda</h3>
     </div>
 </body>
