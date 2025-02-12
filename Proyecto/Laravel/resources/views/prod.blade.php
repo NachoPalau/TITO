@@ -115,62 +115,50 @@
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtén todos los botones de ordenación
-    const ordenarAscendente = document.getElementById("ordenarAscendente");
-    const ordenarDescendente = document.getElementById("ordenarDescendente");
-    const ordenarPrecioAscendente = document.getElementById("ordenarPrecioAscendente");
-    const ordenarPrecioDescendente = document.getElementById("ordenarPrecioDescendente");
+    const productosContainer = document.getElementById("productos"); // Contenedor de productos
+    const productos = Array.from(productosContainer.querySelectorAll(".producto")); // Obtener array de productos
+    const ordenarAZBtn = document.querySelector('.filtros .btn:first-child'); // Botón A-Z
+    const ordenarPrecioBtn = document.querySelector('.filtros .btn:nth-child(2)'); // Botón Precio
 
-    // Obtén los productos normales (no destacados)
-    const productosContainer = document.getElementById("productos");
-    const productos = Array.from(productosContainer.querySelectorAll(".producto"));
+    let ordenAscendente = true; // Variable para controlar el orden A-Z
+    let ordenPrecioAscendente = true; // Variable para controlar el orden de precio
 
-    // Ordenar A-Z
-    ordenarAscendente.addEventListener("click", function () {
-        productos.sort(function(a, b) {
-            const nombreA = a.querySelector("strong").textContent.toLowerCase();
-            const nombreB = b.querySelector("strong").textContent.toLowerCase();
-            return nombreA.localeCompare(nombreB);
-        });
-        actualizarProductos();
-    });
-
-    // Ordenar Z-A
-    ordenarDescendente.addEventListener("click", function () {
-        productos.sort(function(a, b) {
-            const nombreA = a.querySelector("strong").textContent.toLowerCase();
-            const nombreB = b.querySelector("strong").textContent.toLowerCase();
-            return nombreB.localeCompare(nombreA);
-        });
-        actualizarProductos();
-    });
-
-    // Ordenar por Precio Ascendente
-    ordenarPrecioAscendente.addEventListener("click", function () {
-        productos.sort(function(a, b) {
-            const precioA = parseFloat(a.getAttribute("data-precio"));
-            const precioB = parseFloat(b.getAttribute("data-precio"));
-            return precioA - precioB;
-        });
-        actualizarProductos();
-    });
-
-    // Ordenar por Precio Descendente
-    ordenarPrecioDescendente.addEventListener("click", function () {
-        productos.sort(function(a, b) {
-            const precioA = parseFloat(a.getAttribute("data-precio"));
-            const precioB = parseFloat(b.getAttribute("data-precio"));
-            return precioB - precioA;
-        });
-        actualizarProductos();
-    });
-
-    // Función para actualizar el orden de los productos
-    function actualizarProductos() {
-        productos.forEach(function(producto) {
-            productosContainer.appendChild(producto);  // Reordenar los productos en el DOM
+    function actualizarProductos(productos) {
+        productos.forEach(producto => {
+            productosContainer.appendChild(producto); // Reordenar los productos en el DOM
         });
     }
+
+    ordenarAZBtn.addEventListener("click", function () {
+        ordenAscendente = !ordenAscendente;
+
+        productos.sort((a, b) => {
+            const nombreA = a.querySelector("strong").textContent.toLowerCase();
+            const nombreB = b.querySelector("strong").textContent.toLowerCase();
+            return ordenAscendente ? nombreA.localeCompare(nombreB) : nombreB.localeCompare(nombreA);
+        });
+
+        actualizarProductos(productos);
+        ordenarAZBtn.textContent = ordenAscendente ? "A-Z ⬆" : "Z-A ⬇"; // Actualizar texto del botón
+    });
+
+    ordenarPrecioBtn.addEventListener("click", function () {
+        ordenPrecioAscendente = !ordenPrecioAscendente;
+
+        productos.sort((a, b) => {
+            const precioA = parseFloat(a.dataset.precio); // Obtener precio del dataset
+            const precioB = parseFloat(b.dataset.precio);
+
+            if (isNaN(precioA) || isNaN(precioB)) {
+                return 0; // Manejar precios no válidos
+            }
+
+            return ordenPrecioAscendente ? precioA - precioB : precioB - precioA;
+        });
+
+        actualizarProductos(productos);
+        ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇"; // Actualizar texto del botón
+    });
 });
     document.addEventListener("DOMContentLoaded", function () {
         const inputBusqueda = document.getElementById("busquedaTotal");
@@ -194,32 +182,31 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Popup Login
         const popupLogin = document.getElementById("popupLogin");
-        const cerrarPopup = document.getElementById("cerrarPopup");
+            const cerrarPopup = document.getElementById("cerrarPopup");
 
-        // Agregar evento de cerrar popup
-        cerrarPopup.addEventListener("click", function () {
-            popupLogin.style.display = "none";
-        });
-
-        // Obtén todos los botones de añadir al carrito
-        const botonesCarrito = document.querySelectorAll(".agregar-carrito");
-
-        botonesCarrito.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevenir el envío del formulario
-
-                // Verificar si el usuario está logueado
-                if (!{{ auth()->check() ? 'true' : 'false' }}) { // Usamos Blade para pasar la variable de autenticación
-                    // Mostrar popup de login si no está logueado
-                    popupLogin.style.display = "flex";
-                } else {
-                    // Si está logueado, proceder con la acción de agregar al carrito
-                    this.closest('form').submit(); // Enviar el formulario
-                }
+            // Agregar evento de cerrar popup
+            cerrarPopup.addEventListener("click", function () {
+                popupLogin.style.display = "none";
             });
-        });
+
+            // Obtén todos los botones de añadir al carrito
+            const botonesCarrito = document.querySelectorAll(".agregar-carrito");
+
+            botonesCarrito.forEach(button => {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevenir el envío del formulario
+
+                    // Verificar si el usuario está logueado
+                    if (!{{ auth()->check() ? 'true' : 'false' }}) { // Usamos Blade para pasar la variable de autenticación
+                        // Mostrar popup de login si no está logueado
+                        popupLogin.style.display = "flex";
+                    } else {
+                        // Si está logueado, proceder con la acción de agregar al carrito
+                        this.closest('form').submit(); // Enviar el formulario
+                    }
+                });
+            });
     });
 
 
