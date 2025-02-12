@@ -95,30 +95,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
     <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    // Lógica independiente del estado de usuario logueado
-    const inputBusqueda = document.getElementById("busquedaTotal");
-
-    if (!inputBusqueda) {
-        console.error("No se encontró el input de búsqueda.");
-        return;
-    }
-
-    inputBusqueda.addEventListener("keyup", function () {
-        filtrarTotal(this.value);
-    });
-
-    function filtrarTotal(valor) {
-        valor = valor.toLowerCase();
-
-        const recetas = document.querySelectorAll("#recetas .receta");
-        recetas.forEach(receta => {
-            const nombre = receta.querySelector("strong").textContent.toLowerCase();
-            receta.style.display = nombre.includes(valor) ? "block" : "none";
-        });
-    }
-
-    // Lógica de usuario logueado o no
+document.addEventListener("DOMContentLoaded", function () {
     const popupLogin = document.getElementById("popupLogin");
     const cerrarPopup = document.getElementById("cerrarPopup");
     const popupTitulo = document.getElementById("popupTitulo");
@@ -127,29 +104,26 @@
     const usuarioLogueado = {{ auth()->check() ? 'true' : 'false' }};
     const favoritasBackend = JSON.parse(@json($favoritas)); // Convertir a JS
 
-    function mostrarPopup(titulo, mensaje) {
-        popupTitulo.textContent = titulo;
-        popupMensaje.textContent = mensaje;
-        popupLogin.style.display = "flex";
+    function getCookie(name) {
+        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? JSON.parse(match[2]) : null;
+    }
+
+    function setCookie(name, value, days) {
+        let d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
     }
 
     if (usuarioLogueado) {
-        // Lógica para el usuario logueado
-        setCookie('favoritos', favoritasBackend, 7);
-        actualizarEstrellas();
-    } else {
-        // Lógica para el usuario no logueado
-        setCookie('favoritos', [], 7);
-        actualizarEstrellas();
-
-        document.querySelectorAll("img#estrella, .agregar-carrito").forEach(elemento => {
-            elemento.addEventListener("click", function(event) {
-                event.preventDefault();
-                mostrarPopup("¡Debes iniciar sesión!", "Para realizar esta acción, primero inicia sesión.");
-            });
-        });
-    }
-
+    setCookie('favoritos', favoritasBackend, 7);
+    actualizarEstrellas();
+  } else {
+    // Si el usuario no está logueado, vaciar la cookie
+    setCookie('favoritos', [], 7);
+    actualizarEstrellas();
+  }
     let favoritos = getCookie('favoritos');
     if (!favoritos) {
         setCookie('favoritos', favoritasBackend, 7);
@@ -195,9 +169,8 @@
             }
         });
     });
-
-    // Código para mostrar favoritos
-    const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
+     // Código para mostrar favoritos
+     const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
     let mostrandoFavoritos = false; // Variable para controlar el estado
 
     mostrarFavoritosBtn.addEventListener("click", function () {
@@ -276,7 +249,18 @@
         ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇";
     });
 
-    // Aquí comienza la lógica para guardar los favoritos cuando el documento pierde foco
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let csrfToken = null;
+    const metaTag = document.querySelector('meta[name="csrf-token"]');
+    if (metaTag) {
+        csrfToken = metaTag.getAttribute('content');
+    } else {
+        console.error("No se encontró el token CSRF");
+    }
+
     document.addEventListener('visibilitychange', function (e) {
         if (document.visibilityState === 'hidden' && csrfToken) {
             guardarFavoritos(csrfToken);
@@ -284,9 +268,12 @@
     });
 
     function guardarFavoritos(token) {
+        // Obtener la cookie llamada 'favoritos'
         const favoritosCookie = document.cookie.split('; ').find(row => row.startsWith('favoritos='));
 
+        // Verificar si la cookie existe
         if (favoritosCookie) {
+            // Extraer el valor de la cookie y parsearlo como JSON
             try {
                 const favoritos = JSON.parse(favoritosCookie.split('=')[1]);
 
@@ -296,19 +283,22 @@
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': token
                     },
-                    body: JSON.stringify({ favoritos: favoritos })
+                    body: JSON.stringify({ favoritos: favoritos }) // Enviar los favoritos como JSON
                 })
                 .then(response => {
                     if (!response.ok) {
-                        return response.json().then(err => {throw new Error(err.message)});
+                        return response.json().then(err => {throw new Error(err.message)}); // Lanza error si la respuesta no es ok
                     }
                     console.log('Favoritos guardados:', response);
                 })
                 .catch(error => {
                     console.error('Error al guardar favoritos:', error);
+                    // Aquí puedes agregar código para manejar el error, por ejemplo, mostrar un mensaje al usuario.
                 });
+
             } catch (error) {
                 console.error("Error al parsear la cookie de favoritos:", error);
+                // Manejar el error de parseo de la cookie
             }
 
         } else {
