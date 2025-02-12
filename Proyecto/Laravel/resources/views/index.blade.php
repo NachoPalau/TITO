@@ -56,7 +56,17 @@
     </div>
     
     @include('layouts.footer')
-    <script>
+    <div id="popupLogin" class="popup" style="display: none;">
+            <div class="popup-contenido">
+                <span id="cerrarPopup" class="popup-cerrar">✖</span>
+                <h2 id="popupTitulo">¡Debes iniciar sesión!</h2>
+                <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p>
+                <button onclick="window.location.href='/login'">Iniciar sesión</button>
+            </div>
+        </div>
+
+</body>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             const popupLogin = document.getElementById("popupLogin");
             const cerrarPopup = document.getElementById("cerrarPopup");
@@ -94,6 +104,5 @@
             });
         });
     </script>
-</body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
