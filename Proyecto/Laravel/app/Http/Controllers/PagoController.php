@@ -29,7 +29,7 @@ class PagoController extends Controller
             'source' => $request->token,
             'description' => 'Pago seguro en Laravel',
         ]);
-        
+
         $usuario = Auth::user();
 
         $carrito = json_decode($usuario->carrito, true) ?: [];
@@ -45,8 +45,7 @@ class PagoController extends Controller
         $usuario->carrito = json_encode([]);
         $usuario->save();
 
-        // Redirigir a la vista de pedidos con un mensaje de éxito
-        return redirect()->route('pedidos')->with('success', 'Pago realizado con éxito. Pedido creado.');
+        return back()->with('success', 'Pago realizado con exito. Seras redireccionado en 5 segundos');
     } catch (\Exception $e) {
         return back()->withErrors('Error al procesar el pago: ' . $e->getMessage());
     }
