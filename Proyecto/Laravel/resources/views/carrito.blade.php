@@ -98,11 +98,14 @@
                         return $item['precio'] * $item['cantidad'];
                     }, $carrito)), 2) }}€</strong>
                 </div>
-                <div class="flex items-center justify-end mt-4">
-                    <x-primary-button class="button-primary">
-                        {{ __('TRAMITAR PEDIDO') }}
-                    </x-primary-button>
-                </div>
+                <form method="GET" action="{{ route('pago') }}">
+                @csrf
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="button-primary" type="submit">
+                            {{ __('TRAMITAR PEDIDO') }}
+                        </x-primary-button>
+                    </div>
+                </form>
         </div>
         
         @endif

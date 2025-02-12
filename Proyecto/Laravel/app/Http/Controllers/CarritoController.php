@@ -64,6 +64,19 @@ class CarritoController extends Controller
         return view('carrito', compact('carrito', 'total'));
     }
 
+    public function mostrarPago()
+    {
+    $usuario = Auth::user();
+    $carrito = json_decode($usuario->carrito, true) ?: [];
+
+    // Sumar el total del carrito
+    $total = array_sum(array_map(function ($producto) {
+        return $producto['precio'] * $producto['cantidad'];
+    }, $carrito));
+
+    return view('pago', compact('total'));
+    }
+
     // Eliminar producto del carrito
     public function eliminar($productoId)
     {

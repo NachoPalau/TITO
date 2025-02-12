@@ -45,7 +45,7 @@ Route::post('reset-password', [NewPasswordController::class, 'store'])
 ->name('password.store');
 
 //Pago
-Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
+Route::get('/pago', [CarritoController::class, 'mostrarPago'])->name('pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
 
 Route::get('/track_pedido', function () {
