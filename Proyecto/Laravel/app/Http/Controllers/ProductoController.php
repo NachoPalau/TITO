@@ -10,7 +10,7 @@ class ProductoController extends Controller
     public function index()
     { $productos = Producto::all();
         $user = auth()->user();
-        $carrito=$user->carrito;
+        $carrito = $user ? $user->carrito : [];
         $productosDestacados = Producto::where('destacado', true)->get();
         return view('prod', [
             'productos' => $productos,
@@ -22,6 +22,11 @@ class ProductoController extends Controller
     { $productos = Producto::all();
         $productosDestacados = Producto::where('destacado', true)->get();
         return view('editProducto',['productos'=>$productos,'productosDestacados' => $productosDestacados,]);
+    }
+    public function show($id)
+    {
+        $producto = Producto::findOrFail($id);
+        return response()->json($producto);
     }
     public function edit($id)
     {

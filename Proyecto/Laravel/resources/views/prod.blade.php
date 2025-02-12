@@ -55,8 +55,6 @@
         <!-- FILTROS -->
         @include('components.filtrar')
 
-
-
         <div id="productos">
             @foreach($productos as $producto)
             <div class="producto" data-nombre="{{ $producto->nombre }}" data-precio="{{ $producto->precio }}">
@@ -86,7 +84,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-...
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Elementos del DOM
@@ -188,6 +186,9 @@
 
                     // Llamar a la función para agregar el producto al carrito
                     agregarProductoACarrito(idProducto, precio, cantidad);
+
+                    // Actualizar el DOM del carrito
+                    actualizarCarritoDOM();
                 }
             });
         });
@@ -226,6 +227,7 @@
             const expires = "expires=" + fechaExpiracion.toUTCString() + ";";
 
             document.cookie = "carrito=" + carritoJSON + ";" + expires + "path=/";
+            console.log("Cookie actualizada:", document.cookie); // Mostrar la cookie actualizada
         }
 
         // Función para leer la cookie del carrito
@@ -241,12 +243,34 @@
             return null; // Si no existe la cookie
         }
 
+        // Función para actualizar el DOM del carrito
+        function actualizarCarritoDOM() {
+            const carrito = leerCookieCarrito();
+            const carritoContainer = document.getElementById("carritoContainer");
+
+            if (carritoContainer) {
+                carritoContainer.innerHTML = ""; // Limpiar el contenedor del carrito
+
+                carrito.forEach(item => {
+                    const productoElement = document.createElement("div");
+                    productoElement.classList.add("carrito-item");
+                    productoElement.innerHTML = `
+                        <p>Producto ID: ${item.idProducto}</p>
+                        <p>Precio: $${item.precio}</p>
+                        <p>Cantidad: ${item.cantidad}</p>
+                    `;
+                    carritoContainer.appendChild(productoElement);
+                });
+            }
+        }
+
         // Verificar que la cookie del carrito se creó correctamente
         const carritoLeido = leerCookieCarrito();
         console.log("Contenido de la cookie 'carrito':", carritoLeido);
+
+        // Inicializar el DOM del carrito al cargar la página
+        actualizarCarritoDOM();
     });
-    
 </script>
-...
 
 </html>

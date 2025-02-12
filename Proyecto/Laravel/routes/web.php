@@ -71,6 +71,7 @@ Route::get('/api/productos', function () {
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 Route::get('/products/{id}/edit', [ProductoController::class, 'edit']);
 Route::post('/products/{id}/update', [ProductoController::class, 'update']);
+Route::get('/api/productos/{id}', [ProductoController::class, 'show']);
 
 Route::get('/eventos', function () {
     return view('eventos');

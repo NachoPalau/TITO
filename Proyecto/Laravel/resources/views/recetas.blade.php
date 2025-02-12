@@ -1,100 +1,90 @@
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TITO - Tienda</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITO - Tienda</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
 
-    @include('layouts.navigation')
+@include('layouts.navigation')
 
-    @include('layouts.subnavbar')
+@include('layouts.subnavbar')
 
-        <!-- MAIN CONTAINER -->
-        <div class="container">
-            <h1>Recetas destacadas</h1>
-            <!-- NOVEDADES -->
-            <section class="novedades my-4">
-            <div id="productosDes">
-        @foreach($recetasMas as $receta)
-        <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
-            <strong>{{ $receta->titulo }}</strong>
-            @if(auth()->check())
-            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-            @else
-            <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-            @endif
-            <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
-            <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
-            <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
-            <p class="precio-receta"><strong>Precio:</strong> {{ $receta->precio_total ?? 0 }}€</p>
-                    <div class="flex items-center justify-end mt-4">
-                        <x-primary-button class="button-primary agregar-carrito">
-                            {{ __('Añadir al carrito') }}
-                            <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-                        </x-primary-button>
-                    </div>
-
-        </div>
-        @endforeach
-        </div>
-            </section>
-
-            <!-- FILTROS -->
-            @include('components.filtrar')
-
-            <!-- PRODUCTOS -->
-            @if(auth()->check())
-            <div class="flex items-center mt-4" >
-                        <x-primary-button class="button-primary agregar-carrito" id="mostrarFavoritosBtn">
-                            {{ __('Mostrar Recetas Favoritas') }}
-                        </x-primary-button>
-                    </div>
-        @endif
-
-
-        <div id="recetas">
-            @foreach($recetas as $receta)
+<!-- MAIN CONTAINER -->
+<div class="container">
+    <h1>Recetas destacadas</h1>
+    <!-- NOVEDADES -->
+    <section class="novedades my-4">
+        <div id="productosDes">
+            @foreach($recetasMas as $receta)
             <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
                 <strong>{{ $receta->titulo }}</strong>
-                @if(auth()->check())
-                <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-                @else
-                <img id="estrella" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
-                @endif
+                <img id="estrella" data-id="{{ $receta->id }}" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
                 <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
                 <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
                 <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
                 <p class="precio-receta"><strong>Precio:</strong> {{ $receta->precio_total ?? 0 }}€</p>
-                <div class="flex items-center justify-end mt-4" >
-                        <x-primary-button class="button-primary agregar-carrito">
-                            {{ __('Añadir al carrito') }}
-                            <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
-                        </x-primary-button>
-                    </div>
+                <div class="flex items-center justify-end mt-4">
+                    <x-primary-button class="button-primary agregar-carrito">
+                        {{ __('Añadir al carrito') }}
+                        <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                    </x-primary-button>
+                </div>
             </div>
             @endforeach
         </div>
-        <div id="popupLogin" class="popup" style="display: none;">
+    </section>
+
+    <!-- FILTROS -->
+    @include('components.filtrar')
+
+    <!-- PRODUCTOS -->
+    @if(auth()->check())
+    <div class="flex items-center mt-4">
+        <x-primary-button class="button-primary agregar-carrito" id="mostrarFavoritosBtn">
+            {{ __('Mostrar Recetas Favoritas') }}
+        </x-primary-button>
+    </div>
+    @endif
+
+    <div id="recetas">
+        @foreach($recetas as $receta)
+        <div class="receta" data-id="{{ $receta->id }}" data-precio="{{ $receta->precio_total ?? 0 }}">
+            <strong>{{ $receta->titulo }}</strong>
+            <img id="estrella" data-id="{{ $receta->id }}" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
+            <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
+            <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+            <p class="precio-receta"><strong>Precio:</strong> {{ $receta->precio_total ?? 0 }}€</p>
+            <div class="flex items-center justify-end mt-4">
+                <x-primary-button class="button-primary agregar-carrito">
+                    {{ __('Añadir al carrito') }}
+                    <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                </x-primary-button>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <div id="popupLogin" class="popup" style="display: none;">
         <div class="popup-contenido">
             <span id="cerrarPopup" class="popup-cerrar">✖</span>
-            <h2 id="popupTitulo">¡Debes iniciar sesión!</h2> 
-            <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p> 
+            <h2 id="popupTitulo">¡Debes iniciar sesión!</h2>
+            <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p>
             <button onclick="window.location.href='/login'">Iniciar sesión</button>
         </div>
-        </div>
     </div>
-        <!-- FOOTER -->
-        @include( 'layouts.footer')
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    <script>
+</div>
+<!-- FOOTER -->
+@include('layouts.footer')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const popupLogin = document.getElementById("popupLogin");
     const cerrarPopup = document.getElementById("cerrarPopup");
@@ -102,40 +92,49 @@ document.addEventListener("DOMContentLoaded", function () {
     const popupMensaje = document.getElementById("popupMensaje");
 
     const usuarioLogueado = {{ auth()->check() ? 'true' : 'false' }};
-    const favoritasBackend = JSON.parse(@json($favoritas)); // Convertir a JS
+    const favoritasBackend = @json(json_decode($favoritas)); // Convertir a array de JS
+
+    console.log("Favoritas desde la base de datos:", favoritasBackend);
 
     function getCookie(name) {
         let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? JSON.parse(match[2]) : null;
+        return match ? JSON.parse(decodeURIComponent(match[2])) : [];
     }
 
     function setCookie(name, value, days) {
         let d = new Date();
         d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
         let expires = "expires=" + d.toUTCString();
-        document.cookie = name + "=" + JSON.stringify(value) + ";" + expires + ";path=/";
+        document.cookie = name + "=" + encodeURIComponent(JSON.stringify(value)) + ";" + expires + ";path=/";
     }
 
     if (usuarioLogueado) {
-    setCookie('favoritos', favoritasBackend, 7);
-    actualizarEstrellas();
-  } else {
-    // Si el usuario no está logueado, vaciar la cookie
-    setCookie('favoritos', [], 7);
-    actualizarEstrellas();
-  }
+        setCookie('favoritos', favoritasBackend, 7);
+        actualizarEstrellas();
+    } else {
+        // Si el usuario no está logueado, vaciar la cookie
+        setCookie('favoritos', [], 7);
+        actualizarEstrellas();
+    }
+
     let favoritos = getCookie('favoritos');
-    if (!favoritos) {
+    if (!Array.isArray(favoritos)) {
+        favoritos = [];
+    }
+
+    if (!favoritos.length) {
         setCookie('favoritos', favoritasBackend, 7);
         favoritos = favoritasBackend;
     }
 
+    console.log("Favoritos desde la cookie:", favoritos);
+
     function actualizarEstrellas() {
         let favoritos = getCookie('favoritos') || [];
 
-        document.querySelectorAll("img#estrella").forEach(estrella => {
-            const recetaId = estrella.closest('.receta').dataset.id;
-            if (favoritos.includes(parseInt(recetaId))) {
+        document.querySelectorAll("img[id='estrella']").forEach(estrella => {
+            const recetaId = parseInt(estrella.dataset.id);
+            if (favoritos.includes(recetaId)) {
                 estrella.src = "{{ asset('img/carrito/estrella.svg') }}";
             } else {
                 estrella.src = "{{ asset('img/carrito/estrellaVacia.svg') }}";
@@ -146,31 +145,46 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleFavorito(id) {
         let favoritos = getCookie('favoritos') || [];
 
+        if (!Array.isArray(favoritos)) {
+            favoritos = [];
+        }
+
         if (favoritos.includes(id)) {
             favoritos = favoritos.filter(favorito => favorito !== id);
         } else {
             favoritos.push(id);
         }
-        console.log(favoritos);
+        console.log("Favoritos actualizados:", favoritos);
         setCookie('favoritos', favoritos, 7);
         actualizarEstrellas();
     }
 
     actualizarEstrellas();
 
-    document.querySelectorAll("img#estrella").forEach(estrella => {
+    document.querySelectorAll("img[id='estrella']").forEach(estrella => {
         estrella.addEventListener("click", function (event) {
             if (!usuarioLogueado) {
                 event.preventDefault();
                 mostrarPopup("¡Debes iniciar sesión!", "Para guardar esta receta como favorita, primero inicia sesión.");
             } else {
-                const recetaId = parseInt(this.closest('.receta').dataset.id);
+                const recetaId = parseInt(this.dataset.id);
                 toggleFavorito(recetaId);
             }
         });
     });
-     // Código para mostrar favoritos
-     const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
+
+    function mostrarPopup(titulo, mensaje) {
+        popupTitulo.textContent = titulo;
+        popupMensaje.textContent = mensaje;
+        popupLogin.style.display = "flex";
+    }
+
+    cerrarPopup.addEventListener("click", function () {
+        popupLogin.style.display = "none";
+    });
+
+    // Código para mostrar favoritos
+    const mostrarFavoritosBtn = document.getElementById("mostrarFavoritosBtn");
     let mostrandoFavoritos = false; // Variable para controlar el estado
 
     mostrarFavoritosBtn.addEventListener("click", function () {
@@ -178,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const recetas = document.querySelectorAll("#recetas .receta");
         recetas.forEach(receta => {
-            const estrella = receta.querySelector("img#estrella");
+            const estrella = receta.querySelector("img[id='estrella']");
             if (estrella) { // Verifica si la estrella existe
                 const recetaFavorita = estrella.src.includes("estrella.svg"); // Verifica si la estrella está marcada
 
@@ -249,25 +263,14 @@ document.addEventListener("DOMContentLoaded", function () {
         ordenarPrecioBtn.textContent = ordenPrecioAscendente ? "Precio ⬆" : "Precio ⬇";
     });
 
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    let csrfToken = null;
-    const metaTag = document.querySelector('meta[name="csrf-token"]');
-    if (metaTag) {
-        csrfToken = metaTag.getAttribute('content');
-    } else {
-        console.error("No se encontró el token CSRF");
-    }
-
     document.addEventListener('visibilitychange', function (e) {
-        if (document.visibilityState === 'hidden' && csrfToken) {
-            guardarFavoritos(csrfToken);
+        if (document.visibilityState === 'hidden') {
+            guardarFavoritos();
         }
     });
 
-    function guardarFavoritos(token) {
+    function guardarFavoritos() {
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         // Obtener la cookie llamada 'favoritos'
         const favoritosCookie = document.cookie.split('; ').find(row => row.startsWith('favoritos='));
 
@@ -275,7 +278,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (favoritosCookie) {
             // Extraer el valor de la cookie y parsearlo como JSON
             try {
-                const favoritos = JSON.parse(favoritosCookie.split('=')[1]);
+                const favoritos = JSON.parse(decodeURIComponent(favoritosCookie.split('=')[1]));
+
+                if (!Array.isArray(favoritos)) {
+                    throw new Error("La cookie de favoritos no es un array");
+                }
 
                 fetch('/guardar-favoritos', {
                     method: 'POST',
@@ -308,4 +315,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-    </html>
+</html>
