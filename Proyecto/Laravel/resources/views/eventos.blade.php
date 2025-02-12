@@ -16,6 +16,8 @@
 
         .contenedor-imagen {
             position: relative;
+            padding-bottom: 0;
+
         }
 
         .carousel-container {
