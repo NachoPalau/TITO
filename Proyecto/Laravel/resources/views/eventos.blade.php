@@ -16,12 +16,12 @@
 
         .contenedor-imagen {
             position: absolute;
+            margin-top: 12%;
             padding-bottom: 0;
 
         }
 
         .carousel-container {
-            position: absolute;
             left: 40%;
             transform: translate(-50%, -60%);
             width: 70%;
@@ -36,10 +36,12 @@
             /* Altura fija */
             object-fit: cover;
             /* Ajusta la imagen sin distorsionarla */
-
-        } .proxEven{
+            margin-left: 10%;
+        } 
+        
+        .proxEven{
             position: relative;
-            margin-top: 40%;
+            margin-top: 55%;
         }
 
        
@@ -52,12 +54,20 @@
         }
 
         
-        @media (max-width: 480px) { 
-            .prodRespo{
-                text-align: center;
+        @media (max-width: 768px) {
+
+            .contenedor-imagen {
+            position: relative;            
+            padding-bottom: 0;
             }
 
+            .proxEven{
+                margin-top:8%;
+            position: relative;
         }
+    }
+
+        
 
     </style>
 </head>
