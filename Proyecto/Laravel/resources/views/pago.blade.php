@@ -26,6 +26,11 @@
 <h2 class="form-title" style="font-size: 1.5rem; padding-top: 10px;">REALIZAR PEDIDO</h2>
 @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ route('pedidos') }}";
+        }, 5000);
+    </script>
 @endif
 @if ($errors->any())
     <div class="alert alert-danger">{{ $errors->first() }}</div>
