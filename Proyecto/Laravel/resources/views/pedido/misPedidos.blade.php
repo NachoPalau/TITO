@@ -93,7 +93,7 @@
             <div class="pedido-info">
                 <p class="pedido-numero">Nº Pedido: {{ $pedido->codigo_seguimiento }}</p>
                 <p class="estado-text">Estado: {{ $pedido->estado }}</p>
-                <button id="btn-toggle-{{ $pedido->id }}" class="btn btn-outline-secondary btn-sm btn-toggle" onclick="toggleDetails({{ $pedido->id }})">
+                <button id="btn-toggle-{{ $pedido->id }}" class="btn btn-outline-secondary btn-sm btn-toggle" onclick="toggleDetails({{ $pedido->id}})">
                     Mostrar más ▼
                 </button>
             </div>

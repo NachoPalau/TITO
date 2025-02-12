@@ -14,8 +14,6 @@
 
     @include('layouts.navigation')
 
-    @include('layouts.subnavbar')
-
     <!-- MAIN CONTAINER -->
     <div class="container">
     <div id="popupLogin" class="popup" style="display: none;">
