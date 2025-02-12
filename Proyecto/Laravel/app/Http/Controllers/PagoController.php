@@ -26,7 +26,7 @@ class PagoController extends Controller
                 'source' => $request->token,
                 'description' => 'Pago seguro en laravel',
             ]);
-            return back()->with('success', 'Pago realizado con exito');
+            return back()->with('success', 'Pago realizado con exito. Seras redireccionado en 5 segundos.');
         } catch (\Exception $e) {
             return back()->withErrors('Error al procesar el pago: ' . $e->getMessage());
         }
