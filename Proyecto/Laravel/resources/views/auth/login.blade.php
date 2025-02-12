@@ -52,7 +52,7 @@
 
     <div class="flex items-center justify-end mt-4">
             <x-secondary-button class="button-secondary">
-                <a href="{{route('register')}}">REGÍSTRATE</a>
+                <a href="{{route('register')}}" style="color: black;">REGÍSTRATE</a>
             </x-secondary-button>
     </div>
 
