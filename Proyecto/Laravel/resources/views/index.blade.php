@@ -11,8 +11,6 @@
 
 <body>
     @include('layouts.navigation')
-
-    @include('layouts.subnavbar')
     
     <section class="contenedor-imagen">
         <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
@@ -53,6 +51,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.footer')
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const popupLogin = document.getElementById("popupLogin");
