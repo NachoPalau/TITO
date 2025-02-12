@@ -14,10 +14,9 @@
 
     @include('layouts.subnavbar')
     
+    <section class="contenedor-imagen">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
     <div class="container my-4">
-      
-        <section class=" bg-light text-center py-5">
-        <img src=" ./img_eventos/eventoHindi.jpg" alt="" style="width: 100%">
         </section>
 
         <h2>Recetas Mas Guardadas</h2>
@@ -54,18 +53,6 @@
             </div>
         </div>
     </div>
-    
-    @include('layouts.footer')
-    <div id="popupLogin" class="popup" style="display: none;">
-            <div class="popup-contenido">
-                <span id="cerrarPopup" class="popup-cerrar">✖</span>
-                <h2 id="popupTitulo">¡Debes iniciar sesión!</h2>
-                <p id="popupMensaje">Para continuar, primero inicia sesión en tu cuenta.</p>
-                <button onclick="window.location.href='/login'">Iniciar sesión</button>
-            </div>
-        </div>
-
-</body>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             const popupLogin = document.getElementById("popupLogin");

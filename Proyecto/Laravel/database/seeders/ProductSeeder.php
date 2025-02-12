@@ -1239,10 +1239,10 @@ class ProductSeeder extends Seeder
             'descripcion' => 'Bombones M&M de san valentín',
             'precio' => 5.00,
             'stock' => 150,
-            'imagen_url' => 'bombones_m&m.jpg',
+            'imagen_url' => 'bombones_mym.jpg',
         ]);
         Producto::create([
-            'nombre' => 'Pack de champagne y bombones',
+            'nombre' => 'Champagne y bombones',
             'descripcion' => 'Champagne de calidad y deliciosos bombones.',
             'precio' => 15.00,
             'stock' => 200,
@@ -1262,7 +1262,21 @@ class ProductSeeder extends Seeder
             'stock' => 200,
             'imagen_url' => 'corazon_kinder.jpg',
         ]);
-        
+        Producto::create([
+            'nombre' => 'Corazón Lindor',
+            'descripcion' => 'Corazon de chocolate Lindor',
+            'precio' => 9.00,
+            'stock' => 200,
+            'imagen_url' => 'corazon_lindor.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Taza de san valentín',
+            'descripcion' => 'Bonita taza para regalar a tu pareja.',
+            'precio' => 7.00,
+            'stock' => 50,
+            'imagen_url' => 'taza_sanvalentin.jpg',
+        ]);
+    
         Producto::create([
             'nombre' => 'Leche de avena con sabor a frutos rojos',
             'descripcion' => 'Leche vegetal saborizada con frutos rojos, ideal para personas con intolerancia a la lactosa.',
