@@ -13,8 +13,6 @@
 
     @include('layouts.navigation')
 
-    @include('layouts.subnavbar')
-
         <!-- MAIN CONTAINER -->
         <div class="container">
             <h1>Recetas destacadas</h1>
