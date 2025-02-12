@@ -35,8 +35,7 @@
         <strong>{{ $producto->nombre }}</strong>
         <p>Descripción: {{ $producto->descripcion }}</p>
         <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <form action="{{ route('carrito.agregar') }}" method="POST">
-            @csrf
+    
             <input type="hidden" name="producto_id" value="{{ $producto->id }}">
             <input type="hidden" name="precio" value="{{ $producto->precio }}">
             <input type="hidden" name="cantidad" value="1">
@@ -46,7 +45,7 @@
                 <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
             </x-primary-button>
         </div>
-        </form>
+  
     </div>
     @endforeach
 </div>
@@ -56,10 +55,7 @@
         <!-- FILTROS -->
         @include('components.filtrar')
 
-        <!-- <button id="ordenarAscendente">Ordenar A-Z</button>
-<button id="ordenarDescendente">Ordenar Z-A</button>
-<button id="ordenarPrecioAscendente">Ordenar Precio ↑</button>
-<button id="ordenarPrecioDescendente">Ordenar Precio ↓</button> -->
+
 
 <div id="productos">
     @foreach($productos as $producto)
@@ -68,8 +64,7 @@
         <strong>{{ $producto->nombre }}</strong>
         <p>Descripción: {{ $producto->descripcion }}</p>
         <p class="producto-precio">Precio: ${{ number_format($producto->precio, 2) }}</p>
-        <form action="{{ route('carrito.agregar') }}" method="POST" onsubmit="mostrarPopup(event, '{{ $producto->nombre }}')">
-            @csrf
+       
             <input type="hidden" name="producto_id" value="{{ $producto->id }}">
             <input type="hidden" name="precio" value="{{ $producto->precio }}">
             <input type="hidden" name="cantidad" value="1">
@@ -79,7 +74,7 @@
                     <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
                 </x-primary-button>
             </div>
-        </form>
+     
     </div>
     @endforeach
 </div>
@@ -208,7 +203,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
     });
+    const carrito = @json($carrito); // Blade convierte el array PHP a JSON en JavaScript
 
+// Función para crear la cookie
+function crearCookieCarrito() {
+  const carritoJSON = JSON.stringify(carrito);
+
+  // Establecer fecha de expiración (30 días)
+  const fechaExpiracion = new Date();
+  fechaExpiracion.setDate(fechaExpiracion.getDate() + 30);
+  const expires = "expires=" + fechaExpiracion.toUTCString() + ";";
+
+  // Crear la cookie
+  document.cookie = "carrito=" + carritoJSON + ";" + expires + "path=/";
+  console.log("Cookie 'carrito' creada.");
+}
+
+// Llamar a la función para crear la cookie
+crearCookieCarrito();
+
+// Para verificar que la cookie se creó correctamente
+console.log(document.cookie);
+
+// Para leer la cookie posteriormente:
+function leerCookieCarrito() {
+  const nombreCookie = "carrito=";
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i];
+    while (cookie.charAt(0) === ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(nombreCookie) === 0) {
+      return JSON.parse(cookie.substring(nombreCookie.length, cookie.length));
+    }
+  }
+  return null; // Si la cookie no existe
+}
+
+const carritoLeido = leerCookieCarrito();
+console.log("Contenido de la cookie 'carrito':", carritoLeido);
 
 </script>
 </html>
