@@ -13,11 +13,12 @@
     @include('layouts.navigation')
     
     <section class="contenedor-imagen">
-        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" style="width: 100%; height:400px">
+        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" class="img-fluid w-100">
     <div class="container my-4">
         </section>
-
+        <div style="margin:10%; margin-left:2%; margin-bottom: 0;">
         <h2>Recetas Mas Guardadas</h2>
+        </div>
         <section class="novedades my-4">
 
             <div id="productosDes">

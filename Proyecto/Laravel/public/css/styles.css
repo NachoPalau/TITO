@@ -411,6 +411,15 @@ producto2{
     opacity: 1;
 }
 
+.evento-img {
+    height: 350px;
+    /* Ajusta según necesites */
+    object-fit: cover;
+    /* Mantiene la proporción sin deformar */
+    width: 100%;
+    /* Asegura que ocupen el mismo ancho dentro de su contenedor */
+}
+
 .receta img#estrella {
     position: absolute;
     top: 10px;

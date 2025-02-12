@@ -15,7 +15,7 @@
         }
 
         .contenedor-imagen {
-            position: relative;
+            position: absolute;
             padding-bottom: 0;
 
         }
@@ -37,8 +37,12 @@
             object-fit: cover;
             /* Ajusta la imagen sin distorsionarla */
 
+        } .proxEven{
+            position: relative;
+            margin-top: 40%;
         }
 
+       
         .eventos {
             flex: 1;
             margin: 10%;
@@ -47,14 +51,7 @@
             margin-bottom: -3%;
         }
 
-        .evento-img {
-            height: 350px;
-            /* Ajusta según necesites */
-            object-fit: cover;
-            /* Mantiene la proporción sin deformar */
-            width: 100%;
-            /* Asegura que ocupen el mismo ancho dentro de su contenedor */
-        }
+        
         @media (max-width: 480px) { 
             .prodRespo{
                 text-align: center;
@@ -138,7 +135,7 @@
         </div>
     </section>
 
-    <div class="">
+    <div class="proxEven">
         <h2 class="text-center my-2">Próximos eventos</h2>
         <section class="py-5">
             <div class="row justify-content-center text-center">
