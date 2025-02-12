@@ -15,6 +15,7 @@ class Pedido extends Model
         'estado',       // Estado del pedido (ej: pendiente, enviado, entregado)
         'direccion',    // Dirección de envío
         'codigo_seguimiento', // Código de seguimiento generado para el pedido
+        'total',
     ];
 
     // Relación con el modelo Usuario (Cliente)

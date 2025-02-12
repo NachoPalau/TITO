@@ -87,6 +87,7 @@
     @if($pedidos->isEmpty())
     <p>No tienes pedidos registrados</p>
     @else
+    <div style="height: 41vh;">
     @foreach($pedidos as $pedido)
     <div class="border border-0 card mb-2">
         <div class="card-header">
@@ -99,7 +100,7 @@
             </div>
         </div>
         <div id="details-{{ $pedido->id }}" class="card-body" style="display: none;">
-            <p><strong>Detalles:</strong></p>
+            <p style="font-size: 1.5rem;"><strong>Detalles:</strong></p>
             <p><strong>Direccion:</strong> {{ $pedido->direccion }}</p>
             <!-- <p><strong>Productos:</strong></p>
             <div class="productos-list">
@@ -109,6 +110,7 @@
         </div>
     </div>
     @endforeach
+    </div>
     @endif
 
     <br><br><br><br><br>

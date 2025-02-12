@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->string('estado');
             $table->string('direccion');
+            $table->string('total');
         });
     }
 

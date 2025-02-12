@@ -1392,6 +1392,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En camino',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => 'gsdasdffg',
+                'total' => '10',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1401,6 +1402,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En camino',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123456789',
+                'total' => '15',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1410,6 +1412,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En preparación',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123abc',
+                'total' => '12',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1419,6 +1422,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En preparación',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123def',
+                'total' => '125',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1428,6 +1432,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'Entregado',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '4567Abc',
+                'total' => '3',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

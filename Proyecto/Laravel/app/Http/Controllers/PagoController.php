@@ -34,11 +34,16 @@ class PagoController extends Controller
 
         $carrito = json_decode($usuario->carrito, true) ?: [];
 
+        $total = array_sum(array_map(function ($producto) {
+            return $producto['precio'] * $producto['cantidad'];
+        }, $carrito));
+
         // Crear un nuevo pedido
         $pedido = new Pedido();
         $pedido->id_usuario = $usuario->id;
         $pedido->estado = 'En preparación';
         $pedido->direccion = $request->direccion;
+        $pedido->total = $total;
         $pedido->save();
 
         // Borrar el carrito del usuario
