@@ -8,10 +8,6 @@ use Stripe\Charge;
 
 class PagoController extends Controller
 {
-    public function ensenyaMetPago()
-    {
-        return view('pago.pago');
-    }
 
     public function procesarPago(Request $request)
     {

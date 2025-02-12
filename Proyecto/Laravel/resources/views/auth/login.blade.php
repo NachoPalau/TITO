@@ -39,8 +39,8 @@
             <a href="{{route('password.request')}}">¿Has olvidado tu contraseña?</a>
         </div>
         
-        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <x-input-error :messages="$errors->get('email')" class="mt-2" style="color: red;" />
+        <x-input-error :messages="$errors->get('password')" class="mt-2" style="color: red;"/>
 
         <!-- Botón de inicio de sesión -->
         <div class="flex items-center justify-end mt-4">

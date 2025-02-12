@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Producto;
+use App\Models\Receta;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\FavoritoController;
@@ -15,9 +16,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\RecetaController;
 
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [RecetaController::class, 'index5'])->name('index');
 
 
 
@@ -27,6 +26,7 @@ Route::post('register', [RegisteredUserController::class, 'store'])->name('regis
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('miReceta', [RecetaController::class, 'index3'])->name('misrecetas');
 Route::post('editProducto', [ProductoController::class, 'index2'])->name('editProducto');
 
 Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -42,7 +42,7 @@ Route::post('reset-password', [NewPasswordController::class, 'store'])
 ->name('password.store');
 
 //Pago
-Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
+Route::get('/pago', [CarritoController::class, 'mostrarPago'])->name('pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
 
 Route::get('/track_pedido', function () {
@@ -75,9 +75,14 @@ Route::post('/products/{id}/update', [ProductoController::class, 'update']);
 Route::get('/eventos', [ProductoController::class, 'arraysEventos'])->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
+Route::get('newReceta', [RecetaController::class, 'index2'])->name('newReceta');
+Route::get('recetas/create', [RecetaController::class, 'create'])->name('recetas.create');
+Route::get('/recetas/{id}/edit', [RecetaController::class, 'edit'])->name('recetas.edit');
+Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store');
+Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
+Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy');
 
-
-Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
+Route::post('/guardar-favoritos', [RecetaController::class, 'guardarFavoritos']);
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
 
