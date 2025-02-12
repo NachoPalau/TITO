@@ -61,7 +61,6 @@
 
 <body>
     @include('layouts.navigation')
-    @include('layouts.subnavbar')
 
     <section class="contenedor-imagen">
         <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" class="img-fluid w-100"
