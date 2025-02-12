@@ -12,7 +12,8 @@ class Producto extends Model
     protected $table = 'productos';
 
     protected $hidden = ['stock']; 
-    protected $fillable = ['nombre', 'precio', 'descripcion','imagen_url','destacado']; 
+    protected $fillable = ['nombre', 'precio', 'descripcion','imagen_url','destacado'];
+    
     public function recetas() {
         return $this->belongsToMany(Receta::class);
     }

@@ -46,6 +46,12 @@
         <input type="hidden" name="amount" id="amount" class="form-control" step="0.1" min="0.50" required value="{{ $total }}">
         <span id="total-a-pagar" class="ms-auto text-end">{{ number_format($total, 2) }} €</span>
     </div>
+
+    <div class="input-group mb-3">
+        <x-text-input id="direccion" class="text-input" type="text" name="direccion" required />
+        <x-input-label for="direccion" class="input-label" :value="__('Dirección de entrega:')" />
+    </div>
+
     <div id="tarjeta"> </div>
     <br>
 

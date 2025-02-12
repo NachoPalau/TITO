@@ -100,11 +100,11 @@
         </div>
         <div id="details-{{ $pedido->id }}" class="card-body" style="display: none;">
             <p><strong>Detalles:</strong></p>
-            <p><strong>Dir:</strong> {{ $pedido->direccion }}</p>
-            <p><strong>Productos:</strong></p>
+            <p><strong>Direccion:</strong> {{ $pedido->direccion }}</p>
+            <!-- <p><strong>Productos:</strong></p>
             <div class="productos-list">
                 {{ implode(', ', $pedido->productos ?? []) }}
-            </div>
+            </div> -->
             <p><strong>Total:</strong> {{ $pedido->total }} €</p>
         </div>
     </div>
