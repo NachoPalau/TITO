@@ -162,26 +162,49 @@
         actualizarCarritoDOM();
 
         // Agregar evento al botón "Tramitar Pedido"
-        document.querySelector(".footer-carrito .button-primary").addEventListener("click", function() {
-            const carrito = leerCookieCarrito();
-            if (carrito && carrito.length > 0) {
-                fetch('/tramitar-pedido', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ carrito: carrito })
-                })
-                .then(response => response.json())
-                .catch(error => {
-                    console.error('Error al tramitar el pedido:', error);
-                    alert('Error al tramitar el pedido.');
-                });
+        document.querySelector(".footer-carrito .button-primary").addEventListener("click", function(event) {
+    event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+    const carrito = leerCookieCarrito();
+    if (carrito && carrito.length > 0) {
+        // Enviar el carrito al backend
+        fetch('/guardar-carrito', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ carrito: carrito })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                eliminarCookieCarrito(); 
+                window.location.href = "{{ route('pago') }}";
             } else {
-                alert('El carrito está vacío.');
+                alert('Error al guardar el carrito.');
             }
+        })
+        .catch(error => {
+            console.error('Error al guardar el carrito:', error);
+            alert('Error al guardar el carrito.');
         });
+    } else {
+        alert('El carrito está vacío.');
+    }
+});
+fetch('/obtener-carrito')
+    .then(response => response.json())
+    .then(data => {
+        if (data.carrito && data.carrito.length > 0) {
+            crearCookieCarrito(data.carrito); // Actualizar la cookie
+            actualizarCarritoDOM(); // Actualizar el DOM
+        }
+    })
+    .catch(error => console.error('Error al obtener el carrito:', error));
+function eliminarCookieCarrito() {
+    document.cookie = "carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
     });
 </script>
 

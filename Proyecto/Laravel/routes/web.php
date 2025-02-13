@@ -93,5 +93,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/carrito/eliminar/{productoId}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
     Route::post('/carrito/modificar', [CarritoController::class, 'modificarCantidad'])->name('carrito.modificar');
     Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');
+    Route::post('/guardar-carrito', [CarritoController::class, 'guardarCarrito'])->name('guardar.carrito');
 });
 

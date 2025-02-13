@@ -112,6 +112,24 @@ class CarritoController extends Controller
 
         return back()->with('success', 'Producto eliminado del carrito');
     }
+    public function guardarCarrito(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $user->carrito = $request->carrito; // Guardar el carrito en la columna
+            $user->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false, 'message' => 'Usuario no autenticado'], 401);
+    }
+    public function obtenerCarrito(Request $request)
+{
+    $user = Auth::user();
+    if ($user && $user->carrito) {
+        return response()->json(['carrito' => $user->carrito]);
+    }
+    return response()->json(['carrito' => []]);
+}
     public function modificarCantidad(Request $request)
     {
         $usuario = Auth::user();
