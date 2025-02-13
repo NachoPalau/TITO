@@ -49,7 +49,22 @@ class CarritoController extends Controller
         // Redirigir al usuario al carrito o a la página anterior
         return back()->with('success', 'Producto agregado al carrito');
     }
+    public function tramitarPedido(Request $request)
+    {
+        $user = Auth::user();
+        $carrito = $request->input('carrito');
 
+        // Validar que el carrito es un array
+        if (!is_array($carrito)) {
+            return response()->json(['error' => 'El carrito no es válido.'], 400);
+        }
+
+        // Actualizar la columna carrito del usuario
+        $user->carrito = json_encode($carrito);
+        $user->save();
+
+        return response()->json(['success' => 'Carrito actualizado correctamente.']);
+    }
     // Ver el carrito de compras
     public function verCarrito()
     {
@@ -62,6 +77,19 @@ class CarritoController extends Controller
         }, $carrito));
 
         return view('carrito', compact('carrito', 'total'));
+    }
+
+    public function mostrarPago()
+    {
+    $usuario = Auth::user();
+    $carrito = json_decode($usuario->carrito, true) ?: [];
+
+    // Sumar el total del carrito
+    $total = array_sum(array_map(function ($producto) {
+        return $producto['precio'] * $producto['cantidad'];
+    }, $carrito));
+
+    return view('pago', compact('total'));
     }
 
     // Eliminar producto del carrito

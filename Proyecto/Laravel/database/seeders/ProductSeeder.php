@@ -1239,10 +1239,10 @@ class ProductSeeder extends Seeder
             'descripcion' => 'Bombones M&M de san valentín',
             'precio' => 5.00,
             'stock' => 150,
-            'imagen_url' => 'bombones_m&m.jpg',
+            'imagen_url' => 'bombones_mym.jpg',
         ]);
         Producto::create([
-            'nombre' => 'Pack de champagne y bombones',
+            'nombre' => 'Champagne y bombones',
             'descripcion' => 'Champagne de calidad y deliciosos bombones.',
             'precio' => 15.00,
             'stock' => 200,
@@ -1262,7 +1262,21 @@ class ProductSeeder extends Seeder
             'stock' => 200,
             'imagen_url' => 'corazon_kinder.jpg',
         ]);
-        
+        Producto::create([
+            'nombre' => 'Corazón Lindor',
+            'descripcion' => 'Corazon de chocolate Lindor',
+            'precio' => 9.00,
+            'stock' => 200,
+            'imagen_url' => 'corazon_lindor.jpg',
+        ]);
+        Producto::create([
+            'nombre' => 'Taza de san valentín',
+            'descripcion' => 'Bonita taza para regalar a tu pareja.',
+            'precio' => 7.00,
+            'stock' => 50,
+            'imagen_url' => 'taza_sanvalentin.jpg',
+        ]);
+    
         Producto::create([
             'nombre' => 'Leche de avena con sabor a frutos rojos',
             'descripcion' => 'Leche vegetal saborizada con frutos rojos, ideal para personas con intolerancia a la lactosa.',
@@ -1314,6 +1328,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Arroz con pollo, conejo, judía verde y garrofón.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['arroz', 'pollo', 'conejo', 'judía verde', 'garrofón', 'azafrán', 'caldo de pollo']),
+                'id_ingredientes' => json_encode([68,26,120,121,122,123,134]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1323,6 +1338,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Tortilla española hecha con huevos, patatas y cebolla.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['huevos', 'patatas', 'cebolla', 'aceite de oliva', 'sal']),
+                'id_ingredientes' => json_encode([124,10,16,121,80]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1332,6 +1348,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Sopa fría de tomate, pimiento y pepino, ideal para el verano.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['tomate', 'pimiento verde', 'pepino', 'ajo', 'aceite de oliva', 'vinagre', 'pan']),
+                'id_ingredientes' => json_encode([8,15,14,17,121,79,43]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1341,6 +1358,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Plato tradicional de Asturias con fabes, chorizo y morcilla.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['habichuelas', 'chorizo', 'morcilla', 'tocino', 'pimentón', 'agua', 'sal']),
+                'id_ingredientes' => json_encode([126,127,128,135,129,52,80]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1350,6 +1368,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Pulpo cocido con pimentón, aceite de oliva y sal gorda.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['pulpo', 'patatas', 'pimentón', 'aceite de oliva', 'sal gorda']),
+                'id_ingredientes' => json_encode([130,10,129,121,131]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1359,6 +1378,7 @@ class ProductSeeder extends Seeder
                 'descripcion' => 'Cochinillo tierno asado al horno al estilo segoviano.',
                 'id_usuario' => 1,
                 'ingredientes' => json_encode(['cochinillo', 'agua', 'sal', 'manteca de cerdo']),
+                'id_ingredientes' => json_encode([132,52,80,133]),
                 'guardados' => 0,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1372,6 +1392,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En camino',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => 'gsdasdffg',
+                'total' => '10',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1381,6 +1402,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En camino',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123456789',
+                'total' => '15',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1390,6 +1412,7 @@ class ProductSeeder extends Seeder
                 'estado' => 'En preparación',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123abc',
+                'total' => '12',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -1399,15 +1422,17 @@ class ProductSeeder extends Seeder
                 'estado' => 'En preparación',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '123def',
+                'total' => '125',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'id' => 5,
                 'id_usuario' => 1,
-                'estado' => 'Repartido',
+                'estado' => 'Entregado',
                 'direccion' => 'Calle tal/nº13 Valencia',
                 'codigo_seguimiento' => '4567Abc',
+                'total' => '3',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

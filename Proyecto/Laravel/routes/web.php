@@ -16,10 +16,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\RecetaController;
 
 
-Route::get('/', function () {
-    $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
-    return view('index',['recetas'=>$recetasMas]);
-})->name('index');
+Route::get('/', [RecetaController::class, 'index5'])->name('index');
 
 
 
@@ -45,13 +42,13 @@ Route::post('reset-password', [NewPasswordController::class, 'store'])
 ->name('password.store');
 
 //Pago
-Route::get('pago',[PagoController::class,'ensenyaMetPago'])->name('pago.pago');
+Route::get('/pago', [CarritoController::class, 'mostrarPago'])->name('pago');
 Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process');
 
 Route::get('/track_pedido', function () {
     return view('pedido.trackeo');
 })->name('track.pedido.view');
-
+Route::post('/tramitar-pedido', [CarritoController::class, 'tramitarPedido'])->middleware('auth');
 Route::get('/pedidos', [PedidoController::class, 'misPedidos'])->name('pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 
@@ -74,10 +71,9 @@ Route::get('/api/productos', function () {
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 Route::get('/products/{id}/edit', [ProductoController::class, 'edit']);
 Route::post('/products/{id}/update', [ProductoController::class, 'update']);
+Route::get('/api/productos/{id}', [ProductoController::class, 'show']);
 
-Route::get('/eventos', function () {
-    return view('eventos');
-})->name('eventos');
+Route::get('/eventos', [ProductoController::class, 'arraysEventos'])->name('eventos');
 
 Route::get('/recetas', [RecetaController::class, 'index'])->name('recetas');
 Route::get('newReceta', [RecetaController::class, 'index2'])->name('newReceta');
@@ -87,7 +83,7 @@ Route::post('recetas', [RecetaController::class, 'store'])->name('recetas.store'
 Route::put('/recetas/{id}', [RecetaController::class, 'update'])->name('recetas.update'); 
 Route::delete('/recetas/{id}', [RecetaController::class, 'destroy'])->name('recetas.destroy');
 
-Route::get('/guardar-favorito/{recetaId}', [RecetaController::class, 'agregarAFavoritos'])->name('guardar.favorito');
+Route::post('/guardar-favoritos', [RecetaController::class, 'guardarFavoritos']);
 Route::get('/eliminar-favorito/{recetaId}', [RecetaController::class, 'eliminarDeFavoritos'])->name('eliminar.favorito');
 
 
