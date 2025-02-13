@@ -13,9 +13,26 @@
 <body>
 
 @include('layouts.navigation')
-
-    </section>
-
+<div class="container my-4">
+    <section>
+<div id="productosDes">
+        @foreach($recetasMas as $receta)
+        <div class="receta"  data-id="{{ $receta->id }}" data-guardados="{{ $receta->guardados }}">
+            <strong>{{ $receta->titulo }}</strong>
+            <img id="estrella" data-id="{{ $receta->id }}" src="{{ asset('img/carrito/estrellaVacia.svg') }}">
+            <p><strong>Descripción:</strong> {{ $receta->descripcion }}</p>
+            <p><strong>Ingredientes:</strong> {{ implode(', ', json_decode($receta->ingredientes, true)) }}</p>
+            <p><strong>Creador:</strong> {{ $receta->usuario->name ?? 'Desconocido' }}</p>
+                    <div class="flex items-center justify-end mt-4">
+                        <x-primary-button class="button-primary agregar-carrito">
+                            {{ __('Añadir al carrito') }}
+                            <img src="{{ asset('img/carrito/carrito.svg') }}" id="carrito">
+                        </x-primary-button>
+                    </div>
+        </div>
+        @endforeach
+        </div>
+</section>
     <!-- FILTROS -->
     @include('components.filtrar')
 
@@ -57,7 +74,7 @@
 </div>
 <!-- FOOTER -->
 @include('layouts.footer')
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>

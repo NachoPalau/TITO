@@ -48,7 +48,7 @@ Route::post('/pago',[PagoController::class,'procesarPago'])->name('pago.process'
 Route::get('/track_pedido', function () {
     return view('pedido.trackeo');
 })->name('track.pedido.view');
-
+Route::post('/tramitar-pedido', [CarritoController::class, 'tramitarPedido'])->middleware('auth');
 Route::get('/pedidos', [PedidoController::class, 'misPedidos'])->name('pedidos')->middleware('auth');
 // Route::get('/track_pedido',[PedidoController::class,'track'])->name('track.pedido');
 

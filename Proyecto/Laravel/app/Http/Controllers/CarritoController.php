@@ -49,7 +49,22 @@ class CarritoController extends Controller
         // Redirigir al usuario al carrito o a la página anterior
         return back()->with('success', 'Producto agregado al carrito');
     }
+    public function tramitarPedido(Request $request)
+    {
+        $user = Auth::user();
+        $carrito = $request->input('carrito');
 
+        // Validar que el carrito es un array
+        if (!is_array($carrito)) {
+            return response()->json(['error' => 'El carrito no es válido.'], 400);
+        }
+
+        // Actualizar la columna carrito del usuario
+        $user->carrito = json_encode($carrito);
+        $user->save();
+
+        return response()->json(['success' => 'Carrito actualizado correctamente.']);
+    }
     // Ver el carrito de compras
     public function verCarrito()
     {

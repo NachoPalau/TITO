@@ -51,7 +51,6 @@
         function actualizarCarritoDOM() {
             const carrito = leerCookieCarrito();
 
-
             const contenidoCarrito = document.getElementById("contenidoCarrito");
             const sinContenidoCarrito = document.getElementById("sinContenidoCarrito");
 
@@ -70,8 +69,6 @@
                             return response.json();
                         })
                         .then(productoDetails => {
-    
-
                             const productoElement = document.createElement("li");
                             productoElement.classList.add("producto-carrito", "container", "d-flex");
                             productoElement.innerHTML = `
@@ -116,7 +113,6 @@
                                 button.addEventListener('click', function() {
                                     const idProducto = this.getAttribute('data-id');
                                     const action = this.getAttribute('data-action');
-                                   producto
                                     actualizarCantidadProducto(idProducto, action);
                                 });
                             });
@@ -124,7 +120,6 @@
                             productoElement.querySelectorAll('.trash-icon').forEach(icon => {
                                 icon.addEventListener('click', function() {
                                     const idProducto = this.getAttribute('data-id');
-                                
                                     eliminarProductoCarrito(idProducto);
                                 });
                             });
@@ -158,13 +153,42 @@
         function eliminarProductoCarrito(idProducto) {
             let carrito = leerCookieCarrito();
             carrito = carrito.filter(item => item.idProducto != idProducto);
-       
+
             crearCookieCarrito(carrito);
             actualizarCarritoDOM();
         }
 
         // Inicializar el DOM del carrito al cargar la página
         actualizarCarritoDOM();
+
+        // Agregar evento al botón "Tramitar Pedido"
+        document.querySelector(".footer-carrito .button-primary").addEventListener("click", function() {
+            const carrito = leerCookieCarrito();
+            if (carrito && carrito.length > 0) {
+                fetch('/tramitar-pedido', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ carrito: carrito })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pedido tramitado correctamente.');
+                    } else {
+                        alert('Error al tramitar el pedido.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al tramitar el pedido:', error);
+                    alert('Error al tramitar el pedido.');
+                });
+            } else {
+                alert('El carrito está vacío.');
+            }
+        });
     });
 </script>
 
@@ -178,7 +202,7 @@
         <img src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" class="img-fluid" style="width: 100px;">
         <strong>Tu carrito está vacío</strong>
     </div>
-
+    @auth
     <div id="contenidoCarrito">
         <ul>
             <!-- Los productos del carrito se agregarán aquí dinámicamente -->
@@ -195,28 +219,11 @@
                 {{ __('TRAMITAR PEDIDO') }}
             </x-primary-button>
         </div>
-        <hr>
-            <div class="footer-carrito">
-                <div style="text-align: right; font-size: 1.2rem;">
-                    <strong>Total: {{ number_format(array_sum(array_map(function($item) {
-                        return $item['precio'] * $item['cantidad'];
-                    }, $carrito)), 2) }}€</strong>
-                </div>
-                <form method="GET" action="{{ route('pago') }}">
-                @csrf
-                    <div class="flex items-center justify-end mt-4">
-                        <x-primary-button class="button-primary" type="submit">
-                            {{ __('TRAMITAR PEDIDO') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-        </div>
-        
-        @endif
-        @else
-        <div id="sinContenidoCarrito">
-            <img src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" class="img-fluid" style="width: 100px;">
-            <strong>Tu carrito está vacío</strong>
-        </div>
-        @endif
     </div>
+    @else
+    <div id="sinContenidoCarrito">
+        <img src="{{ asset('img/carrito/Shopping Cart.png') }}" alt="carritoRojo" class="img-fluid" style="width: 100px;">
+        <strong>Tu carrito está vacío</strong>
+    </div>
+    @endauth
+</div>
