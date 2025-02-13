@@ -14,7 +14,7 @@
     @include('layouts.navigation')
     
     <section class="contenedor-imagen">
-        <img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" class="img-fluid w-100">
+        <a href="{{ route('eventos') }}"><img src="{{ asset('img/img_eventos/sanValentin.jpg') }}" alt="Imagen principal" class="img-fluid w-100"></a>
     <div class="container my-4">
         </section>
         <div style="margin:10%; margin-left:2%; margin-bottom: 0;">
