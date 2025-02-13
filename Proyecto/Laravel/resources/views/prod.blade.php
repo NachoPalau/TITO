@@ -26,6 +26,7 @@
                 <button onclick="window.location.href='/login'">Iniciar sesión</button>
             </div>
         </div>
+        <h1>Novedades</h1>
         <!-- NOVEDADES -->
         <section class="novedades my-4">
             <div id="productosDes">

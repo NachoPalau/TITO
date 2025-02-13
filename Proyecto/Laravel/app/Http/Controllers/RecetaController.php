@@ -89,7 +89,7 @@ public function index()
     $recetas = Receta::all();
     $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
     $user = auth()->user();
-    $favoritas = auth()->check() ? $user->favoritas : [];
+    $favoritas = auth()->check() ? $user->favoritas : json_encode([]);
 
     foreach ($recetas as $receta) {
         $precioReceta = 0;
@@ -111,7 +111,7 @@ public function index5()
     $recetas = Receta::all();
     $recetasMas = Receta::orderByDesc('guardados')->take(5)->get();
     $user = auth()->user();
-    $favoritas = $user ? $user->favoritas : [];
+    $favoritas = auth()->check() ? $user->favoritas : json_encode([]);
 
     foreach ($recetas as $receta) {
         $precioReceta = 0;
