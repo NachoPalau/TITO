@@ -174,13 +174,6 @@
                     body: JSON.stringify({ carrito: carrito })
                 })
                 .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Pedido tramitado correctamente.');
-                    } else {
-                        alert('Error al tramitar el pedido.');
-                    }
-                })
                 .catch(error => {
                     console.error('Error al tramitar el pedido:', error);
                     alert('Error al tramitar el pedido.');
@@ -214,11 +207,14 @@
         <div style="text-align: right; font-size: 1.2rem;">
             <strong>Total: 0.00€</strong>
         </div>
+        <form method="GET" action="{{ route('pago') }}">
+        @csrf
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="button-primary">
                 {{ __('TRAMITAR PEDIDO') }}
             </x-primary-button>
         </div>
+        </form>
     </div>
     @else
     <div id="sinContenidoCarrito">
